@@ -2,10 +2,16 @@ import UIKit
 
 class ImagesListViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+//MARK: - IBOutlets
+    
+@IBOutlet private var tableView: UITableView!
+    
+    
+override func viewDidLoad() {
+    super.viewDidLoad()
         
     }
+
 
 
 }
