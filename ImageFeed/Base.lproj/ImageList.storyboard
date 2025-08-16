@@ -51,6 +51,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" name="YP Black iOS"/>
                                             <constraints>
                                                 <constraint firstItem="mDW-8R-f8h" firstAttribute="top" secondItem="Xgv-JJ-cNx" secondAttribute="topMargin" id="K1i-Wn-3xl"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="mDW-8R-f8h" secondAttribute="trailing" id="SXp-w6-9L4"/>
