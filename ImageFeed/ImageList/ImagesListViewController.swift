@@ -12,6 +12,8 @@ class ImagesListViewController: UIViewController {
     
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.rowHeight = 200
     }
     
     func configCell(for cell: ImagesListCell) {
