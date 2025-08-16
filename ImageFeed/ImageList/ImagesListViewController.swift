@@ -4,15 +4,20 @@ class ImagesListViewController: UIViewController {
 
 //MARK: - IBOutlets
     
-@IBOutlet private var tableView: UITableView!
+    @IBOutlet private var tableView: UITableView!
     
     
-override func viewDidLoad() {
-    super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
     
-    tableView.dataSource = self
-    tableView.delegate = self
+        tableView.dataSource = self
+        tableView.delegate = self
     }
+    
+    func configCell(for cell: ImagesListCell) {
+        
+    }
+    
     
 }
 
