@@ -68,8 +68,8 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="1hz-eG-uGc" secondAttribute="bottom" id="9Qi-6g-9pI"/>
                             <constraint firstItem="1hz-eG-uGc" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="eWU-t2-ISl"/>
-                            <constraint firstItem="1hz-eG-uGc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ruA-6y-C5J"/>
-                            <constraint firstItem="1hz-eG-uGc" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="zTd-UT-rCh"/>
+                            <constraint firstItem="1hz-eG-uGc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ruA-6y-C5J"/>
+                            <constraint firstItem="1hz-eG-uGc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="zTd-UT-rCh"/>
                         </constraints>
                     </view>
                     <connections>
