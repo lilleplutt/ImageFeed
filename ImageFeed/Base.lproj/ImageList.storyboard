@@ -62,6 +62,11 @@
                                                 <constraint firstItem="KUZ-Kc-FGa" firstAttribute="leading" secondItem="mDW-8R-f8h" secondAttribute="leading" constant="8" id="vsD-4u-pQ1"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellImage" destination="mDW-8R-f8h" id="ik7-3j-vLD"/>
+                                            <outlet property="dateLabel" destination="KUZ-Kc-FGa" id="ORl-Ia-VS5"/>
+                                            <outlet property="likeButton" destination="vAN-5A-vfW" id="oOA-2T-tyf"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
