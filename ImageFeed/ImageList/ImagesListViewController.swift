@@ -50,6 +50,19 @@ extension ImagesListViewController: UITableViewDelegate {
         
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let imageName = photosName[indexPath.row]
+        guard let image = UIImage(named: imageName) else { return 200 }
+        let imageRatio = image.size.height / image.size.width
+        let cellWidth = tableView.bounds.width - tableView.contentInset.left - tableView.contentInset.right
+        
+        let imageViewHeight = cellWidth * imageRatio
+        let topInset: CGFloat = 4
+        let bottomInset: CGFloat = 4
+    
+        return imageViewHeight + topInset + bottomInset
+    }
+    
 }
 
 extension ImagesListViewController: UITableViewDataSource {
