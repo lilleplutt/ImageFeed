@@ -9,6 +9,12 @@ class ImagesListViewController: UIViewController {
     //MARK: - Private properties
     
     private let photosName: [String] = Array(0..<20).map{"\($0)"}
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter
+    }()
     
     //MARK: - Methods
     
@@ -23,6 +29,8 @@ class ImagesListViewController: UIViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        let image = photosName[indexPath.row]
+        guard let image = UIImage(named: image) else { return }
         
     }
     
