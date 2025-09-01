@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="mDW-8R-f8h" userLabel="Cell image">
-                                                    <rect key="frame" x="20" y="11" width="353" height="247"/>
+                                                    <rect key="frame" x="16" y="4" width="361" height="261"/>
                                                     <color key="backgroundColor" name="YP Black iOS"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -38,12 +38,12 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAN-5A-vfW" userLabel="Like Button">
-                                                    <rect key="frame" x="329" y="11" width="44" height="44"/>
+                                                    <rect key="frame" x="333" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" image="like-button-on"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 августа 2025" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUZ-Kc-FGa" userLabel="Date Label">
-                                                    <rect key="frame" x="28" y="234" width="337" height="16"/>
+                                                    <rect key="frame" x="24" y="241" width="361" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" name="YP White iOS"/>
                                                     <nil key="highlightedColor"/>
@@ -52,13 +52,13 @@
                                             <color key="backgroundColor" name="YP Black iOS"/>
                                             <constraints>
                                                 <constraint firstItem="vAN-5A-vfW" firstAttribute="top" secondItem="mDW-8R-f8h" secondAttribute="top" id="Ji8-zJ-bo9"/>
-                                                <constraint firstItem="mDW-8R-f8h" firstAttribute="top" secondItem="Xgv-JJ-cNx" secondAttribute="topMargin" id="K1i-Wn-3xl"/>
+                                                <constraint firstItem="mDW-8R-f8h" firstAttribute="top" secondItem="Xgv-JJ-cNx" secondAttribute="top" constant="4" id="K1i-Wn-3xl"/>
                                                 <constraint firstItem="mDW-8R-f8h" firstAttribute="trailing" secondItem="vAN-5A-vfW" secondAttribute="trailing" id="OCS-yG-SFS"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="mDW-8R-f8h" secondAttribute="trailing" id="SXp-w6-9L4"/>
+                                                <constraint firstAttribute="trailing" secondItem="mDW-8R-f8h" secondAttribute="trailing" constant="16" id="SXp-w6-9L4"/>
                                                 <constraint firstItem="mDW-8R-f8h" firstAttribute="bottom" secondItem="KUZ-Kc-FGa" secondAttribute="bottom" constant="8" id="fH5-lh-fGm"/>
-                                                <constraint firstItem="KUZ-Kc-FGa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mDW-8R-f8h" secondAttribute="trailing" constant="-8" id="lOt-0C-SvA"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="mDW-8R-f8h" secondAttribute="bottom" id="lgs-Ux-fNV"/>
-                                                <constraint firstItem="mDW-8R-f8h" firstAttribute="leading" secondItem="Xgv-JJ-cNx" secondAttribute="leadingMargin" id="td8-vI-XcW"/>
+                                                <constraint firstItem="KUZ-Kc-FGa" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mDW-8R-f8h" secondAttribute="trailing" constant="8" id="lOt-0C-SvA"/>
+                                                <constraint firstAttribute="bottom" secondItem="mDW-8R-f8h" secondAttribute="bottom" constant="4" id="lgs-Ux-fNV"/>
+                                                <constraint firstItem="mDW-8R-f8h" firstAttribute="leading" secondItem="Xgv-JJ-cNx" secondAttribute="leading" constant="16" id="td8-vI-XcW"/>
                                                 <constraint firstItem="KUZ-Kc-FGa" firstAttribute="leading" secondItem="mDW-8R-f8h" secondAttribute="leading" constant="8" id="vsD-4u-pQ1"/>
                                             </constraints>
                                         </tableViewCellContentView>
