@@ -2,10 +2,11 @@ import UIKit
 
 class ImagesListViewController: UIViewController {
 
-//MARK: - IBOutlets
+    //MARK: - IBOutlets
     
     @IBOutlet private var tableView: UITableView!
     
+    //MARK: - Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,8 @@ class ImagesListViewController: UIViewController {
     
     
 }
+
+    //MARK: - Extensions
 
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
