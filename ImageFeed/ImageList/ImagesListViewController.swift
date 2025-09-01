@@ -6,6 +6,10 @@ class ImagesListViewController: UIViewController {
     
     @IBOutlet private var tableView: UITableView!
     
+    //MARK: - Private properties
+    
+    private let photosName: [String] = Array(0..<20).map{"\($0)"}
+    
     //MARK: - Methods
     
     override func viewDidLoad() {
