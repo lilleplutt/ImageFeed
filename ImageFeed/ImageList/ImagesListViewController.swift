@@ -32,6 +32,7 @@ class ImagesListViewController: UIViewController {
         let image = photosName[indexPath.row]
         guard let image = UIImage(named: image) else { return }
         
+        dateFormatter.string(from: Date())
     }
     
     
