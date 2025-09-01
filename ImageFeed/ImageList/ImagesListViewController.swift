@@ -22,7 +22,7 @@ class ImagesListViewController: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
-    func configCell(for cell: ImagesListCell) {
+    func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         
     }
     
@@ -48,7 +48,7 @@ extension ImagesListViewController: UITableViewDataSource {
         
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
         
-        configCell(for: imageListCell)
+        configCell(for: ImagesListCell, with: IndexPath)
         return imageListCell
     }
     
