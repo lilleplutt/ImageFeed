@@ -62,7 +62,7 @@ extension ImagesListViewController: UITableViewDataSource {
         
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
         
-        configCell(for: ImagesListCell, with: IndexPath)
+        configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
     
