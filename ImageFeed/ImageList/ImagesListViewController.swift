@@ -29,10 +29,15 @@ class ImagesListViewController: UIViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let image = photosName[indexPath.row]
-        guard let image = UIImage(named: image) else { return }
+        let imageName = photosName[indexPath.row]
+        guard let image = UIImage(named: imageName) else { return }
         
-        dateFormatter.string(from: Date())
+        cell.cellImage.image = image
+        cell.dateLabel.text = dateFormatter.string(from: Date())
+        
+        let isLiked = indexPath.row.isMultiple(of: 2)
+        let likeImage = isLiked ? UIImage(named: "like-button-on") : UIImage(named: "like-button-off")
+        cell.likeButton.setImage(likeImage, for: .normal)
     }
     
     
