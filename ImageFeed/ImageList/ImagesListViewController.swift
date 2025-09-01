@@ -33,6 +33,9 @@ class ImagesListViewController: UIViewController {
         guard let image = UIImage(named: imageName) else { return }
         
         cell.cellImage.image = image
+        cell.cellImage.contentMode = .scaleAspectFill
+        cell.cellImage.clipsToBounds = true
+        
         cell.dateLabel.text = dateFormatter.string(from: Date())
         
         let isLiked = indexPath.row.isMultiple(of: 2)
