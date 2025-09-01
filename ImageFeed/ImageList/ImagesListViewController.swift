@@ -32,9 +32,6 @@ class ImagesListViewController: UIViewController {
         guard let image = UIImage(named: imageName) else { return }
         
         cell.cellImage.image = image
-        cell.cellImage.contentMode = .scaleAspectFill
-        cell.cellImage.clipsToBounds = true
-        
         cell.dateLabel.text = dateFormatter.string(from: Date())
         
         let isLiked = indexPath.row.isMultiple(of: 2)
@@ -54,15 +51,14 @@ extension ImagesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let imageName = photosName[indexPath.row]
-        guard let image = UIImage(named: imageName) else { return 200 }
-        let imageRatio = image.size.height / image.size.width
-        let cellWidth = tableView.bounds.width - tableView.contentInset.left - tableView.contentInset.right
+        guard let image = UIImage(named: imageName) else { return 0 }
         
-        let imageViewHeight = cellWidth * imageRatio
-        let topInset: CGFloat = 4
-        let bottomInset: CGFloat = 4
-    
-        return imageViewHeight + topInset + bottomInset
+        let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
+        let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
+        let imageWidth = image.size.width
+        let scale = imageViewWidth / imageWidth
+        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
+        return cellHeight
     }
     
 }
