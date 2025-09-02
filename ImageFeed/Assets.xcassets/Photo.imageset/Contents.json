@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Stub.svg",
+      "filename" : "Photo.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Photo — копия.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Photo — копия 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
