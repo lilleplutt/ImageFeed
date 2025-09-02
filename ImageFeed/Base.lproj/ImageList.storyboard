@@ -126,11 +126,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-5F-mOB">
-                                <rect key="frame" x="302" y="118" width="75" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-5F-mOB" userLabel="Exit Button">
+                                <rect key="frame" x="306" y="107" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="Exit"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aHi-XB-Xna"/>
@@ -144,6 +144,7 @@
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
+        <image name="Exit" width="44" height="44"/>
         <image name="Stub" width="70" height="70"/>
         <image name="like-button-on" width="44" height="44"/>
         <namedColor name="YP Black iOS">
