@@ -126,7 +126,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-5F-mOB" userLabel="Exit Button">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-5F-mOB" userLabel="Logout Button">
                                 <rect key="frame" x="306" y="107" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
@@ -138,6 +138,7 @@
                     </view>
                     <connections>
                         <outlet property="avatarImageView" destination="dYV-56-iSg" id="H6i-lU-jRf"/>
+                        <outlet property="logoutButton" destination="lmS-5F-mOB" id="5uD-Mw-Vzc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVw-yi-MaC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
