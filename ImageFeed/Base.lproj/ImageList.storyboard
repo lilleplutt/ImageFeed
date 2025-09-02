@@ -119,7 +119,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeF-rA-weL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeF-rA-weL" userLabel="Description Label">
                                 <rect key="frame" x="16" y="312" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -138,6 +138,7 @@
                     </view>
                     <connections>
                         <outlet property="avatarImageView" destination="dYV-56-iSg" id="H6i-lU-jRf"/>
+                        <outlet property="descriptionLabel" destination="eeF-rA-weL" id="ZEu-5n-kze"/>
                         <outlet property="loginNameLabel" destination="Ffe-vD-RBI" id="uBW-Hw-Tvz"/>
                         <outlet property="logoutButton" destination="lmS-5F-mOB" id="5uD-Mw-Vzc"/>
                         <outlet property="nameLabel" destination="st6-O1-QiH" id="WKh-4y-baO"/>
