@@ -96,7 +96,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="dYV-56-iSg" userLabel="Userpick">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="dYV-56-iSg" userLabel="Avatar">
                                 <rect key="frame" x="16" y="118" width="70" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <userDefinedRuntimeAttributes>
@@ -136,6 +136,9 @@
                         <viewLayoutGuide key="safeArea" id="aHi-XB-Xna"/>
                         <color key="backgroundColor" name="YP Black iOS"/>
                     </view>
+                    <connections>
+                        <outlet property="avatarImageView" destination="dYV-56-iSg" id="H6i-lU-jRf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVw-yi-MaC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
