@@ -104,15 +104,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="st6-O1-QiH" userLabel="Name Label">
-                                <rect key="frame" x="16" y="254" width="241" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                <color key="textColor" name="YP White iOS"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffe-vD-RBI" userLabel="Login Name Label">
-                                <rect key="frame" x="16" y="283" width="99" height="18"/>
+                                <rect key="frame" x="16" y="292.66666666666669" width="99" height="15.666666666666686"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" name="YP Gray iOS"/>
@@ -130,15 +123,23 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="Exit"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="st6-O1-QiH" userLabel="Name Label">
+                                <rect key="frame" x="16" y="154" width="241" height="27.666666666666657"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                                <color key="textColor" name="YP White iOS"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aHi-XB-Xna"/>
                         <color key="backgroundColor" name="YP Black iOS"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="st6-O1-QiH" secondAttribute="trailing" constant="136" id="6oK-BD-k5n"/>
                             <constraint firstItem="lmS-5F-mOB" firstAttribute="leading" secondItem="aHi-XB-Xna" secondAttribute="leading" constant="315" id="G2V-F6-fEV"/>
-                            <constraint firstItem="aHi-XB-Xna" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lmS-5F-mOB" secondAttribute="trailing" symbolic="YES" id="Nam-GS-aam"/>
                             <constraint firstAttribute="top" secondItem="lmS-5F-mOB" secondAttribute="top" constant="89" id="UB5-zE-AwA"/>
                             <constraint firstItem="dYV-56-iSg" firstAttribute="leading" secondItem="a1y-sd-Ddj" secondAttribute="leading" constant="16" id="WNk-tB-1Ek"/>
                             <constraint firstItem="dYV-56-iSg" firstAttribute="top" secondItem="a1y-sd-Ddj" secondAttribute="top" constant="76" id="mXy-Q7-amc"/>
+                            <constraint firstItem="st6-O1-QiH" firstAttribute="top" secondItem="dYV-56-iSg" secondAttribute="bottom" constant="8" symbolic="YES" id="rLb-gn-1Lg"/>
+                            <constraint firstItem="st6-O1-QiH" firstAttribute="leading" secondItem="a1y-sd-Ddj" secondAttribute="leading" constant="16" id="wau-TM-ojz"/>
                         </constraints>
                     </view>
                     <connections>
