@@ -80,7 +80,7 @@
                             <constraint firstItem="1hz-eG-uGc" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="zTd-UT-rCh"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="oJY-Wb-yZu"/>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="oJY-Wb-yZu"/>
                     <connections>
                         <outlet property="tableView" destination="1hz-eG-uGc" id="seD-yP-VmZ"/>
                     </connections>
@@ -180,6 +180,7 @@
         <image name="Exit" width="44" height="44"/>
         <image name="Photo" width="70" height="70"/>
         <image name="like-button-on" width="44" height="44"/>
+        <image name="tab_editorial_active" width="30" height="30"/>
         <namedColor name="YP Black iOS">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
