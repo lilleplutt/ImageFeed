@@ -96,9 +96,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="dYV-56-iSg" userLabel="Avatar">
-                                <rect key="frame" x="16" y="118" width="70" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="dYV-56-iSg" userLabel="Avatar">
+                                <rect key="frame" x="16" y="76" width="70" height="70"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="61"/>
@@ -135,6 +134,10 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aHi-XB-Xna"/>
                         <color key="backgroundColor" name="YP Black iOS"/>
+                        <constraints>
+                            <constraint firstItem="dYV-56-iSg" firstAttribute="leading" secondItem="a1y-sd-Ddj" secondAttribute="leading" constant="16" id="WNk-tB-1Ek"/>
+                            <constraint firstItem="dYV-56-iSg" firstAttribute="top" secondItem="a1y-sd-Ddj" secondAttribute="top" constant="76" id="mXy-Q7-amc"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="avatarImageView" destination="dYV-56-iSg" id="H6i-lU-jRf"/>
