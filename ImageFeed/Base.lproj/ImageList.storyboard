@@ -100,16 +100,17 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="LPA-AC-w2D"/>
+                        <segue destination="sKh-FR-55B" kind="relationship" relationship="viewControllers" id="BHS-tr-Kxt"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8L-b8-Ehg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1056" y="77"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Profile-->
         <scene sceneID="3sd-oD-fYL">
             <objects>
-                <viewController id="sKh-FR-55B" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sKh-FR-55B" userLabel="Profile" customClass="ProfileViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a1y-sd-Ddj">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -162,6 +163,7 @@
                             <constraint firstItem="st6-O1-QiH" firstAttribute="leading" secondItem="a1y-sd-Ddj" secondAttribute="leading" constant="16" id="wau-TM-ojz"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_profile_active" id="3aQ-U9-EJp"/>
                     <connections>
                         <outlet property="avatarImageView" destination="dYV-56-iSg" id="H6i-lU-jRf"/>
                         <outlet property="descriptionLabel" destination="eeF-rA-weL" id="ZEu-5n-kze"/>
@@ -181,6 +183,7 @@
         <image name="Photo" width="70" height="70"/>
         <image name="like-button-on" width="44" height="44"/>
         <image name="tab_editorial_active" width="30" height="30"/>
+        <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Black iOS">
             <color red="0.10196078431372549" green="0.10588235294117647" blue="0.13333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
