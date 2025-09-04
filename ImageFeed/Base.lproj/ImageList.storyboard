@@ -97,13 +97,24 @@
                     <view key="view" contentMode="scaleToFill" id="8Vd-Jl-iMb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GE7-CA-Vc6">
+                                <rect key="frame" x="0.0" y="118" width="393" height="666"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="1E1-ao-o7t"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GE7-CA-Vc6" firstAttribute="leading" secondItem="1E1-ao-o7t" secondAttribute="leading" id="6Sk-eU-TFT"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="GE7-CA-Vc6" secondAttribute="bottom" id="Bpe-K4-aL9"/>
+                            <constraint firstItem="GE7-CA-Vc6" firstAttribute="top" secondItem="8Vd-Jl-iMb" secondAttribute="topMargin" id="JAk-Vr-O4m"/>
+                            <constraint firstItem="GE7-CA-Vc6" firstAttribute="trailing" secondItem="1E1-ao-o7t" secondAttribute="trailing" id="P9U-CL-5Ja"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eEj-oh-exN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1783" y="-267"/>
+            <point key="canvasLocation" x="1782.4427480916029" y="-267.6056338028169"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="pST-19-9dL">
