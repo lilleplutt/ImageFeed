@@ -111,6 +111,9 @@
                             <constraint firstItem="GE7-CA-Vc6" firstAttribute="trailing" secondItem="1E1-ao-o7t" secondAttribute="trailing" id="P9U-CL-5Ja"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="GE7-CA-Vc6" id="k8R-ou-BXv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eEj-oh-exN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
