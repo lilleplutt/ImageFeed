@@ -2,13 +2,13 @@ import UIKit
 
 final class SingleImageViewController: UIViewController {
     
-    //MARK: - IBOutlets
-    
-    @IBOutlet weak var imageView: UIImageView!
-    
     //MARK: - Properties
     
     var image: UIImage?
+    
+    //MARK: - IBOutlets
+    
+    @IBOutlet private var imageView: UIImageView!
     
     //MARK: - Methods
     
