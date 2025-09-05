@@ -107,6 +107,9 @@
                                 <state key="normal" image="back_button">
                                     <color key="titleColor" name="YP White iOS"/>
                                 </state>
+                                <connections>
+                                    <action selector="didTapBackButton:" destination="G5H-uZ-q9h" eventType="touchDown" id="zA8-wv-agh"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1E1-ao-o7t"/>
