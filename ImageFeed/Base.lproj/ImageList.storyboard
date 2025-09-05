@@ -101,9 +101,8 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0" translatesAutoresizingMaskIntoConstraints="NO" id="GE7-CA-Vc6">
                                 <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sy-WM-XKX">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Sy-WM-XKX" userLabel="Back Button">
                                 <rect key="frame" x="42" y="65" width="44" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="back_button">
                                     <color key="titleColor" name="YP White iOS"/>
@@ -114,9 +113,11 @@
                         <color key="backgroundColor" name="YP Black iOS"/>
                         <constraints>
                             <constraint firstItem="GE7-CA-Vc6" firstAttribute="leading" secondItem="8Vd-Jl-iMb" secondAttribute="leading" id="6Sk-eU-TFT"/>
+                            <constraint firstItem="8Sy-WM-XKX" firstAttribute="top" secondItem="1E1-ao-o7t" secondAttribute="top" constant="9" id="9Gg-1i-DLm"/>
                             <constraint firstAttribute="bottom" secondItem="GE7-CA-Vc6" secondAttribute="bottom" constant="34" id="Bpe-K4-aL9"/>
                             <constraint firstItem="GE7-CA-Vc6" firstAttribute="top" secondItem="8Vd-Jl-iMb" secondAttribute="top" constant="59" id="JAk-Vr-O4m"/>
                             <constraint firstItem="GE7-CA-Vc6" firstAttribute="trailing" secondItem="8Vd-Jl-iMb" secondAttribute="trailing" id="P9U-CL-5Ja"/>
+                            <constraint firstItem="8Sy-WM-XKX" firstAttribute="leading" secondItem="1E1-ao-o7t" secondAttribute="leading" constant="8" id="glI-12-yfR"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="QRc-u1-6mX"/>
