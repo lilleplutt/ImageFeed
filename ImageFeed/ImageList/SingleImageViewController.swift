@@ -6,5 +6,16 @@ final class SingleImageViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    //MARK: - Properties
+    
+    var image: UIImage?
+    
+    //MARK: - Methods
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        imageView.image = image
+    }
+    
 
 }
