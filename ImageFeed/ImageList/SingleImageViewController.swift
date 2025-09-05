@@ -13,7 +13,7 @@ final class SingleImageViewController: UIViewController {
     
     //MARK: - IBOutlets
     
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet private var imageView: UIImageView!
     
     //MARK: - Methods
     
