@@ -8,6 +8,8 @@ final class ImagesListCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     
+    //MARK: - Properties
+    
     static let reuseIdentifier = "ImagesListCell"
     
 }
