@@ -4,7 +4,12 @@ final class SingleImageViewController: UIViewController {
     
     //MARK: - Properties
     
-    var image: UIImage?
+    var image: UIImage? {
+        didSet {
+            guard isViewLoaded else { return }
+            imageView.image = image
+        }
+    }
     
     //MARK: - IBOutlets
     
