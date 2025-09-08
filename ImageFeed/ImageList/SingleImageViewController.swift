@@ -1,6 +1,6 @@
 import UIKit
 
-final class SingleImageViewController: UIViewController {
+final class SingleImageViewController: UIViewController, UIScrollViewDelegate {
     
     //MARK: - Properties
     
