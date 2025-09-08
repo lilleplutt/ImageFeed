@@ -1,6 +1,6 @@
 import UIKit
 
-final class SingleImageViewController: UIViewController, UIScrollViewDelegate {
+final class SingleImageViewController: UIViewController {
     
     //MARK: - Properties
     
@@ -33,4 +33,10 @@ final class SingleImageViewController: UIViewController, UIScrollViewDelegate {
     }
     
 
+}
+
+extension SingleImageViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 }
