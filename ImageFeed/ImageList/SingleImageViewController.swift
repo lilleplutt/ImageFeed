@@ -14,6 +14,7 @@ final class SingleImageViewController: UIViewController {
     //MARK: - IBOutlets
     
     @IBOutlet private var imageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     //MARK: - Methods
     
