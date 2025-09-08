@@ -53,7 +53,7 @@ final class ImagesListViewController: UIViewController {
         cell.dateLabel.text = dateFormatter.string(from: Date())
         
         let isLiked = indexPath.row.isMultiple(of: 2)
-        let likeImage = isLiked ? UIImage(named: "like-button-on") : UIImage(named: "like-button-off")
+        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
     }
     
