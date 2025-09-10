@@ -127,10 +127,13 @@
                                     <action selector="didTapBackButton:" destination="G5H-uZ-q9h" eventType="touchDown" id="zA8-wv-agh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-6U-2n9" userLabel="Sharing Button">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-6U-2n9" userLabel="Share Button">
                                 <rect key="frame" x="162" y="711" width="50" height="50"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="sharing_button"/>
+                                <connections>
+                                    <action selector="didTapShareButton:" destination="G5H-uZ-q9h" eventType="touchUpInside" id="4NQ-SP-U0D"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1E1-ao-o7t"/>
