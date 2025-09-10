@@ -127,6 +127,12 @@
                                     <action selector="didTapBackButton:" destination="G5H-uZ-q9h" eventType="touchDown" id="zA8-wv-agh"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="InH-aS-WrZ" userLabel="Sharing Button">
+                                <rect key="frame" x="170" y="404" width="55" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="sharing_button"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1E1-ao-o7t"/>
                         <color key="backgroundColor" name="YP Black iOS"/>
@@ -269,6 +275,7 @@
         <image name="Photo" width="70" height="70"/>
         <image name="back_button" width="24" height="24"/>
         <image name="like-button-on" width="44" height="44"/>
+        <image name="sharing_button" width="30.333333969116211" height="30"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Black iOS">
