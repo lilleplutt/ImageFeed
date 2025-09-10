@@ -40,7 +40,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vAN-5A-vfW" userLabel="Like Button">
                                                     <rect key="frame" x="333" y="4" width="44" height="44"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="like-button-on"/>
+                                                    <state key="normal" image="like_button_on"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 августа 2025" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUZ-Kc-FGa" userLabel="Date Label">
                                                     <rect key="frame" x="24" y="241" width="361" height="16"/>
@@ -130,7 +130,7 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-6U-2n9" userLabel="Share Button">
                                 <rect key="frame" x="162" y="711" width="50" height="50"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="sharing_button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="share_button"/>
                                 <connections>
                                     <action selector="didTapShareButton:" destination="G5H-uZ-q9h" eventType="touchUpInside" id="4NQ-SP-U0D"/>
                                 </connections>
@@ -204,7 +204,7 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-5F-mOB" userLabel="Logout Button">
                                 <rect key="frame" x="315" y="89" width="44" height="44"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="Exit"/>
+                                <buttonConfiguration key="configuration" style="plain" image="exit_button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="st6-O1-QiH" userLabel="Name Label">
                                 <rect key="frame" x="16" y="154" width="241" height="27.666666666666657"/>
@@ -275,11 +275,11 @@
     </scenes>
     <resources>
         <image name="0" width="1600" height="1059"/>
-        <image name="Exit" width="44" height="44"/>
         <image name="Photo" width="70" height="70"/>
         <image name="back_button" width="24" height="24"/>
-        <image name="like-button-on" width="44" height="44"/>
-        <image name="sharing_button" width="50" height="50"/>
+        <image name="exit_button" width="44" height="44"/>
+        <image name="like_button_on" width="44" height="44"/>
+        <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Black iOS">
