@@ -6,9 +6,9 @@ final class SingleImageViewController: UIViewController {
     
     var image: UIImage? {
         didSet {
-            guard isViewLoaded else { return }
+            guard isViewLoaded, let image else { return }
             imageView.image = image
-            guard let image = image else { return }
+            imageView.frame.size = image.size
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
@@ -22,8 +22,10 @@ final class SingleImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        guard let image else { return }
         imageView.image = image
-        guard let image = image else { return }
+        imageView.frame.size = image.size
         rescaleAndCenterImageInScrollView(image: image)
         
         scrollView.minimumZoomScale = 0.1
