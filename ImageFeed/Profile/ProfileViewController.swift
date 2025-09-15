@@ -47,6 +47,13 @@ final class ProfileViewController: UIViewController {
         loginNameLabel.text = "@ekaterina_nov"
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginNameLabel)
+        loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        loginNameLabel.textColor = UIColor(named: "YP Gray iOS")
+        loginNameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        loginNameLabel.widthAnchor.constraint(equalToConstant: 99).isActive = true
+        loginNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        loginNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 180).isActive = true
+        
         
         let descriptionLabel = UILabel()
         descriptionLabel.text = "Hello, world!"
