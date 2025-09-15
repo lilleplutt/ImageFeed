@@ -11,6 +11,14 @@ final class ProfileViewController: UIViewController {
         let imageView = UIImageView(image: profileImage)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
+        
+        let exitButton = UIButton.systemButton(
+            with: UIImage(named: "exit_button")!,
+            target: self,
+            action: nil
+        )
+        exitButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(exitButton)
     }
     
     
