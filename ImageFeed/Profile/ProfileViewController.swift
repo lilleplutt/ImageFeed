@@ -25,6 +25,12 @@ final class ProfileViewController: UIViewController {
         )
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(exitButton)
+        exitButton.tintColor = UIColor(named: "YP Red iOS")
+        exitButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        exitButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        exitButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 89).isActive = true
+        
         
         let nameLabel = UILabel()
         nameLabel.text = "Екатерина Новикова"
