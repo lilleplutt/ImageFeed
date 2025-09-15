@@ -60,8 +60,12 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.text = "Hello, world!"
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionLabel)
-        
-        
+        descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
+        descriptionLabel.textColor = UIColor(named: "YP White iOS")
+        descriptionLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        descriptionLabel.widthAnchor.constraint(equalToConstant: 77).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
         
         
     }
