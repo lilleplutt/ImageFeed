@@ -41,6 +41,7 @@ final class ProfileViewController: UIViewController {
         nameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 241).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8).isActive = true
         
         
         let loginNameLabel = UILabel()
