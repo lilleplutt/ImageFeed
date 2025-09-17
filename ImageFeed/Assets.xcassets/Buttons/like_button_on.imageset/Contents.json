@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "No Active.svg",
+      "filename" : "Active.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Active — копия 2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Active — копия 3.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
