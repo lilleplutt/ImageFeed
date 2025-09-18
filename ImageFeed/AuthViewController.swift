@@ -6,16 +6,19 @@ class AuthViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor(named: "YP Black iOS")
-        setUpSceneLoginScreen()
+        setUpLoginScreen()
     }
     
-    func setUpSceneLoginScreen() {
+    func setUpLoginScreen() {
         let unsplashLogoImage = UIImage(named: "logo_of_unsplash")
         let unsplashLogoImageView = UIImageView(image: unsplashLogoImage)
         unsplashLogoImageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(unsplashLogoImageView)
         
-        
+        unsplashLogoImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        unsplashLogoImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        unsplashLogoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 376).isActive = true
+        unsplashLogoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 158).isActive = true
         
     }
 
