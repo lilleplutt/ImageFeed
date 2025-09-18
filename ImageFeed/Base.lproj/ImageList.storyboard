@@ -203,7 +203,7 @@
         <!--Auth View Controller-->
         <scene sceneID="lHW-I5-uQk">
             <objects>
-                <viewController id="dQE-ka-1R8" userLabel="Auth View Controller" sceneMemberID="viewController">
+                <viewController id="dQE-ka-1R8" userLabel="Auth View Controller" customClass="AuthViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cEC-1N-bCc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
