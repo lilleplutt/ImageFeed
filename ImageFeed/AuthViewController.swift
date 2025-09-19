@@ -19,7 +19,7 @@ class AuthViewController: UIViewController {
         
         unsplashLogoImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         unsplashLogoImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        //unsplashLogoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 376).isActive = true
+        unsplashLogoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 376).isActive = true
         unsplashLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true //new
         //unsplashLogoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 158).isActive = true
         unsplashLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true //new
