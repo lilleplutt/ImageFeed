@@ -17,8 +17,6 @@ class AuthViewController: UIViewController {
         
         unsplashLogoImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         unsplashLogoImageView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        unsplashLogoImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 376).isActive = true
-        unsplashLogoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 158).isActive = true //need to fix
         
         let loginButton = UIButton.systemButton(
             with: UIImage(named: "login_button")!,
