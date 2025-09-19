@@ -1,4 +1,5 @@
 import UIKit
+import WebKit
 
 class WebViewViewController: UIViewController {
     
@@ -7,4 +8,8 @@ class WebViewViewController: UIViewController {
         
         
     }
+    
+    //MARK: - Outlet
+    
+    @IBOutlet private var webView: WKWebView!
 }

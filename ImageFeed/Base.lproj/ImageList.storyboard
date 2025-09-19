@@ -242,6 +242,9 @@
                             <constraint firstItem="6vy-7h-c4s" firstAttribute="top" secondItem="RnI-e2-Is6" secondAttribute="top" id="sI0-Pu-3hg"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="6vy-7h-c4s" id="OaJ-7p-NUy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoY-iU-Rql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
