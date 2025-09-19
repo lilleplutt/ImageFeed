@@ -28,7 +28,8 @@ class AuthViewController: UIViewController {
         loginButton.tintColor = UIColor(named: "YP White iOS")
         loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         loginButton.widthAnchor.constraint(equalToConstant: 343).isActive = true
-        
+        loginButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 640).isActive = true
+        loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
     }
 
     
