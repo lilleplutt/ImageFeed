@@ -5,10 +5,11 @@ class AuthViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "YP Black iOS")
-        setUpLoginScreen()
+        //view.backgroundColor = UIColor(named: "YP Black iOS")
+        //setUpLoginScreen()
     }
     
+    /*
     func setUpLoginScreen() {
         let unsplashLogoImage = UIImage(named: "logo_of_unsplash")
         let unsplashLogoImageView = UIImageView(image: unsplashLogoImage)
@@ -31,6 +32,7 @@ class AuthViewController: UIViewController {
         loginButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 640).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
     }
+     */
 
     
 }
