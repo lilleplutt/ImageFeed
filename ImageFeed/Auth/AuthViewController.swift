@@ -50,6 +50,8 @@ class AuthViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
+    //MARK: - Actions
+    
     @objc func loginButtonTapped() {
         let webViewVC = WebViewViewController()
         navigationController?.pushViewController(webViewVC, animated: true)

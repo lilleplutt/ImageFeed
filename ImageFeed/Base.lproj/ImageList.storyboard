@@ -223,13 +223,29 @@
                     <view key="view" contentMode="scaleToFill" id="WsP-Hb-0U6">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-7h-c4s">
+                                <rect key="frame" x="0.0" y="118" width="393" height="734"/>
+                                <color key="backgroundColor" name="YP White iOS"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="RnI-e2-Is6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="leading" secondItem="6vy-7h-c4s" secondAttribute="leading" id="Tnv-8a-maw"/>
+                            <constraint firstItem="6vy-7h-c4s" firstAttribute="trailing" secondItem="WsP-Hb-0U6" secondAttribute="trailing" id="hOD-qk-lDN"/>
+                            <constraint firstItem="6vy-7h-c4s" firstAttribute="bottom" secondItem="WsP-Hb-0U6" secondAttribute="bottom" id="s4u-Pq-h2Y"/>
+                            <constraint firstItem="6vy-7h-c4s" firstAttribute="top" secondItem="RnI-e2-Is6" secondAttribute="top" id="sI0-Pu-3hg"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoY-iU-Rql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="665" y="-1032"/>
+            <point key="canvasLocation" x="661.83206106870227" y="-1021.1267605633803"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="egG-Ea-N8g">
