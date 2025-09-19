@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -213,7 +214,22 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yId-Jh-4nR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-179.38931297709922" y="-657.04225352112678"/>
+            <point key="canvasLocation" x="-234" y="-1021"/>
+        </scene>
+        <!--WebView View Controller-->
+        <scene sceneID="BGH-v4-oVI">
+            <objects>
+                <viewController id="KGJ-Oy-e9S" userLabel="WebView View Controller" customClass="WebViewViewController" customModule="ImageFeed" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WsP-Hb-0U6">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="RnI-e2-Is6"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XoY-iU-Rql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="665" y="-1032"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="egG-Ea-N8g">
@@ -255,7 +271,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVF-0U-zl7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1106.1068702290077" y="-657.04225352112678"/>
+            <point key="canvasLocation" x="-1143" y="-1021"/>
         </scene>
     </scenes>
     <resources>
@@ -271,5 +287,8 @@
         <namedColor name="YP White iOS">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
