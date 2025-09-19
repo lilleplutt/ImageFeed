@@ -14,7 +14,7 @@ class AuthViewController: UIViewController {
         let unsplashLogoImage = UIImage(named: "logo_of_unsplash")
         let unsplashLogoImageView = UIImageView(image: unsplashLogoImage)
         unsplashLogoImageView.translatesAutoresizingMaskIntoConstraints = false
-        unsplashLogoImageView.contentMode = .scaleAspectFit
+        unsplashLogoImageView.contentMode = .scaleAspectFit //for saving image proportion
         view.addSubview(unsplashLogoImageView)
         
         unsplashLogoImageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -29,9 +29,9 @@ class AuthViewController: UIViewController {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginButton)
         
-        loginButton.backgroundColor = .white
+        loginButton.backgroundColor = UIColor(named: "YP White iOS")
         loginButton.setTitle("Войти", for: .normal)
-        loginButton.setTitleColor(.black, for: .normal)
+        loginButton.setTitleColor(UIColor(named: "YP Black iOS"), for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         loginButton.layer.cornerRadius = 16
         
