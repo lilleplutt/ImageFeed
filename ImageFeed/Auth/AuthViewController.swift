@@ -6,13 +6,7 @@ class AuthViewController: UIViewController {
     
     private let showWebViewSegueIdentifier = "ShowWebView"
     
-    //MARK: - Private Methods
-    
-    private func configureBackButton() {
-        
-    }
-    
-    //MARK: - Methods
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +17,14 @@ class AuthViewController: UIViewController {
         
         configureBackButton()
     }
+    
+    //MARK: - Private Methods
+    
+    private func configureBackButton() {
+        
+    }
+    
+    //MARK: - Methods
     
     func setUpLogo() {
         let unsplashLogoImage = UIImage(named: "logo_of_unsplash")

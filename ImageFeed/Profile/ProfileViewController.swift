@@ -2,7 +2,7 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    //MARK: - Methods
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -14,6 +14,8 @@ final class ProfileViewController: UIViewController {
         setUpLoginNameLabel()
         setUpDescriptionLabel()
     }
+    
+    //MARK: - Methods
         
         func setUpProfileImage() {
             let profileImage = UIImage(named: "profile_image")
@@ -26,7 +28,6 @@ final class ProfileViewController: UIViewController {
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         }
             
-    
         func setUpExitButton() {
             let exitButton = UIButton.systemButton(
                 with: UIImage(named: "exit_button")!,

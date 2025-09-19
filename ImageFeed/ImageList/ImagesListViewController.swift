@@ -17,7 +17,7 @@ final class ImagesListViewController: UIViewController {
     }()
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
-    //MARK: - Methods
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +27,8 @@ final class ImagesListViewController: UIViewController {
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
+    
+    //MARK: - Methods
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {

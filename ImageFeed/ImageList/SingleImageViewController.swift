@@ -18,7 +18,7 @@ final class SingleImageViewController: UIViewController {
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    //MARK: - Methods
+    //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
