@@ -26,6 +26,8 @@ class AuthViewController: UIViewController {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginButton)
         loginButton.tintColor = UIColor(named: "YP White iOS")
+        loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        loginButton.widthAnchor.constraint(equalToConstant: 343).isActive = true
         
     }
 
