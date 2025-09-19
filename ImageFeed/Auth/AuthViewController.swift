@@ -6,6 +6,12 @@ class AuthViewController: UIViewController {
     
     private let showWebViewSegueIdentifier = "ShowWebView"
     
+    //MARK: - Private Methods
+    
+    private func configureBackButton() {
+        
+    }
+    
     //MARK: - Methods
     
     override func viewDidLoad() {
@@ -14,6 +20,8 @@ class AuthViewController: UIViewController {
         view.backgroundColor = UIColor(named: "YP Black iOS")
         setUpLogo()
         setUpLoginButton()
+        
+        configureBackButton()
     }
     
     func setUpLogo() {
