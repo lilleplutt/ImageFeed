@@ -11,7 +11,7 @@ class WebViewViewController: UIViewController {
         
     }
     
-    //MARK: - Outlet
+    //MARK: - Outlets
     
     @IBOutlet private var webView: WKWebView!
 }
