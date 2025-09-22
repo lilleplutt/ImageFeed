@@ -22,6 +22,7 @@ class WebViewViewController: UIViewController {
     
     //MARK: - Properties
     
+    weak var delegate: WebViewViewControllerDelegate?
     private var webView: WKWebView!
     
     //MARK: - Private methods
@@ -80,7 +81,7 @@ extension WebViewViewController: WKNavigationDelegate {
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == "code" })
         {
-            return codeItem.value                                           
+            return codeItem.value
         } else {
             return nil
         }
