@@ -1,7 +1,7 @@
 import UIKit
 import WebKit
 
-class WebViewViewController: UIViewController, WKNavigationDelegate {
+class WebViewViewController: UIViewController {
     
     //MARK: - Lifecycle
     
@@ -55,3 +55,21 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
     }
     
 }
+
+    //MARK: - Extensions
+
+extension WebViewViewController: WKNavigationDelegate {
+    func webView(
+        _ webView: WKWebView,
+        decidePolicyFor navigationAction: WKNavigationAction,
+        decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
+    ) {
+          if let code = code(from: navigationAction) {
+              //TODO: process code
+              decisionHandler(.cancel)
+          } else {
+              decisionHandler(.allow)
+          }
+      }
+}
+
