@@ -1,15 +1,17 @@
 import UIKit
 import WebKit
 
-class WebViewViewController: UIViewController {
+class WebViewViewController: UIViewController, WKNavigationDelegate {
     
     //MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(named: "YP White iOS")
+        webView.navigationDelegate = self
+        
         setUpWebView()
         loadAuthView()
-        view.backgroundColor = UIColor(named: "YP White iOS")
     }
     
     //MARK: - Constants
