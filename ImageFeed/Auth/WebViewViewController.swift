@@ -11,6 +11,12 @@ class WebViewViewController: UIViewController {
         
     }
     
+    //MARK: - Constants
+    
+    enum WebViewConstants {
+        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+    }
+    
     //MARK: - Outlets
     
     @IBOutlet private var webView: WKWebView!
