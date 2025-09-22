@@ -7,7 +7,9 @@ class WebViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpWebView()
         loadAuthView()
+        view.backgroundColor = UIColor(named: "YP White iOS")
     }
     
     //MARK: - Constants
@@ -16,11 +18,24 @@ class WebViewViewController: UIViewController {
         static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     }
     
-    //MARK: - Outlets
+    //MARK: - Properties
     
-    @IBOutlet private var webView: WKWebView!
+    private var webView: WKWebView!
     
     //MARK: - Private methods
+    
+    private func setUpWebView() {
+        webView = WKWebView()
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(webView)
+        
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
+    }
     
     private func loadAuthView() {
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else { return }
