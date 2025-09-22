@@ -66,8 +66,11 @@ class AuthViewController: UIViewController {
     
     @objc func loginButtonTapped() {
         let webViewVC = WebViewViewController()
+        webViewVC.delegate = self 
         navigationController?.pushViewController(webViewVC, animated: true)
     }
+    
+    
     
 
     
