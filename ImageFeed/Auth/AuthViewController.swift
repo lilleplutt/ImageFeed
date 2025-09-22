@@ -80,7 +80,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        <#code#>
+        navigationController?.popViewController(animated: true)
     }
     
     
