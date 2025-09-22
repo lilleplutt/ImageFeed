@@ -66,12 +66,23 @@ class AuthViewController: UIViewController {
     
     @objc func loginButtonTapped() {
         let webViewVC = WebViewViewController()
-        webViewVC.delegate = self 
+        webViewVC.delegate = self
         navigationController?.pushViewController(webViewVC, animated: true)
     }
     
-    
-    
+}
 
+    //MARK: - WebViewViewControllerDelegate
+
+extension AuthViewController: WebViewViewControllerDelegate {
+    func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        <#code#>
+    }
+    
+    func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
+        <#code#>
+    }
+    
     
 }
+
