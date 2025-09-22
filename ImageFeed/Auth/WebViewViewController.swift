@@ -40,7 +40,7 @@ class WebViewViewController: UIViewController {
             ])
     }
     
-    private func loadAuthView() {
+    private func loadAuthView() { //show authorization screen
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else { return }
         
         urlComponents.queryItems = [
@@ -60,23 +60,24 @@ class WebViewViewController: UIViewController {
     //MARK: - Extensions
 
 extension WebViewViewController: WKNavigationDelegate {
-    func webView(
+    
+    func webView( //to understand if user authorized
         _ webView: WKWebView,
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
           if let code = code(from: navigationAction) {
-              delegate?.webViewViewController(self, didAuthenticateWithCode: code)
               decisionHandler(.cancel)
+              delegate?.webViewViewController(self, didAuthenticateWithCode: code)
           } else {
               decisionHandler(.allow)
           }
       }
     
-    private func code(from navigationAction: WKNavigationAction) -> String? {
+    private func code(from navigationAction: WKNavigationAction) -> String? { //to find url with parameter "code"
         if
             let url = navigationAction.request.url,
-            let urlComponents = URLComponents(string: url.absoluteString),
+            let urlComponents = URLComponents(string: url.absoluteString), //all parameters in url
             urlComponents.path == "/oauth/authorize/native",
             let items = urlComponents.queryItems,
             let codeItem = items.first(where: { $0.name == "code" })
