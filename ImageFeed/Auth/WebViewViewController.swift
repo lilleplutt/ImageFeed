@@ -8,9 +8,10 @@ class WebViewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "YP White iOS")
-        webView.navigationDelegate = self
         
         setUpWebView()
+        webView.navigationDelegate = self
+
         loadAuthView()
     }
     
