@@ -33,7 +33,7 @@ class WebViewViewController: UIViewController {
     private func setUpProgressView() {
         progressView = UIProgressView()
         progressView.translatesAutoresizingMaskIntoConstraints = false
-        var progressTintColor = UIColor(named: "YP Black iOS")
+        progressView.progressTintColor = UIColor(named: "YP Black iOS")
         progressView.progress = 0.5
         view.addSubview(progressView)
         
