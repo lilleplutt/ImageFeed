@@ -9,9 +9,10 @@ class WebViewViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(named: "YP White iOS")
         
+        setUpProgressView()
         setUpWebView()
+        
         webView.navigationDelegate = self
-
         loadAuthView()
     }
     
@@ -25,8 +26,23 @@ class WebViewViewController: UIViewController {
     
     weak var delegate: WebViewViewControllerDelegate?
     private var webView: WKWebView!
+    private var progressView: UIProgressView!
     
     //MARK: - Private methods
+    
+    private func setUpProgressView() {
+        progressView = UIProgressView()
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        var progressTintColor = UIColor(named: "YP Black iOS")
+        progressView.progress = 0.5
+        view.addSubview(progressView)
+        
+        NSLayoutConstraint.activate([
+            progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            ])
+    }
     
     private func setUpWebView() {
         webView = WKWebView()
@@ -55,6 +71,7 @@ class WebViewViewController: UIViewController {
         let request = URLRequest(url: url)
         webView.load(request)
     }
+    
 
 }
 
