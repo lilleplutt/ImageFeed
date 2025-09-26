@@ -22,10 +22,6 @@ final class OAuth2Service {
         return request
     }
     
-    private enum NetworkError: Error {
-        case codeError
-    }
-    
     func fetchOAuthToken(code: String, url: URL, handler: @escaping (Result<Data, Error>) -> Void) {
         let request = URLRequest(url: url)
         
@@ -37,7 +33,7 @@ final class OAuth2Service {
             
             if let response = response as? HTTPURLResponse,
                 response.statusCode < 200 || response.statusCode >= 300 {
-                handler(.failure(NetworkError.codeError))
+                handler(.failure(NetworkError.invalidRequest))
                 return
             }
             
