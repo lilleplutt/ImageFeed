@@ -1,5 +1,4 @@
 import UIKit
-import WebKit
 
 final class OAuth2Service {
     static let shared = OAuth2Service() //static provide global access and uniqueness
@@ -12,7 +11,7 @@ final class OAuth2Service {
             URLQueryItem(name: "client_id", value: Constants.accessKey),
             URLQueryItem(name: "client_secret", value: Constants.secretKey),
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
-            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "code", value: "code"),
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
         
@@ -22,24 +21,19 @@ final class OAuth2Service {
         return request
     }
     
-    func fetchOAuthToken(code: String, url: URL, handler: @escaping (Result<Data, Error>) -> Void) {
-        let request = URLRequest(url: url)
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                handler(.failure(error))
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse,
-                response.statusCode < 200 || response.statusCode >= 300 {
-                handler(.failure(NetworkError.invalidRequest))
-                return
-            }
-            
-            guard let data = data else { return }
-            handler(.success(data))
+    func fetchOAuthToken(
+        code: String,
+        completion: @escaping (Result<Data, Error>) -> Void
+    ) {
+        guard let request = makeOAuthTokenRequest(code: code) else {
+            completion(.failure(NetworkError.invalidRequest))
+            return
         }
+        
+        let task = URLSession.shared.data(for: request) { result in
+            completion(result)
+        }
+        
         task.resume()
     }
     
