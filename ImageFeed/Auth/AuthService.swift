@@ -28,8 +28,25 @@ final class OAuth2Service {
             return
         }
         
-        let task = URLSession.shared.data(for: request) { result in
-            completion(result)
+        let task = URLSession.shared.data(for: request) { [weak self] result in
+            switch result {
+            case .success(let data):
+                do {
+                    let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
+                    let token = tokenResponse.accessToken
+                    
+                    OAuth2TokenStorage.shared.token = token
+                    print("[OAuth2Service] Successfully take and save token")
+                    completion(.success(token))
+                } catch {
+                    print("[OAuth2Service] Failed to decode JSON: \(error.localizedDescription)")
+                    completion(.failure(NetworkError.decodingError(error)))
+                }
+                
+            case .failure(let error):
+                print("[OAuth2Service] Network error: \(error.localizedDescription)")
+                completion(.failure(error))
+            }
         }
         
         task.resume()
