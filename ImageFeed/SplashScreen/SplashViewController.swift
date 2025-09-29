@@ -2,10 +2,22 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    //MARK: - Properties
+    
+    private let storage = OAuth2TokenStorage()
+    
+    //MARK: - Methods
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        
+        if storage.token != nil {
+            
+        } else {
+            
+        }
     }
+    
 }
+
+    //MARK: - Extensions
 
