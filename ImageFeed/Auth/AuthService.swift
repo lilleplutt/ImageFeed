@@ -23,6 +23,7 @@ final class OAuth2Service {
     
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         guard let request = makeOAuthTokenRequest(code: code) else {
+            print("[OAuth2Service] Failed to create URLRequest")
             completion(.failure(NetworkError.invalidRequest))
             return
         }
