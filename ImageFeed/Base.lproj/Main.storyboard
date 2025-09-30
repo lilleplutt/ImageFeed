@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -89,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1819.0839694656488" y="-270.42253521126764"/>
+            <point key="canvasLocation" x="790" y="-146"/>
         </scene>
         <!--SingleImageViewController-->
         <scene sceneID="iFO-JW-jaA">
@@ -158,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eEj-oh-exN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2709.1603053435115" y="-267.6056338028169"/>
+            <point key="canvasLocation" x="1604" y="-146"/>
         </scene>
         <!--Splash View Controller-->
         <scene sceneID="3R2-8N-hLR">
@@ -167,8 +166,17 @@
                     <view key="view" contentMode="scaleToFill" id="xfr-vd-1dY">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_screen_logo" translatesAutoresizingMaskIntoConstraints="NO" id="cYn-ua-Yvl">
+                                <rect key="frame" x="160" y="413.33333333333331" width="73" height="75.666666666666657"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="1e2-aK-psk"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="YP Black iOS"/>
+                        <constraints>
+                            <constraint firstItem="cYn-ua-Yvl" firstAttribute="centerX" secondItem="1e2-aK-psk" secondAttribute="centerX" id="Nkc-Hl-ydt"/>
+                            <constraint firstItem="cYn-ua-Yvl" firstAttribute="centerY" secondItem="1e2-aK-psk" secondAttribute="centerY" id="thT-Vu-J25"/>
+                        </constraints>
                     </view>
                     <connections>
                         <segue destination="Rl4-xg-GKf" kind="presentation" id="N6r-8c-LiH"/>
@@ -216,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gVw-yi-MaC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-34" y="424"/>
+            <point key="canvasLocation" x="-42" y="560"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="lHW-I5-uQk">
@@ -232,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yId-Jh-4nR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-234" y="-1021"/>
+            <point key="canvasLocation" x="-45" y="-1021"/>
         </scene>
         <!--WebView View Controller-->
         <scene sceneID="BGH-v4-oVI">
@@ -266,7 +274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XoY-iU-Rql" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="661.83206106870227" y="-1021.1267605633803"/>
+            <point key="canvasLocation" x="789" y="-1021"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="egG-Ea-N8g">
@@ -290,7 +298,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Uk-zH-v5P" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="892.36641221374043" y="-270.42253521126764"/>
+            <point key="canvasLocation" x="-44" y="-146"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mjC-jK-aLt">
@@ -308,7 +316,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TVF-0U-zl7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1143" y="-1021"/>
+            <point key="canvasLocation" x="-1057" y="-1021"/>
         </scene>
     </scenes>
     <resources>
@@ -316,6 +324,7 @@
         <image name="back_button" width="24" height="24"/>
         <image name="like_button_on" width="44" height="44"/>
         <image name="share_button" width="50" height="50"/>
+        <image name="splash_screen_logo" width="72.666664123535156" height="75.333335876464844"/>
         <image name="tab_editorial_active" width="30" height="30"/>
         <image name="tab_profile_active" width="30" height="30"/>
         <namedColor name="YP Black iOS">
@@ -324,8 +333,5 @@
         <namedColor name="YP White iOS">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
