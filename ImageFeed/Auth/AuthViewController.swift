@@ -1,6 +1,10 @@
 import UIKit
 
-class AuthViewController: UIViewController {
+protocol AuthViewControllerDelegate: AnyObject {
+    func didAuthenticate(_ vc: AuthViewController)
+}
+
+final class AuthViewController: UIViewController {
     
     //MARK: - Properties
     
