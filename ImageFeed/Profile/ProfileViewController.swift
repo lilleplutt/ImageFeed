@@ -81,10 +81,6 @@ final class ProfileViewController: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
             descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
         }
-        
-    
-    
-    
     
 }
 
