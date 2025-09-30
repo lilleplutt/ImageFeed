@@ -8,6 +8,7 @@ final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
     //MARK: - Methods
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
