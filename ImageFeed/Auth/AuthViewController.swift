@@ -9,6 +9,7 @@ final class AuthViewController: UIViewController {
     //MARK: - Properties
     
     private let showWebViewSegueIdentifier = "ShowWebView"
+    weak var delegate: AuthViewControllerDelegate?
     
     //MARK: - Lifecycle
     
@@ -95,12 +96,15 @@ extension AuthViewController: WebViewViewControllerDelegate {
     
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         print("[AuthViewController] Code: \(code)")
+        vc.dismiss(animated: true)
         
         OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
+            guard let self = self else { return }
+            
             switch result {
                 case .success(let token):
+                self.delegate?.didAuthenticate(self)
                 print("[AuthViewController] Token: \(token)")
-                self?.dismiss(animated: true)
                 
             case .failure(let error):
                 print("[AuthViewController] Error: \(error.localizedDescription)")
