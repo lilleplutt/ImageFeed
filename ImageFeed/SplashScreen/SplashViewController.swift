@@ -12,7 +12,7 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if storage.token != nil {
-            
+            switchToTabBarController()
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
