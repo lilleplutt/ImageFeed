@@ -18,6 +18,17 @@ final class SplashViewController: UIViewController {
         }
     }
     
+    private func switchToTabBarController() {
+        guard let window = UIApplication.shared.windows.first else {
+            assertionFailure("Invalid window configuration")
+            return
+        }
+        
+        let tabBarController = UIStoryboard(name: "ImageList", bundle: .main).instantiateViewController(withIdentifier: "TabBarController")
+        
+        window.rootViewController = tabBarController
+    }
+    
 }
 
     //MARK: - Extensions
