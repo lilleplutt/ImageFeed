@@ -179,7 +179,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="Rl4-xg-GKf" kind="presentation" id="N6r-8c-LiH"/>
+                        <segue destination="Rl4-xg-GKf" kind="presentation" identifier="ShowAuthenticationScreen" id="N6r-8c-LiH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hms-76-hLt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
