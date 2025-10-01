@@ -67,24 +67,11 @@ final class AuthViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showWebViewSegueIdentifier {
-            guard
-                let webViewViewController = segue.destination as? WebViewViewController
-            else {
-                assertionFailure("Failed to prepare for \(showWebViewSegueIdentifier)")
-                return
-            }
-            webViewViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
-    }
-    
     //MARK: - Actions
     
     @objc func loginButtonTapped() {
         let webViewViewController = WebViewViewController()
+        webViewViewController.delegate = self
         navigationController?.pushViewController(webViewViewController, animated: true)
     }
     
