@@ -8,7 +8,6 @@ final class AuthViewController: UIViewController {
     
     //MARK: - Properties
     
-    private let showWebViewSegueIdentifier = "ShowWebView"
     weak var delegate: AuthViewControllerDelegate?
     
     //MARK: - Lifecycle
