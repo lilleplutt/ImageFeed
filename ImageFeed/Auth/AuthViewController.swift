@@ -65,9 +65,11 @@ final class AuthViewController: UIViewController {
     @objc func loginButtonTapped() {
         let webViewViewController = WebViewViewController()
         webViewViewController.delegate = self
-        navigationController?.pushViewController(webViewViewController, animated: true)
-    }
-    
+        
+        let navigationController = UINavigationController(rootViewController: webViewViewController)
+          navigationController.modalPresentationStyle = .fullScreen
+          present(navigationController, animated: true) //new 3 strings
+      }
 }
 
 //MARK: - WebViewViewControllerDelegate
@@ -77,21 +79,23 @@ extension AuthViewController: WebViewViewControllerDelegate {
         vc.dismiss(animated: true)
         
         OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
-            guard let self = self else { return }
-            
-            switch result {
-            case .success(let token):
-                self.delegate?.didAuthenticate(self)
-                print("[AuthViewController] Token: \(token)")
-                
-            case .failure(let error):
-                print("[AuthViewController] Error: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let token):
+                    print("[AuthViewController] Token: \(token)")
+                    self?.dismiss(animated: true) {
+                        self?.delegate?.didAuthenticate(self!)
+                    }
+                    
+                case .failure(let error):
+                    print("[AuthViewController] Error: \(error.localizedDescription)")
+                }
             }
         }
     }
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
-        vc.dismiss(animated: true)
+        dismiss(animated: true)
     }
     
 }
