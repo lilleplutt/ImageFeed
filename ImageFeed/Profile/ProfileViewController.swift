@@ -3,7 +3,6 @@ import UIKit
 final class ProfileViewController: UIViewController {
     
     //MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -16,7 +15,6 @@ final class ProfileViewController: UIViewController {
     }
     
     //MARK: - Methods
-        
         func setUpProfileImage() {
             let profileImage = UIImage(named: "profile_image")
             let imageView = UIImageView(image: profileImage)
@@ -27,7 +25,7 @@ final class ProfileViewController: UIViewController {
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76).isActive = true
             imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         }
-            
+        
         func setUpExitButton() {
             let exitButton = UIButton.systemButton(
                 with: UIImage(resource: .exitButton),

@@ -4,7 +4,6 @@ import WebKit
 final class WebViewViewController: UIViewController {
     
     //MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(resource: .ypWhiteIOS)
@@ -18,19 +17,16 @@ final class WebViewViewController: UIViewController {
     }
     
     //MARK: - Constants
-    
     enum WebViewConstants {
         static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
     }
     
     //MARK: - Properties
-    
     weak var delegate: WebViewViewControllerDelegate?
     private var webView: WKWebView!
     private var progressView: UIProgressView!
     
     //MARK: - Private methods
-    
     private func setUpProgressView() {
         progressView = UIProgressView()
         progressView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +70,6 @@ final class WebViewViewController: UIViewController {
     }
     
     //MARK: - KVO
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -112,7 +107,6 @@ final class WebViewViewController: UIViewController {
 }
 
     //MARK: - Extensions
-
 extension WebViewViewController: WKNavigationDelegate {
     
     func webView( //to understand if user authorized
