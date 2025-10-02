@@ -3,6 +3,7 @@ import UIKit
 final class OAuth2Service {
     static let shared = OAuth2Service() //static provide global access and uniqueness
     private init() {} //make single exemple
+    private let decoder = JSONDecoder()
     
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") else { return nil }
@@ -28,11 +29,13 @@ final class OAuth2Service {
             return
         }
         
-        let task = URLSession.shared.data(for: request) { [weak self] result in
+        let decoder = self.decoder
+        
+        let task = URLSession.shared.data(for: request) { result in
             switch result {
             case .success(let data):
                 do {
-                    let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
+                    let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
                     let token = tokenResponse.accessToken
                     
                     OAuth2TokenStorage.shared.token = token
@@ -53,4 +56,3 @@ final class OAuth2Service {
     }
     
 }
-
