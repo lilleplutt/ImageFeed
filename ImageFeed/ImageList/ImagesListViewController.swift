@@ -1,7 +1,7 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
-
+    
     //MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     
@@ -18,7 +18,7 @@ final class ImagesListViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -56,7 +56,7 @@ final class ImagesListViewController: UIViewController {
     }
 }
 
-    //MARK: - Extensions
+//MARK: - Extensions
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
@@ -76,6 +76,7 @@ extension ImagesListViewController: UITableViewDelegate {
     
 }
 
+//MARK: - Extensions
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photoNames.count

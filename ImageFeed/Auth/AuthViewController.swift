@@ -70,7 +70,7 @@ final class AuthViewController: UIViewController {
     
 }
 
-    //MARK: - WebViewViewControllerDelegate
+//MARK: - WebViewViewControllerDelegate
 extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         print("[AuthViewController] Code: \(code)")
@@ -80,7 +80,7 @@ extension AuthViewController: WebViewViewControllerDelegate {
             guard let self = self else { return }
             
             switch result {
-                case .success(let token):
+            case .success(let token):
                 self.delegate?.didAuthenticate(self)
                 print("[AuthViewController] Token: \(token)")
                 

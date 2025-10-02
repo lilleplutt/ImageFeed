@@ -19,7 +19,7 @@ final class SingleImageViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         guard let image else { return }
         imageView.image = image
         imageView.frame.size = image.size
@@ -62,7 +62,7 @@ final class SingleImageViewController: UIViewController {
     }
 }
 
-    //MARK: - Extentions
+//MARK: - Extentions
 extension SingleImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView

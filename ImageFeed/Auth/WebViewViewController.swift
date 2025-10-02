@@ -103,7 +103,7 @@ final class WebViewViewController: UIViewController {
     }
 }
 
-    //MARK: - Extensions
+//MARK: - Extensions
 extension WebViewViewController: WKNavigationDelegate {
     
     func webView( //to understand if user authorized
