@@ -36,7 +36,7 @@ final class ProfileViewController: UIViewController {
             )
             exitButton.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(exitButton)
-            exitButton.tintColor = UIColor(named: "YP Red iOS")
+            exitButton.tintColor = UIColor(resource: .ypRedIOS)
             exitButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
             exitButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
             exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
@@ -49,7 +49,7 @@ final class ProfileViewController: UIViewController {
             nameLabel.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(nameLabel)
             nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
-            nameLabel.textColor = UIColor(named: "YP White iOS")
+            nameLabel.textColor = UIColor(resource: .ypWhiteIOS)
             nameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
             nameLabel.widthAnchor.constraint(equalToConstant: 241).isActive = true
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -62,7 +62,7 @@ final class ProfileViewController: UIViewController {
             loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(loginNameLabel)
             loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-            loginNameLabel.textColor = UIColor(named: "YP Gray iOS")
+            loginNameLabel.textColor = UIColor(resource: .ypGrayIOS)
             loginNameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
             loginNameLabel.widthAnchor.constraint(equalToConstant: 99).isActive = true
             loginNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -75,7 +75,7 @@ final class ProfileViewController: UIViewController {
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(descriptionLabel)
             descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
-            descriptionLabel.textColor = UIColor(named: "YP White iOS")
+            descriptionLabel.textColor = UIColor(resource: .ypWhiteIOS)
             descriptionLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
             descriptionLabel.widthAnchor.constraint(equalToConstant: 77).isActive = true
             descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true

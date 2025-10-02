@@ -51,7 +51,7 @@ final class AuthViewController: UIViewController {
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginButton)
         
-        loginButton.backgroundColor = UIColor(named: "YP White iOS")
+        loginButton.backgroundColor = UIColor(resource: .ypWhiteIOS)
         loginButton.setTitle("Войти", for: .normal)
         loginButton.setTitleColor(UIColor(resource: .ypBlackIOS), for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)

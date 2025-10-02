@@ -7,7 +7,7 @@ final class WebViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "YP White iOS")
+        view.backgroundColor = UIColor(resource: .ypWhiteIOS)
         
         setUpProgressView()
         setUpWebView()
