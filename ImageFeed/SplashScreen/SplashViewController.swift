@@ -20,7 +20,6 @@ final class SplashViewController: UIViewController {
     }
     
     private func switchToTabBarController() {
-        // Prefer the current view's window; fall back to the key window from the active UIWindowScene.
         let window = self.view.window ?? UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
@@ -58,8 +57,8 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
-        vc.dismiss(animated: true)
-        
-        switchToTabBarController()
+        vc.dismiss(animated: false) { [weak self] in
+            self?.switchToTabBarController()
+        }
     }
 }
