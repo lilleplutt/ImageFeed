@@ -32,9 +32,8 @@ final class SplashViewController: UIViewController {
         
         let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "TabBarViewController")
         
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: {
-            window.rootViewController = tabBarController
-        })
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
     }
     
 }
