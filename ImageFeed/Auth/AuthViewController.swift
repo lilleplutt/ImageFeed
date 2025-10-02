@@ -14,7 +14,7 @@ final class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(named: "YP Black iOS")
+        view.backgroundColor = UIColor(resource: .ypBlackIOS)
         
         setUpLogo()
         setUpLoginButton()
@@ -27,7 +27,7 @@ final class AuthViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button") //for right animation between scenes
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "YP Black iOS")
+        navigationItem.backBarButtonItem?.tintColor = UIColor(resource: .ypBlackIOS)
     }
     
     //MARK: - Methods
@@ -53,7 +53,7 @@ final class AuthViewController: UIViewController {
         
         loginButton.backgroundColor = UIColor(named: "YP White iOS")
         loginButton.setTitle("Войти", for: .normal)
-        loginButton.setTitleColor(UIColor(named: "YP Black iOS"), for: .normal)
+        loginButton.setTitleColor(UIColor(resource: .ypBlackIOS), for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         loginButton.layer.cornerRadius = 16
         

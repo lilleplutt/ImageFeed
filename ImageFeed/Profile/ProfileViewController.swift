@@ -7,7 +7,7 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor(named: "YP Black iOS")
+        view.backgroundColor = UIColor(resource: .ypBlackIOS)
         setUpProfileImage()
         setUpExitButton()
         setUpNameLabel()
