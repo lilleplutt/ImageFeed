@@ -23,12 +23,11 @@ final class WebViewViewController: UIViewController {
     
     //MARK: - Properties
     weak var delegate: WebViewViewControllerDelegate?
-    private var webView: WKWebView!
-    private var progressView: UIProgressView!
+    private let webView = WKWebView()
+    private let progressView = UIProgressView()
     
     //MARK: - Private methods
     private func setUpProgressView() {
-        progressView = UIProgressView()
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressTintColor = UIColor(resource: .ypBlackIOS)
         progressView.progress = 0.5
@@ -38,11 +37,10 @@ final class WebViewViewController: UIViewController {
             progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
-            ])
+        ])
     }
     
     private func setUpWebView() {
-        webView = WKWebView()
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
         
@@ -51,7 +49,7 @@ final class WebViewViewController: UIViewController {
             webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
+        ])
     }
     
     private func loadAuthView() { //show authorization screen
@@ -74,10 +72,11 @@ final class WebViewViewController: UIViewController {
         super.viewWillAppear(animated)
         
         webView.addObserver(
-        self,
-        forKeyPath: #keyPath(WKWebView.estimatedProgress),
-        options: .new,
-        context: nil)
+            self,
+            forKeyPath: #keyPath(WKWebView.estimatedProgress),
+            options: .new,
+            context: nil
+        )
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -89,21 +88,19 @@ final class WebViewViewController: UIViewController {
         forKeyPath keyPath: String?,
         of object: Any?,
         change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?) {
-        
-            if keyPath == #keyPath(WKWebView.estimatedProgress) {
-                updateProgress()
-            } else {
-                super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            }
+        context: UnsafeMutableRawPointer?
+    ) {
+        if keyPath == #keyPath(WKWebView.estimatedProgress) {
+            updateProgress()
+        } else {
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+        }
     }
     
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
-    
-
 }
 
     //MARK: - Extensions
@@ -114,13 +111,13 @@ extension WebViewViewController: WKNavigationDelegate {
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping (WKNavigationActionPolicy) -> Void
     ) {
-          if let code = code(from: navigationAction) {
-              delegate?.webViewViewController(self, didAuthenticateWithCode: code)
-              decisionHandler(.cancel)
-          } else {
-              decisionHandler(.allow)
-          }
-      }
+        if let code = code(from: navigationAction) {
+            delegate?.webViewViewController(self, didAuthenticateWithCode: code)
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
     
     private func code(from navigationAction: WKNavigationAction) -> String? { //to find url with parameter "code"
         if
@@ -136,4 +133,3 @@ extension WebViewViewController: WKNavigationDelegate {
         }
     }
 }
-
