@@ -24,8 +24,8 @@ final class AuthViewController: UIViewController {
     //MARK: - Private Methods
     
     private func configureBackButton() {
-        navigationController?.navigationBar.backIndicatorImage = UIImage(named: "nav_back_button")
-        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(named: "nav_back_button") //for right animation between scenes
+        navigationController?.navigationBar.backIndicatorImage = UIImage(resource: .navBackButton)
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(resource: .navBackButton) //for right animation between scenes
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.backBarButtonItem?.tintColor = UIColor(resource: .ypBlackIOS)
     }
@@ -33,7 +33,7 @@ final class AuthViewController: UIViewController {
     //MARK: - Methods
     
     func setUpLogo() {
-        let unsplashLogoImage = UIImage(named: "logo_of_unsplash")
+        let unsplashLogoImage = UIImage(resource: .logoOfUnsplash)
         let unsplashLogoImageView = UIImageView(image: unsplashLogoImage)
         unsplashLogoImageView.translatesAutoresizingMaskIntoConstraints = false
         unsplashLogoImageView.contentMode = .scaleAspectFit //for saving image proportion
