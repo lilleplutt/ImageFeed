@@ -7,11 +7,9 @@ protocol AuthViewControllerDelegate: AnyObject {
 final class AuthViewController: UIViewController {
     
     //MARK: - Properties
-    
     weak var delegate: AuthViewControllerDelegate?
     
     //MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(resource: .ypBlackIOS)
@@ -22,7 +20,6 @@ final class AuthViewController: UIViewController {
     }
     
     //MARK: - Private Methods
-    
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(resource: .navBackButton)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(resource: .navBackButton) //for right animation between scenes
@@ -30,9 +27,7 @@ final class AuthViewController: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = UIColor(resource: .ypBlackIOS)
     }
     
-    //MARK: - Methods
-    
-    func setUpLogo() {
+    private func setUpLogo() {
         let unsplashLogoImage = UIImage(resource: .logoOfUnsplash)
         let unsplashLogoImageView = UIImageView(image: unsplashLogoImage)
         unsplashLogoImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +41,7 @@ final class AuthViewController: UIViewController {
         unsplashLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -100).isActive = true
     }
     
-    func setUpLoginButton() {
+    private func setUpLoginButton() {
         let loginButton = UIButton(type: .system)
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginButton)
@@ -67,7 +62,6 @@ final class AuthViewController: UIViewController {
     }
     
     //MARK: - Actions
-    
     @objc func loginButtonTapped() {
         let webViewViewController = WebViewViewController()
         webViewViewController.delegate = self
@@ -77,9 +71,7 @@ final class AuthViewController: UIViewController {
 }
 
     //MARK: - WebViewViewControllerDelegate
-
 extension AuthViewController: WebViewViewControllerDelegate {
-    
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         print("[AuthViewController] Code: \(code)")
         vc.dismiss(animated: true)
@@ -101,8 +93,6 @@ extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         vc.dismiss(animated: true)
     }
- 
-    
     
 }
 
