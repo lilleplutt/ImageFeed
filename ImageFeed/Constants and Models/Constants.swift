@@ -1,4 +1,4 @@
-import UIKit
+import Foundation
 
 enum Constants {
     static let accessKey = "1UlRB2zD6MYqUW-nM042qpaYt3SPSRlIYAyvv_ik5fE"
