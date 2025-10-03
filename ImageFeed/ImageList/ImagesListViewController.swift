@@ -1,13 +1,11 @@
 import UIKit
 
 final class ImagesListViewController: UIViewController {
-
-    //MARK: - IBOutlets
     
+    //MARK: - IBOutlets
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: - Private properties
-    
     private let photoNames: [String] = Array(0..<20).map{"\($0)"}
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -17,17 +15,17 @@ final class ImagesListViewController: UIViewController {
     }()
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
-    //MARK: - Methods
-    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
     }
     
+    //MARK: - Methods
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
@@ -56,12 +54,9 @@ final class ImagesListViewController: UIViewController {
         let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
     }
-    
-    
 }
 
-    //MARK: - Extensions
-
+//MARK: - Extensions
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
@@ -81,6 +76,7 @@ extension ImagesListViewController: UITableViewDelegate {
     
 }
 
+//MARK: - Extensions
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photoNames.count
@@ -94,6 +90,5 @@ extension ImagesListViewController: UITableViewDataSource {
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
-    
 }
 

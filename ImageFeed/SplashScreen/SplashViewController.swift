@@ -1,0 +1,63 @@
+import UIKit
+
+final class SplashViewController: UIViewController {
+    
+    //MARK: - Properties
+    private let storage = OAuth2TokenStorage.shared
+    private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
+    
+    //MARK: - Methods
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let storageToken = storage.token
+        
+        if storageToken != nil {
+            switchToTabBarController()
+        } else {
+            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+        }
+    }
+    
+    private func switchToTabBarController() {
+        let window = self.view.window ?? UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first(where: { $0.isKeyWindow })
+        
+        guard let window else {
+            assertionFailure("Invalid window configuration")
+            return
+        }
+        
+        let tabBarController = UIStoryboard(name: "Main", bundle: .main).instantiateViewController(withIdentifier: "TabBarViewController")
+        
+        window.rootViewController = tabBarController
+    }
+    
+}
+
+//MARK: - Extensions
+extension SplashViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == showAuthenticationScreenSegueIdentifier {
+            guard
+                let navigationController = segue.destination as? UINavigationController,
+                let viewController = navigationController.viewControllers.first as? AuthViewController
+            else { return }
+            
+            viewController.delegate = self
+        } else {
+            super.prepare(for: segue, sender: sender)
+        }
+    }
+}
+
+extension SplashViewController: AuthViewControllerDelegate {
+    func didAuthenticate(_ vc: AuthViewController) {
+        vc.navigationController?.dismiss(animated: true) { [weak self] in
+            guard let self else { return }
+            self.switchToTabBarController()
+        }
+    }
+}
