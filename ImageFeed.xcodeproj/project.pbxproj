@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FD04E3782E93F48E00E5ED73 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = FD04E3772E93F48E00E5ED73 /* ProgressHUD */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FDDC1E882E48EC39004110F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD04E3782E93F48E00E5ED73 /* ProgressHUD in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = ImageFeed;
 			packageProductDependencies = (
+				FD04E3772E93F48E00E5ED73 /* ProgressHUD */,
 			);
 			productName = ImageFeed;
 			productReference = FDDC1E6E2E48EC38004110F9 /* ImageFeed.app */;
@@ -209,7 +215,7 @@
 			mainGroup = FDDC1E652E48EC38004110F9;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				FD71752E2E93F0590059FAE5 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
+				FD04E3762E93F48E00E5ED73 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FDDC1E6F2E48EC38004110F9 /* Products */;
@@ -301,7 +307,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -333,7 +339,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -584,15 +590,23 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		FD71752E2E93F0590059FAE5 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+		FD04E3762E93F48E00E5ED73 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/relatedcode/ProgressHUD";
 			requirement = {
-				kind = exactVersion;
-				version = 13.6.1;
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FD04E3772E93F48E00E5ED73 /* ProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FD04E3762E93F48E00E5ED73 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			productName = ProgressHUD;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FDDC1E662E48EC38004110F9 /* Project object */;
 }
