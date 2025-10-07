@@ -2,6 +2,15 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    // MARK: - UI
+    private let nameLabel = UILabel()
+    private let loginNameLabel = UILabel()
+    private let descriptionLabel = UILabel()
+    
+    // MARK: - Services
+    private let profileService = ProfileService()
+    private let tokenStorage = OAuth2TokenStorage.shared
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -12,6 +21,22 @@ final class ProfileViewController: UIViewController {
         setUpNameLabel()
         setUpLoginNameLabel()
         setUpDescriptionLabel()
+        
+        if let token = tokenStorage.token { // загрузка профиля
+            profileService.fetchProfile(token) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let profile):
+                    self.nameLabel.text = profile.name
+                    self.loginNameLabel.text = profile.loginName
+                    self.descriptionLabel.text = profile.bio
+                case .failure(let error):
+                    print("[ProfileViewController] Failed to fetch profile: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            print("[ProfileViewController] Token is missing")
+        }
     }
     
     //MARK: - Methods
@@ -42,7 +67,6 @@ final class ProfileViewController: UIViewController {
     }
     
     func setUpNameLabel() {
-        let nameLabel = UILabel()
         nameLabel.text = "Екатерина Новикова"
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
@@ -55,7 +79,6 @@ final class ProfileViewController: UIViewController {
     }
     
     func setUpLoginNameLabel() {
-        let loginNameLabel = UILabel()
         loginNameLabel.text = "@ekaterina_nov"
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginNameLabel)
@@ -68,7 +91,6 @@ final class ProfileViewController: UIViewController {
     }
     
     func setUpDescriptionLabel() {
-        let descriptionLabel = UILabel()
         descriptionLabel.text = "Hello, world!"
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionLabel)
@@ -81,5 +103,4 @@ final class ProfileViewController: UIViewController {
     }
     
 }
-
 
