@@ -79,11 +79,11 @@ extension AuthViewController: WebViewViewControllerDelegate {
         
         print("[AuthViewController] Code: \(code)")
         vc.dismiss(animated: true)
-        ProgressHUD.animate()
+        UIBlockingProgressHUD.show()
         
         OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
             DispatchQueue.main.async {
-                ProgressHUD.dismiss()
+                UIBlockingProgressHUD.dismiss()
                 
                 guard let self else { return }
                 switch result {
