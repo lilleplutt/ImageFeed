@@ -8,7 +8,7 @@ final class OAuth2Service {
     private let decoder = JSONDecoder()
     
     private let urlSession = URLSession.shared
-    private var task: URLSessionDataTask?
+    private var task: URLSessionTask?
     private var lastCode: String?
     
     //MARK: - Methods
@@ -30,7 +30,7 @@ final class OAuth2Service {
         
         let decoder = self.decoder
         
-        let task = urlSession.dataTask(with: request) { [weak self] data, response, error in
+        let task = urlSession.data(for: request) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
