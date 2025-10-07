@@ -1,11 +1,20 @@
 import Foundation
 
+//MARK: - Enums
+enum AuthServiceerror: Error {
+    case invalidRequest
+}
+
 final class OAuth2Service {
     
     //MARK: - Properties
     static let shared = OAuth2Service() //static provide global access and uniqueness
     private init() {} //make single exemple
     private let decoder = JSONDecoder()
+    
+    private let urlSession = URLSession.shared
+    private var task: URLSessionDataTask?
+    private var lastCode: String?
     
     //MARK: - Methods
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
