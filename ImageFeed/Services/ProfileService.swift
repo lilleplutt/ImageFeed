@@ -2,6 +2,7 @@ import UIKit
 
 final class ProfileService {
     
+    //MARK: - Models
     struct ProfileResult: Codable {
         let first_name: String
         let last_name: String
@@ -28,6 +29,20 @@ final class ProfileService {
             self.loginName = "@\(result.username)"
             self.bio = result.bio
         }
+    }
+    
+    //MARK: - Private Methods
+    private func makeProfileRequest() -> URLRequest? {
+        guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
+            assertionFailure("Bearer token is missing")
+            return nil
+        }
+        
+        let url = Constants.defaultBaseURL.appendingPathComponent("me")
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return request
     }
     
 }
