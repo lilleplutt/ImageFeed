@@ -1,10 +1,5 @@
 import Foundation
 
-//MARK: - Enums
-enum AuthServiceerror: Error {
-    case invalidRequest
-}
-
 final class OAuth2Service {
     
     //MARK: - Properties
@@ -18,6 +13,15 @@ final class OAuth2Service {
     
     //MARK: - Methods
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        guard lastCode != code else {
+            completion(.failure(NetworkError.invalidRequest))
+            return
+        }
+        
+        task?.cancel()
+        lastCode = code
+        
         guard let request = makeOAuthTokenRequest(code: code) else {
             print("[OAuth2Service] Failed to create URLRequest")
             completion(.failure(NetworkError.invalidRequest))
@@ -26,27 +30,31 @@ final class OAuth2Service {
         
         let decoder = self.decoder
         
-        let task = URLSession.shared.data(for: request) { result in
-            switch result {
-            case .success(let data):
-                do {
-                    let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                    let token = tokenResponse.accessToken
+        let task = urlSession.dataTask(with: request) { [weak self] data, response, error in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    do {
+                        let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
+                        let token = tokenResponse.accessToken
+                        
+                        OAuth2TokenStorage.shared.token = token
+                        print("[OAuth2Service] Successfully take and save token")
+                        completion(.success(token))
+                    } catch {
+                        print("[OAuth2Service] Failed to decode JSON: \(error.localizedDescription)")
+                        completion(.failure(NetworkError.decodingError(error)))
+                    }
                     
-                    OAuth2TokenStorage.shared.token = token
-                    print("[OAuth2Service] Successfully take and save token")
-                    completion(.success(token))
-                } catch {
-                    print("[OAuth2Service] Failed to decode JSON: \(error.localizedDescription)")
-                    completion(.failure(NetworkError.decodingError(error)))
+                case .failure(let error):
+                    print("[OAuth2Service] Network error: \(error.localizedDescription)")
+                    completion(.failure(error))
                 }
-                
-            case .failure(let error):
-                print("[OAuth2Service] Network error: \(error.localizedDescription)")
-                completion(.failure(error))
+                self?.task = nil
+                self?.lastCode = nil
             }
         }
-        
+        self.task = task
         task.resume()
     }
     
