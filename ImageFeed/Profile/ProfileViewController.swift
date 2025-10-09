@@ -27,7 +27,7 @@ final class ProfileViewController: UIViewController {
     }
     
     //MARK: - Methods
-    func setUpProfileImage() {
+    private func setUpProfileImage() {
         let profileImage = UIImage(named: "profile_image")
         let imageView = UIImageView(image: profileImage)
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +38,7 @@ final class ProfileViewController: UIViewController {
         imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
     }
     
-    func setUpExitButton() {
+    private func setUpExitButton() {
         let exitButton = UIButton.systemButton(
             with: UIImage(resource: .exitButton),
             target: self,
@@ -53,7 +53,7 @@ final class ProfileViewController: UIViewController {
         exitButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 89).isActive = true
     }
     
-    func setUpNameLabel() {
+    private func setUpNameLabel() {
         nameLabel.text = "Екатерина Новикова"
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
@@ -65,7 +65,7 @@ final class ProfileViewController: UIViewController {
         nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 154).isActive = true
     }
     
-    func setUpLoginNameLabel() {
+    private func setUpLoginNameLabel() {
         loginNameLabel.text = "@ekaterina_nov"
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginNameLabel)
@@ -77,7 +77,7 @@ final class ProfileViewController: UIViewController {
         loginNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 180).isActive = true
     }
     
-    func setUpDescriptionLabel() {
+    private func setUpDescriptionLabel() {
         descriptionLabel.text = "Hello, world!"
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionLabel)
@@ -89,7 +89,7 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
     }
     
-    func updateProfileDetails(profile: Profile) {
+    private func updateProfileDetails(profile: Profile) {
         nameLabel.text = profile.name.isEmpty
             ? "Имя не указано"
             : profile.name

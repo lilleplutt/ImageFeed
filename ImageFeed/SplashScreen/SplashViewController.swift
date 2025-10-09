@@ -68,7 +68,7 @@ extension SplashViewController {
     }
 }
 
-extension SplashViewController: AuthViewControllerDelegate { //fix this
+extension SplashViewController: AuthViewControllerDelegate { 
     func didAuthenticate(_ vc: AuthViewController) {
         vc.navigationController?.dismiss(animated: true)
         
