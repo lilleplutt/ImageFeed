@@ -5,7 +5,7 @@ final class ProfileService {
     //MARK: - Properties
     static let sharedProfile = ProfileService()
     private init() {}
-    private(set) var profile: Profile?  
+    private(set) var profile: Profile?
     
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
@@ -60,6 +60,7 @@ final class ProfileService {
                 do {
                     let profileResult = try decoder.decode(ProfileResult.self, from: data)
                     let profile = Profile(result: profileResult)
+                    self?.profile = profile
                     completion(.success(profile))
                 } catch {
                     print("[ProfileService] Decoding error: \(error.localizedDescription)")
@@ -71,7 +72,6 @@ final class ProfileService {
             }
             self?.task = nil
         }
-        
         self.task = task
         task.resume()
     }
