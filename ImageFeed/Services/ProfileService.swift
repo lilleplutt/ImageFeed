@@ -2,6 +2,10 @@ import UIKit
 
 final class ProfileService {
     
+    //MARK: - Properties
+    static let sharedProfile = ProfileService()
+    private init() {}
+    
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
     private let decoder = JSONDecoder()
