@@ -78,7 +78,10 @@ final class ProfileService {
             return nil
         }
         
-        let url = Constants.defaultBaseURL.appendingPathComponent("me")
+        guard let url = URL(string: "https://api.unsplash.com/me") else {
+            return nil
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
