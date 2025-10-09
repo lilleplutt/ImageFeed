@@ -5,7 +5,7 @@ final class SplashViewController: UIViewController {
     //MARK: - Private properties
     private let storage = OAuth2TokenStorage.shared
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-    private let profileService = ProfileService()
+    private let profileService = ProfileService.sharedProfile
     
     //MARK: - Methods
     override func viewDidAppear(_ animated: Bool) {
@@ -35,6 +35,21 @@ final class SplashViewController: UIViewController {
         window.rootViewController = tabBarController
     }
     
+    private func fetchProfile(token: String) { //this add in authCont
+        UIBlockingProgressHUD.show()
+        profileService.fetchProfile(token) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+            
+            guard let self else { return }
+            
+            switch result {
+            case .success: self.switchToTabBarController()
+            case .failure:
+                break
+            }
+        }
+    }
+    
 }
 
 //MARK: - Extensions
@@ -53,27 +68,11 @@ extension SplashViewController {
     }
 }
 
-extension SplashViewController: AuthViewControllerDelegate {
+extension SplashViewController: AuthViewControllerDelegate { //fix this
     func didAuthenticate(_ vc: AuthViewController) {
         vc.navigationController?.dismiss(animated: true)
         
         guard let token = storage.token else { return }
         fetchProfile(token: token)
-    }
-    
-    private func fetchProfile(token: String) {
-        UIBlockingProgressHUD.show()
-        profileService.fetchProfile(token) { [weak self] result in
-            UIBlockingProgressHUD.dismiss()
-            
-            guard let self else { return }
-            
-            switch result {
-            case .success: self.switchToTabBarController()
-            case .failure:
-                //TODO ошибка профиля
-                break
-            }
-        }
     }
 }
