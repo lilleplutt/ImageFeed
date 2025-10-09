@@ -2,9 +2,10 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - Private properties
     private let storage = OAuth2TokenStorage.shared
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
+    private let profileService = ProfileService()
     
     //MARK: - Methods
     override func viewDidAppear(_ animated: Bool) {
