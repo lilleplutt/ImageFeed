@@ -56,10 +56,10 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
-        vc.navigationController?.dismiss(animated: true) { [weak self] in
-            guard let self else { return }
-            self.switchToTabBarController()
-        }
+        vc.navigationController?.dismiss(animated: true)
+        
+        guard let token = storage.token else { return }
+        fetchProfile(token: token)
     }
     
     private func fetchProfile(token: String) {
