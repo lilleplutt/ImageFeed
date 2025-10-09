@@ -29,6 +29,10 @@ struct Profile {
     }
 }
 
+extension Notification.Name {
+    static let profileDidChange = Notification.Name("ProfileServiceProfileDidChange")
+}
+
 final class ProfileService {
     
     //MARK: - Properties
@@ -61,6 +65,8 @@ final class ProfileService {
                     let profileResult = try decoder.decode(ProfileResult.self, from: data)
                     let profile = Profile(result: profileResult)
                     self?.profile = profile
+                    // уведомляем всех слушателей, что профиль обновился
+                    NotificationCenter.default.post(name: .profileDidChange, object: profile)
                     completion(.success(profile))
                 } catch {
                     print("[ProfileService] Decoding error: \(error.localizedDescription)")

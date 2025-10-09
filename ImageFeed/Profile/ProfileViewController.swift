@@ -21,6 +21,10 @@ final class ProfileViewController: UIViewController {
         setUpLoginNameLabel()
         setUpDescriptionLabel()
         
+        nameLabel.text = nil
+        loginNameLabel.text = nil
+        descriptionLabel.text = nil
+        
         if let profile = ProfileService.sharedProfile.profile {
             updateProfileDetails(profile: profile)
         }
@@ -54,7 +58,6 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setUpNameLabel() {
-        nameLabel.text = "Екатерина Новикова"
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nameLabel)
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
@@ -66,7 +69,6 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setUpLoginNameLabel() {
-        loginNameLabel.text = "@ekaterina_nov"
         loginNameLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginNameLabel)
         loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
@@ -78,7 +80,6 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setUpDescriptionLabel() {
-        descriptionLabel.text = "Hello, world!"
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(descriptionLabel)
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
@@ -100,6 +101,5 @@ final class ProfileViewController: UIViewController {
             ? "Профиль не заполнен"
             : profile.bio
     }
-    
 }
 
