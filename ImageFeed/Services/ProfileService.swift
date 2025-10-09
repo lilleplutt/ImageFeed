@@ -5,6 +5,7 @@ final class ProfileService {
     //MARK: - Properties
     static let sharedProfile = ProfileService()
     private init() {}
+    private(set) var profile: Profile?  
     
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
