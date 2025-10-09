@@ -21,7 +21,9 @@ final class ProfileViewController: UIViewController {
         setUpLoginNameLabel()
         setUpDescriptionLabel()
         
-        updateProfile()
+        if let profile = ProfileService.sharedProfile.profile {
+            updateProfileDetails(profile: profile)
+        }
     }
     
     //MARK: - Methods
