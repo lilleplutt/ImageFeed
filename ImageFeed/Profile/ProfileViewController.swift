@@ -93,7 +93,7 @@ final class ProfileViewController: UIViewController {
         loginNameLabel.text = profile.loginName.isEmpty
             ? "@неизвестный_пользователь"
             : profile.loginName
-        descriptionLabel.text = profile.bio.isEmpty
+        descriptionLabel.text = (profile.bio?.isEmpty ?? true)
             ? "Профиль не заполнен"
             : profile.bio
     }
