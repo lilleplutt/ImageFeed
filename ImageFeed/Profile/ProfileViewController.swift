@@ -22,21 +22,7 @@ final class ProfileViewController: UIViewController {
         setUpLoginNameLabel()
         setUpDescriptionLabel()
         
-        if let token = tokenStorage.token { // загрузка профиля
-            profileService.fetchProfile(token) { [weak self] result in
-                guard let self else { return }
-                switch result {
-                case .success(let profile):
-                    self.nameLabel.text = profile.name
-                    self.loginNameLabel.text = profile.loginName
-                    self.descriptionLabel.text = profile.bio
-                case .failure(let error):
-                    print("[ProfileViewController] Failed to fetch profile: \(error.localizedDescription)")
-                }
-            }
-        } else {
-            print("[ProfileViewController] Token is missing")
-        }
+        fetchProfile()
     }
     
     //MARK: - Methods
@@ -100,6 +86,24 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.widthAnchor.constraint(equalToConstant: 77).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
+    }
+    
+    func fetchProfile() {
+        if let token = tokenStorage.token { // загрузка профиля
+            profileService.fetchProfile(token) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let profile):
+                    self.nameLabel.text = profile.name
+                    self.loginNameLabel.text = profile.loginName
+                    self.descriptionLabel.text = profile.bio
+                case .failure(let error):
+                    print("[ProfileViewController] Failed to fetch profile: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            print("[ProfileViewController] Token is missing")
+        }
     }
     
 }
