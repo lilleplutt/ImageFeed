@@ -12,8 +12,8 @@ final class SplashViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if let token = storage.token {
+            switchToTabBarController()
             fetchProfile(token: token)
-            switchToTabBarController() //fix
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
@@ -43,7 +43,8 @@ final class SplashViewController: UIViewController {
             guard let self else { return }
             
             switch result {
-            case .success: self.switchToTabBarController()
+            case .success:
+                self.switchToTabBarController()
             case .failure:
                 break
             }
