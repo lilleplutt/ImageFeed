@@ -35,7 +35,7 @@ final class SplashViewController: UIViewController {
         window.rootViewController = tabBarController
     }
     
-    private func fetchProfile(token: String) { //this add in authCont
+    private func fetchProfile(token: String) {
         UIBlockingProgressHUD.show()
         profileService.fetchProfile(token) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
@@ -72,7 +72,6 @@ extension SplashViewController: AuthViewControllerDelegate { //fix this
     func didAuthenticate(_ vc: AuthViewController) {
         vc.navigationController?.dismiss(animated: true)
         
-        guard let token = storage.token else { return }
-        fetchProfile(token: token)
+        switchToTabBarController()
     }
 }
