@@ -55,7 +55,7 @@ final class ProfileService {
 
                     let profile = Profile(
                         username: profileResult.username,
-                        name: profileResult.firstName,
+                        name: "\(profileResult.firstName) \(profileResult.lastName)",
                         loginName: "@\(profileResult.username)",
                         bio: profileResult.bio
                     )
