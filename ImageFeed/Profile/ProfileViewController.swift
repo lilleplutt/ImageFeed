@@ -22,7 +22,7 @@ final class ProfileViewController: UIViewController {
         setUpLoginNameLabel()
         setUpDescriptionLabel()
         
-        fetchProfile()
+        updateProfile()
     }
     
     //MARK: - Methods
@@ -88,7 +88,7 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
     }
     
-    func fetchProfile() {
+    func updateProfile() {
         if let token = tokenStorage.token { // загрузка профиля
             profileService.fetchProfile(token) { [weak self] result in
                 guard let self else { return }
