@@ -51,8 +51,14 @@ final class ProfileService {
             switch result {
             case .success(let data):
                 do {
-                    let profileResult = try decoder.decode(ProfileResult.self, from: data)
-                    let profile = Profile(result: profileResult)
+                    let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
+
+                    let profile = Profile(
+                        username: profileResult.username,
+                        name: profileResult.firstName,
+                        loginName: "@\(profileResult.username)",
+                        bio: profileResult.bio
+                    )
                     self?.profile = profile
                     completion(.success(profile))
                 } catch {
