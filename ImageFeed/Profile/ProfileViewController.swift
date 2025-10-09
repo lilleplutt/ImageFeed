@@ -8,7 +8,6 @@ final class ProfileViewController: UIViewController {
     private let descriptionLabel = UILabel()
     
     // MARK: - Services
-    private let profileService = ProfileService()
     private let tokenStorage = OAuth2TokenStorage.shared
     
     //MARK: - Lifecycle
@@ -88,22 +87,16 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
     }
     
-    func updateProfile() {
-        if let token = tokenStorage.token { // загрузка профиля
-            profileService.fetchProfile(token) { [weak self] result in
-                guard let self else { return }
-                switch result {
-                case .success(let profile):
-                    self.nameLabel.text = profile.name
-                    self.loginNameLabel.text = profile.loginName
-                    self.descriptionLabel.text = profile.bio
-                case .failure(let error):
-                    print("[ProfileViewController] Failed to fetch profile: \(error.localizedDescription)")
-                }
-            }
-        } else {
-            print("[ProfileViewController] Token is missing")
-        }
+    func updateProfileDetails(profile: Profile) {
+        nameLabel.text = profile.name.isEmpty
+            ? "Имя не указано"
+            : profile.name
+        loginNameLabel.text = profile.loginName.isEmpty
+            ? "@неизвестный_пользователь"
+            : profile.loginName
+        descriptionLabel.text = profile.bio.isEmpty
+            ? "Профиль не заполнен"
+            : profile.bio
     }
     
 }
