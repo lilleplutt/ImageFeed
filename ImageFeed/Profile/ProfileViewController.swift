@@ -7,6 +7,9 @@ final class ProfileViewController: UIViewController {
     private let loginNameLabel = UILabel()
     private let descriptionLabel = UILabel()
     
+    // MARK: - Properties
+    private var profileImageServiceObserver: NSObjectProtocol?
+    
     // MARK: - Services
     private let tokenStorage = OAuth2TokenStorage.shared
     
@@ -24,6 +27,17 @@ final class ProfileViewController: UIViewController {
         if let profile = ProfileService.sharedProfile.profile {
             updateProfileDetails(profile: profile)
         }
+        
+        profileImageServiceObserver = NotificationCenter.default
+            .addObserver(
+                forName: ProfileImageService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                self.updateAvatar()
+            }
+        updateAvatar()
     }
     
     //MARK: - Methods
