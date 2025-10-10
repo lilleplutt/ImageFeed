@@ -16,12 +16,12 @@ final class ProfileImageService {
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
     private let decoder = JSONDecoder()
-    private var task: URLSessionTask?
+    private var imageTask: URLSessionTask?
     
     // MARK: - Public methods
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
-        task?.cancel()
+        imageTask?.cancel()
         
         guard let request = makeProfileImageRequest() else {
             print("[ProfileService] Failed to create profile request")
@@ -56,17 +56,17 @@ final class ProfileImageService {
     }
     
     //MARK: - Private Methods
-    private func makeProfileImageRequest() -> URLRequest? {
+    private func makeProfileImageRequest(token: String, username: String) -> URLRequest? {
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
             assertionFailure("Bearer token is missing")
             return nil
         }
         
-        guard let url = URL(string: "https://api.unsplash.com/me") else {
+        guard let profileURL = URL(string: "https://api.unsplash.com/users/:username") else {
             return nil
         }
         
-        var request = URLRequest(url: url)
+        var request = URLRequest(url: profileURL)
         request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
