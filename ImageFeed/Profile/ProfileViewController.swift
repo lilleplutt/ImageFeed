@@ -40,7 +40,7 @@ final class ProfileViewController: UIViewController {
         updateAvatar()
     }
     
-    //MARK: - Methods
+    //MARK: - Private methods
     private func setUpProfileImage() {
         let profileImage = UIImage(named: "profile_image")
         let imageView = UIImageView(image: profileImage)
@@ -110,6 +110,14 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.text = (profile.bio?.isEmpty ?? true)
             ? "Профиль не заполнен"
             : profile.bio
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        // TODO [Sprint 11] Обновить аватар, используя Kingfisher
     }
 }
 
