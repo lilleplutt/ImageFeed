@@ -27,6 +27,7 @@ final class ProfileImageService {
     static let shared = ProfileImageService()
     private init() {}
     private(set) var avatarURL: String?
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
     
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
@@ -58,6 +59,11 @@ final class ProfileImageService {
                     let userResult = try decoder.decode(UserResult.self, from: data)
                     self.avatarURL = userResult.profileImage.small
                     completion(.success(userResult.profileImage.small))
+                    NotificationCenter.default.post(
+                        name: ProfileImageService.didChangeNotification,
+                        object: self,
+                        userInfo: ["URL": avatarURL]
+                    )
                 } catch {
                     print("[ProfileImageService] Decoding error: \(error.localizedDescription)")
                     completion(.failure(NetworkError.decodingError(error)))
