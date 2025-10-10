@@ -24,7 +24,7 @@ final class ProfileImageService {
         imageTask?.cancel()
         
         guard let request = makeProfileImageRequest() else {
-            print("[ProfileService] Failed to create profile request")
+            print("[ProfileImageService] Failed to create profile image request")
             completion(.failure(NetworkError.invalidRequest))
             return
         }
@@ -56,13 +56,8 @@ final class ProfileImageService {
     }
     
     //MARK: - Private Methods
-    private func makeProfileImageRequest(token: String, username: String) -> URLRequest? {
-        guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
-            assertionFailure("Bearer token is missing")
-            return nil
-        }
-        
-        guard let profileURL = URL(string: "https://api.unsplash.com/users/:username") else {
+    private func makeProfileImageRequest(username: String, token: String) -> URLRequest? {
+        guard let profileURL = URL(string: "https://api.unsplash.com/users/\(username)") else {
             return nil
         }
         
