@@ -23,6 +23,11 @@ struct UserResult: Codable {
 
 final class ProfileImageService {
     
+    //MARK: - Properties
+    static let shared = ProfileImageService()
+    private init() {}
+    private(set) var avatarURL: String?
+    
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
     private let decoder = JSONDecoder()
