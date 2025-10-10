@@ -31,14 +31,18 @@ final class ProfileImageService {
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
     private let decoder = JSONDecoder()
-    private var imageTask: URLSessionTask?
+    private var task: URLSessionTask?
     
     // MARK: - Public methods
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
-        assert(Thread.isMainThread)
-        imageTask?.cancel()
+        task?.cancel()
         
-        guard let request = makeProfileImageRequest() else {
+        guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
+            assertionFailure("Bearer token is missing")
+            return
+        }
+        
+        guard let request = makeProfileImageRequest(username: username, token: token) else {
             print("[ProfileImageService] Failed to create profile image request")
             completion(.failure(NetworkError.invalidRequest))
             return
@@ -49,22 +53,19 @@ final class ProfileImageService {
         let task = urlSession.data(for: request) { [weak self] result in
             switch result {
             case .success(let data):
+                guard let self else { return }
                 do {
-                    let profileImage = try decoder.decode(ProfileImage.self, from: data)
-                    
-                    let userResult = UserResult(profileImage: profileImage.small)
-                    
-                    self?.userResult = userResult
-                    completion(.success(userResult))
+                    let userResult = try decoder.decode(UserResult.self, from: data)
+                    self.avatarURL = userResult.profileImage.small
+                    completion(.success(userResult.profileImage.small))
                 } catch {
-                    print("[ProfileService] Decoding error: \(error.localizedDescription)")
+                    print("[ProfileImageService] Decoding error: \(error.localizedDescription)")
                     completion(.failure(NetworkError.decodingError(error)))
                 }
             case .failure(let error):
-                print("[ProfileService] Network error: \(error.localizedDescription)")
+                print("[ProfileImageService] Network error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
-            self?.task = nil
         }
         self.task = task
         task.resume()
