@@ -62,7 +62,7 @@ final class ProfileImageService {
                     NotificationCenter.default.post(
                         name: ProfileImageService.didChangeNotification,
                         object: self,
-                        userInfo: ["URL": avatarURL]
+                        userInfo: ["URL": userResult.profileImage.small]
                     )
                 } catch {
                     print("[ProfileImageService] Decoding error: \(error.localizedDescription)")

@@ -7,10 +7,8 @@ final class ProfileViewController: UIViewController {
     private let loginNameLabel = UILabel()
     private let descriptionLabel = UILabel()
     
-    // MARK: - Properties
+    // MARK: - Private properties
     private var profileImageServiceObserver: NSObjectProtocol?
-    
-    // MARK: - Services
     private let tokenStorage = OAuth2TokenStorage.shared
     
     //MARK: - Lifecycle
@@ -100,6 +98,14 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
     }
     
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let url = URL(string: profileImageURL)
+        else { return }
+        // TODO [Sprint 11] Обновить аватар, используя Kingfisher
+    }
+    
     private func updateProfileDetails(profile: Profile) {
         nameLabel.text = profile.name.isEmpty
             ? "Имя не указано"
@@ -110,14 +116,6 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.text = (profile.bio?.isEmpty ?? true)
             ? "Профиль не заполнен"
             : profile.bio
-    }
-    
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else { return }
-        // TODO [Sprint 11] Обновить аватар, используя Kingfisher
     }
 }
 
