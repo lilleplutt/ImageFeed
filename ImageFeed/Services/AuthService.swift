@@ -9,6 +9,15 @@ final class OAuth2Service {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     private var lastCode: String?
+    private let dataStorage = OAuth2TokenStorage.shared
+    private(set) var authToken: String? {
+        get {
+            return dataStorage.token
+        }
+        set {
+            dataStorage.token = newValue
+        }
+    }
     
     //MARK: - Methods
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
@@ -28,18 +37,23 @@ final class OAuth2Service {
         }
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
-            guard let self else { return }
-            
-            switch result {
-            case .success(let oauthTokenResponseBody):
-                let accessToken = oauthTokenResponseBody.accessToken
-                completion(.success(accessToken))
-            case .failure(let error):
-                completion(.failure(error))
+            DispatchQueue.main.async {
+                UIBlockingProgressHUD.dismiss()
+                guard let self else { return }
+                
+                switch result {
+                case .success(let body):
+                    let authToken = body.accessToken
+                    self.authToken = authToken
+                    completion(.success(authToken))
+                case .failure(let error):
+                    print("[OAuth2Service] Request failed: \(error.localizedDescription)")
+                    completion(.failure(error))
+                    
+                    self.task = nil
+                    self.lastCode = nil
+                }
             }
-            
-            self.task = nil
-            self.lastCode = nil
         }
         self.task = task
         task.resume()
