@@ -31,7 +31,6 @@ final class ProfileService {
     
     // MARK: - Dependencies
     private let urlSession = URLSession.shared
-    private let decoder = JSONDecoder()
     private var task: URLSessionTask?
     
     // MARK: - Public methods
@@ -45,31 +44,24 @@ final class ProfileService {
             return
         }
         
-        let decoder = self.decoder
-        
-        let task = urlSession.data(for: request) { [weak self] result in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
+            guard let self else { return }
+            
             switch result {
-            case .success(let data):
-                do {
-                    let profileResult = try decoder.decode(ProfileResult.self, from: data)
-
-                    let profile = Profile(
-                        username: profileResult.username,
-                        name: "\(profileResult.firstName) \(profileResult.lastName)",
-                        loginName: "@\(profileResult.username)",
-                        bio: profileResult.bio
-                    )
-                    self?.profile = profile
-                    completion(.success(profile))
-                } catch {
-                    print("[ProfileService] Decoding error: \(error.localizedDescription)")
-                    completion(.failure(NetworkError.decodingError(error)))
-                }
+            case .success(let profileResult):
+                let profile = Profile(
+                    username: profileResult.username,
+                    name: "\(profileResult.firstName) \(profileResult.lastName)",
+                    loginName: "@\(profileResult.username)",
+                    bio: profileResult.bio
+                )
+                self.profile = profile
+                completion(.success(profile))
             case .failure(let error):
                 print("[ProfileService] Network error: \(error.localizedDescription)")
                 completion(.failure(error))
             }
-            self?.task = nil
+            self.task = nil
         }
         self.task = task
         task.resume()
