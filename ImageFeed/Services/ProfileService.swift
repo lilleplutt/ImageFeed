@@ -13,7 +13,7 @@ struct ProfileResult: Codable {
     let firstName: String
     let lastName: String
     let bio: String?
-
+    
     private enum CodingKeys: String, CodingKey {
         case username
         case firstName = "first_name"
@@ -70,13 +70,13 @@ final class ProfileService {
     //MARK: - Private Methods
     private func makeProfileRequest() -> URLRequest? {
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
-            assertionFailure("Bearer token is missing")
+            assertionFailure("[ProfileService] Bearer token is missing")
             return nil
         }
         
         guard let url = URL(string: "https://api.unsplash.com/me") else {
-            return nil
-        }
+            print("[ProfileService] Incorrect user profile URL")
+            return nil }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"

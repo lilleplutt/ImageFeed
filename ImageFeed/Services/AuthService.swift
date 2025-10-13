@@ -48,7 +48,7 @@ final class OAuth2Service {
     //MARK: - Private Methods
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") else {
-            assertionFailure("Failed to create URL")
+            assertionFailure("[OAuth2Service] Failed to create URL")
             return nil
         }
         
@@ -60,7 +60,9 @@ final class OAuth2Service {
             URLQueryItem(name: "grant_type", value: "authorization_code")
         ]
         
-        guard let authTokenUrl = urlComponents.url else { return nil }
+        guard let authTokenUrl = urlComponents.url else {
+            print("[OAuth2Service] Incorrect token request URL with parameters")
+            return nil }
         var request = URLRequest(url: authTokenUrl)
         request.httpMethod = "POST"
         return request

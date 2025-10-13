@@ -38,7 +38,7 @@ final class ProfileImageService {
         task?.cancel()
         
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
-            assertionFailure("Bearer token is missing")
+            assertionFailure("[ProfileImageService] Bearer token is missing")
             return
         }
         
@@ -73,8 +73,8 @@ final class ProfileImageService {
     //MARK: - Private Methods
     private func makeProfileImageRequest(username: String, token: String) -> URLRequest? {
         guard let profileURL = URL(string: "https://api.unsplash.com/users/\(username)") else {
-            return nil
-        }
+            print("[ProfileImageService] Incorrect user public profile URL")
+            return nil }
         
         var request = URLRequest(url: profileURL)
         request.httpMethod = "GET"
