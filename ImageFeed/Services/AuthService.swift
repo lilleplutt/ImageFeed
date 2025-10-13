@@ -5,7 +5,6 @@ final class OAuth2Service {
     //MARK: - Properties
     static let shared = OAuth2Service() //static provide global access and uniqueness
     private init() {} //make single exemple
-    private let decoder = JSONDecoder()
     
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
@@ -28,31 +27,19 @@ final class OAuth2Service {
             return
         }
         
-        let decoder = self.decoder
-        
-        let task = urlSession.data(for: request) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    do {
-                        let tokenResponse = try decoder.decode(OAuthTokenResponseBody.self, from: data)
-                        let token = tokenResponse.accessToken
-                        
-                        OAuth2TokenStorage.shared.token = token
-                        print("[OAuth2Service] Successfully take and save token")
-                        completion(.success(token))
-                    } catch {
-                        print("[OAuth2Service] Failed to decode JSON: \(error.localizedDescription)")
-                        completion(.failure(NetworkError.decodingError(error)))
-                    }
-                    
-                case .failure(let error):
-                    print("[OAuth2Service] Network error: \(error.localizedDescription)")
-                    completion(.failure(error))
-                }
-                self?.task = nil
-                self?.lastCode = nil
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let oauthTokenResponseBody):
+                let accessToken = oauthTokenResponseBody.accessToken
+                completion(.success(accessToken))
+            case .failure(let error):
+                completion(.failure(error))
             }
+            
+            self.task = nil
+            self.lastCode = nil
         }
         self.task = task
         task.resume()
