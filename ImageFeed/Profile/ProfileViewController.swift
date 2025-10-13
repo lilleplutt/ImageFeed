@@ -40,8 +40,7 @@ final class ProfileViewController: UIViewController {
     
     //MARK: - Private methods
     private func setUpProfileImage() {
-        let profileImage = UIImage(named: "profile_image")
-        let imageView = UIImageView(image: profileImage)
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(imageView)
         imageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
