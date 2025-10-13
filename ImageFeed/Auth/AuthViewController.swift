@@ -68,9 +68,9 @@ final class AuthViewController: UIViewController {
         webViewViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: webViewViewController)
-          navigationController.modalPresentationStyle = .fullScreen
-          present(navigationController, animated: true) //new 3 strings
-      }
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true) //new 3 strings
+    }
 }
 
 //MARK: - WebViewViewControllerDelegate
@@ -90,13 +90,14 @@ extension AuthViewController: WebViewViewControllerDelegate {
                 case .success(let token):
                     print("[AuthViewController] Token: \(token)")
                     self.delegate?.didAuthenticate(self)
-                
-            case .failure(let error):
-                print("[AuthViewController] Error: \(error.localizedDescription)")
+                    
+                case .failure(let error):
+                    print("[AuthViewController] Error: \(error.localizedDescription)")
+                    self.showAlert()
+                }
             }
         }
     }
-}
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         navigationController?.popViewController(animated: true)
