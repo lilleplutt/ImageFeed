@@ -13,7 +13,15 @@ final class WebViewViewController: UIViewController {
         
         webView.navigationDelegate = self
         loadAuthView()
-        updateProgress()
+        
+        //MARK: - KVO
+        estimatedProgressObservation = webView.observe(
+            \.estimatedProgress,
+             options: [],
+             changeHandler: { [weak self] _, _ in
+                 guard let self else { return }
+                 self.updateProgress()
+             })
     }
     
     //MARK: - Constants
@@ -30,7 +38,7 @@ final class WebViewViewController: UIViewController {
     private func setUpProgressView() {
         progressView.translatesAutoresizingMaskIntoConstraints = false
         progressView.progressTintColor = UIColor(resource: .ypBlackIOS)
-        progressView.progress = 0.5
+        progressView.progress = 0.1
         view.addSubview(progressView)
         
         NSLayoutConstraint.activate([
@@ -68,34 +76,7 @@ final class WebViewViewController: UIViewController {
     }
     
     //MARK: - KVO
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        webView.addObserver(
-            self,
-            forKeyPath: #keyPath(WKWebView.estimatedProgress),
-            options: .new,
-            context: nil
-        )
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), context: nil)
-    }
-    
-    override func observeValue(
-        forKeyPath keyPath: String?,
-        of object: Any?,
-        change: [NSKeyValueChangeKey : Any]?,
-        context: UnsafeMutableRawPointer?
-    ) {
-        if keyPath == #keyPath(WKWebView.estimatedProgress) {
-            updateProgress()
-        } else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-    }
+    private var estimatedProgressObservation: NSKeyValueObservation?
     
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
