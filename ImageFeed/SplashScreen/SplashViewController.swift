@@ -11,8 +11,7 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let token = storage.token {
-            switchToTabBarController()
+        if let token = storage.token, !token.isEmpty {
             fetchProfile(token: token)
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
@@ -47,9 +46,8 @@ final class SplashViewController: UIViewController {
                 ProfileImageService.shared.fetchProfileImageURL(username: profile.username) { _ in }
                 self.switchToTabBarController()
             case .failure(let error):
-                print(error)
+                print("[SplashViewController] fetchProfile error: \(error)")
                 self.showAlert()
-                break
             }
         }
     }
@@ -72,10 +70,15 @@ extension SplashViewController {
     }
 }
 
-extension SplashViewController: AuthViewControllerDelegate { 
+extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController) {
         vc.navigationController?.dismiss(animated: true)
         
-        switchToTabBarController()
+        if let token = storage.token, !token.isEmpty {
+            fetchProfile(token: token)
+        } else {
+            print("[SplashViewController] Warning: token is missing after auth")
+            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+        }
     }
 }

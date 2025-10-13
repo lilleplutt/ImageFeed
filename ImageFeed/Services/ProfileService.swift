@@ -8,18 +8,12 @@ struct Profile {
     let bio: String?
 }
 
-struct ProfileResult: Codable {
+struct ProfileResult: Decodable {
     let username: String
-    let firstName: String
-    let lastName: String
+    let firstName: String?
+    let lastName: String?
+    let name: String?
     let bio: String?
-    
-    private enum CodingKeys: String, CodingKey {
-        case username
-        case firstName = "first_name"
-        case lastName = "last_name"
-        case bio
-    }
 }
 
 final class ProfileService {
@@ -35,7 +29,6 @@ final class ProfileService {
     
     // MARK: - Public methods
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
-        //assert(Thread.isMainThread)
         task?.cancel()
         
         guard let request = makeProfileRequest() else {
@@ -49,9 +42,18 @@ final class ProfileService {
             
             switch result {
             case .success(let profileResult):
+                let fullName: String
+                if let first = profileResult.firstName, let last = profileResult.lastName, !(first.isEmpty && last.isEmpty) {
+                    fullName = "\(first) \(last)"
+                } else if let name = profileResult.name, !name.isEmpty {
+                    fullName = name
+                } else {
+                    fullName = ""
+                }
+                
                 let profile = Profile(
                     username: profileResult.username,
-                    name: "\(profileResult.firstName) \(profileResult.lastName)",
+                    name: fullName,
                     loginName: "@\(profileResult.username)",
                     bio: profileResult.bio
                 )
@@ -76,13 +78,12 @@ final class ProfileService {
         
         guard let url = URL(string: "https://api.unsplash.com/me") else {
             print("[ProfileService] Incorrect user profile URL")
-            return nil }
+            return nil
+        }
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
-    
 }
-
