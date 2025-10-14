@@ -5,20 +5,10 @@ struct ProfileImage: Codable {
     let small: String
     let medium: String
     let large: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case small
-        case medium
-        case large
-    }
 }
 
 struct UserResult: Codable {
     let profileImage: ProfileImage
-    
-    private enum CodingKeys: String, CodingKey {
-        case profileImage = "profile_image"
-    }
 }
 
 final class ProfileImageService {
@@ -49,7 +39,7 @@ final class ProfileImageService {
         }
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
-            guard let self = self else { return }
+            guard let self else { return }
             
             switch result {
             case .success(let userResult):
@@ -76,7 +66,8 @@ final class ProfileImageService {
     private func makeProfileImageRequest(username: String, token: String) -> URLRequest? {
         guard let profileURL = URL(string: "https://api.unsplash.com/users/\(username)") else {
             print("[ProfileImageService] Incorrect user public profile URL")
-            return nil }
+            return nil
+        }
         
         var request = URLRequest(url: profileURL)
         request.httpMethod = "GET"

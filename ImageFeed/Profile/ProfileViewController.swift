@@ -4,6 +4,7 @@ import Kingfisher
 final class ProfileViewController: UIViewController {
     
     // MARK: - UI
+    private let profileImageView = UIImageView()
     private let nameLabel = UILabel()
     private let loginNameLabel = UILabel()
     private let descriptionLabel = UILabel()
@@ -41,13 +42,18 @@ final class ProfileViewController: UIViewController {
     
     //MARK: - Private methods
     private func setUpProfileImage() {
-        let profileImageView = UIImageView()
         profileImageView.translatesAutoresizingMaskIntoConstraints = false
+        profileImageView.contentMode = .scaleAspectFill
+        profileImageView.clipsToBounds = true
+        profileImageView.layer.cornerRadius = 35
         view.addSubview(profileImageView)
-        profileImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        profileImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76).isActive = true
-        profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        
+        NSLayoutConstraint.activate([
+            profileImageView.heightAnchor.constraint(equalToConstant: 70),
+            profileImageView.widthAnchor.constraint(equalToConstant: 70),
+            profileImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 76),
+            profileImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16)
+        ])
     }
     
     private func setUpExitButton() {
@@ -59,10 +65,12 @@ final class ProfileViewController: UIViewController {
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(exitButton)
         exitButton.tintColor = UIColor(resource: .ypRedIOS)
-        exitButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        exitButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
-        exitButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 89).isActive = true
+        NSLayoutConstraint.activate([
+            exitButton.heightAnchor.constraint(equalToConstant: 44),
+            exitButton.widthAnchor.constraint(equalToConstant: 44),
+            exitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            exitButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 89)
+        ])
     }
     
     private func setUpNameLabel() {
@@ -70,10 +78,12 @@ final class ProfileViewController: UIViewController {
         view.addSubview(nameLabel)
         nameLabel.font = UIFont.systemFont(ofSize: 23, weight: .bold)
         nameLabel.textColor = UIColor(resource: .ypWhiteIOS)
-        nameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        nameLabel.widthAnchor.constraint(equalToConstant: 241).isActive = true
-        nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 154).isActive = true
+        NSLayoutConstraint.activate([
+            nameLabel.heightAnchor.constraint(equalToConstant: 18),
+            nameLabel.widthAnchor.constraint(equalToConstant: 241),
+            nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 154)
+        ])
     }
     
     private func setUpLoginNameLabel() {
@@ -81,10 +91,12 @@ final class ProfileViewController: UIViewController {
         view.addSubview(loginNameLabel)
         loginNameLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         loginNameLabel.textColor = UIColor(resource: .ypGrayIOS)
-        loginNameLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        loginNameLabel.widthAnchor.constraint(equalToConstant: 99).isActive = true
-        loginNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        loginNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 180).isActive = true
+        NSLayoutConstraint.activate([
+            loginNameLabel.heightAnchor.constraint(equalToConstant: 18),
+            loginNameLabel.widthAnchor.constraint(equalToConstant: 99),
+            loginNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            loginNameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 180)
+        ])
     }
     
     private func setUpDescriptionLabel() {
@@ -92,10 +104,12 @@ final class ProfileViewController: UIViewController {
         view.addSubview(descriptionLabel)
         descriptionLabel.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         descriptionLabel.textColor = UIColor(resource: .ypWhiteIOS)
-        descriptionLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        descriptionLabel.widthAnchor.constraint(equalToConstant: 77).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206).isActive = true
+        NSLayoutConstraint.activate([
+            descriptionLabel.heightAnchor.constraint(equalToConstant: 18),
+            descriptionLabel.widthAnchor.constraint(equalToConstant: 77),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 206)
+        ])
     }
     
     private func updateAvatar() {
@@ -103,8 +117,6 @@ final class ProfileViewController: UIViewController {
             let profileImageURL = ProfileImageService.shared.avatarURL,
             let url = URL(string: profileImageURL)
         else { return }
-        
-        print("imageUrl: \(profileImageURL)")
         
         let placeholderImage = UIImage(systemName: "person.circle.fill")?
             .withTintColor(.lightGray, renderingMode: .alwaysOriginal)
@@ -120,18 +132,15 @@ final class ProfileViewController: UIViewController {
                 .scaleFactor(UIScreen.main.scale),
                 .cacheOriginalImage,
                 .forceRefresh
-            ]) { result in
-                
-                switch result {
-                case .success(let value):
-                    print(value.image)
-                    print(value.cacheType)
-                    print(value.source)
-                    
-                case .failure(let error):
-                    print(error)
-                }
+            ]
+        ) { result in
+            switch result {
+            case .success(let value):
+                print("[ProfileViewController] avatar loaded, cache: \(value.cacheType), source: \(value.source)")
+            case .failure(let error):
+                print("[ProfileViewController] avatar load error: \(error)")
             }
+        }
     }
     
     private func updateProfileDetails(profile: Profile) {
