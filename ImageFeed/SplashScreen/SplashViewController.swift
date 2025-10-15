@@ -7,17 +7,30 @@ final class SplashViewController: UIViewController {
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let profileService = ProfileService.sharedProfile
     
-    //MARK: - Methods
+    //MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        view.backgroundColor = UIColor(resource: .ypBlackIOS)
+        setUpLogoImage()
         
         if let token = storage.token, !token.isEmpty {
             fetchProfile(token: token)
         } else {
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
         }
+    }
+    
+    //MARK: - Private methods
+    private func setUpLogoImage() {
+        view.backgroundColor = UIColor(resource: .ypBlackIOS)
+        let splashLogoImage = UIImage(resource: .splashScreenLogo)
+        let splashLogoImageView = UIImageView(image: splashLogoImage)
+        splashLogoImageView.translatesAutoresizingMaskIntoConstraints = false
+        splashLogoImageView.contentMode = .scaleAspectFit
+        view.addSubview(splashLogoImageView)
+        
+        splashLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        splashLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
     private func switchToTabBarController() {
