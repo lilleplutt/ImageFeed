@@ -69,7 +69,7 @@ final class AuthViewController: UIViewController {
         
         let navigationController = UINavigationController(rootViewController: webViewViewController)
         navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true) //new 3 strings
+        present(navigationController, animated: true) 
     }
 }
 

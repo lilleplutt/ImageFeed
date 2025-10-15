@@ -37,6 +37,12 @@ final class SplashViewController: UIViewController {
     private func presentAuthViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController")
+        
+        guard let authViewController = authViewController as? AuthViewController else {
+            assertionFailure("[SplashViewController] Could not find AuthViewController")
+            return
+        }
+        
         authViewController.delegate = self
         authViewController.modalPresentationStyle = .fullScreen
         present(authViewController, animated: true)
@@ -49,7 +55,7 @@ final class SplashViewController: UIViewController {
             .first(where: { $0.isKeyWindow })
         
         guard let window else {
-            assertionFailure("Invalid window configuration")
+            assertionFailure("[SplashViewController] Invalid window configuration")
             return
         }
         
