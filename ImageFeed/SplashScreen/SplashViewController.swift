@@ -17,7 +17,7 @@ final class SplashViewController: UIViewController {
         if let token = storage.token, !token.isEmpty {
             fetchProfile(token: token)
         } else {
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            presentAuthViewController()
         }
     }
     
