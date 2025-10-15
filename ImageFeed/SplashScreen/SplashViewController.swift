@@ -6,6 +6,7 @@ final class SplashViewController: UIViewController {
     private let storage = OAuth2TokenStorage.shared
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     private let profileService = ProfileService.sharedProfile
+    private var splashLogoImageView: UIImageView!
     
     //MARK: - Lifecycle
     override func viewDidAppear(_ animated: Bool) {
@@ -24,7 +25,7 @@ final class SplashViewController: UIViewController {
     private func setUpLogoImage() {
         view.backgroundColor = UIColor(resource: .ypBlackIOS)
         let splashLogoImage = UIImage(resource: .splashScreenLogo)
-        let splashLogoImageView = UIImageView(image: splashLogoImage)
+        splashLogoImageView = UIImageView(image: splashLogoImage)
         splashLogoImageView.translatesAutoresizingMaskIntoConstraints = false
         splashLogoImageView.contentMode = .scaleAspectFit
         view.addSubview(splashLogoImageView)
