@@ -34,6 +34,14 @@ final class SplashViewController: UIViewController {
         splashLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
+    private func presentAuthViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController")
+        authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
+        present(authViewController, animated: true)
+    }
+    
     private func switchToTabBarController() {
         let window = self.view.window ?? UIApplication.shared.connectedScenes
             .compactMap { $0 as? UIWindowScene }
