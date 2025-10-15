@@ -11,6 +11,8 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        view.backgroundColor = UIColor(resource: .ypBlackIOS)
+        
         if let token = storage.token, !token.isEmpty {
             fetchProfile(token: token)
         } else {
