@@ -30,8 +30,8 @@ final class SplashViewController: UIViewController {
         splashLogoImageView.contentMode = .scaleAspectFit
         view.addSubview(splashLogoImageView)
         
-        splashLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        splashLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        splashLogoImageView.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        splashLogoImageView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
     }
     
     private func presentAuthViewController() {
