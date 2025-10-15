@@ -129,7 +129,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOB-6U-2n9" userLabel="Share Button">
-                                <rect key="frame" x="162" y="770" width="50" height="50"/>
+                                <rect key="frame" x="162" y="770" width="69" height="50"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" image="share_button"/>
                                 <connections>
@@ -147,6 +147,7 @@
                             <constraint firstItem="sOK-oh-peY" firstAttribute="top" secondItem="8Vd-Jl-iMb" secondAttribute="top" id="T1n-ks-U5M"/>
                             <constraint firstItem="oOB-6U-2n9" firstAttribute="leading" secondItem="1E1-ao-o7t" secondAttribute="leading" constant="162" id="eff-Y0-FAc"/>
                             <constraint firstItem="8Sy-WM-XKX" firstAttribute="leading" secondItem="1E1-ao-o7t" secondAttribute="leading" constant="8" id="glI-12-yfR"/>
+                            <constraint firstItem="oOB-6U-2n9" firstAttribute="centerX" secondItem="1E1-ao-o7t" secondAttribute="centerX" id="qK3-B7-s8X"/>
                             <constraint firstAttribute="trailing" secondItem="sOK-oh-peY" secondAttribute="trailing" id="vox-oW-aqg"/>
                         </constraints>
                     </view>
