@@ -31,6 +31,7 @@ final class ImagesListService {
     private init() {}
     private(set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
+    static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
     //MARK: - Methods
     func fetchPhotosNextPage() {
