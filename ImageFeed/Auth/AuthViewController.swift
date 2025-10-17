@@ -1,4 +1,5 @@
 import UIKit
+import ProgressHUD
 
 protocol AuthViewControllerDelegate: AnyObject {
     func didAuthenticate(_ vc: AuthViewController)
@@ -67,9 +68,9 @@ final class AuthViewController: UIViewController {
         webViewViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: webViewViewController)
-          navigationController.modalPresentationStyle = .fullScreen
-          present(navigationController, animated: true) //new 3 strings
-      }
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true) 
+    }
 }
 
 //MARK: - WebViewViewControllerDelegate
@@ -77,22 +78,26 @@ extension AuthViewController: WebViewViewControllerDelegate {
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         
         print("[AuthViewController] Code: \(code)")
+        vc.dismiss(animated: true)
+        UIBlockingProgressHUD.show()
         
         OAuth2Service.shared.fetchOAuthToken(code: code) { [weak self] result in
             DispatchQueue.main.async {
+                UIBlockingProgressHUD.dismiss()
                 
                 guard let self else { return }
                 switch result {
                 case .success(let token):
                     print("[AuthViewController] Token: \(token)")
                     self.delegate?.didAuthenticate(self)
-                
-            case .failure(let error):
-                print("[AuthViewController] Error: \(error.localizedDescription)")
+                    
+                case .failure(let error):
+                    print("[AuthViewController] Error: \(error.localizedDescription)")
+                    self.showAlert()
+                }
             }
         }
     }
-}
     
     func webViewViewControllerDidCancel(_ vc: WebViewViewController) {
         navigationController?.popViewController(animated: true)
