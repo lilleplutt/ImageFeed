@@ -27,6 +27,8 @@ struct UrlsResult: Decodable {
 
 final class ImagesListService {
     //MARK: - Private Properties
+    static let shared = ImagesListService()
+    private init() {}
     private(set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
     
