@@ -12,7 +12,7 @@ final class OAuth2Service {
     private let dataStorage = OAuth2TokenStorage.shared
     private(set) var authToken: String? {
         get {
-            return dataStorage.token
+            dataStorage.token
         }
         set {
             dataStorage.token = newValue
@@ -37,7 +37,6 @@ final class OAuth2Service {
         }
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
-            DispatchQueue.main.async {
                 UIBlockingProgressHUD.dismiss()
                 guard let self else { return }
                 
@@ -53,7 +52,6 @@ final class OAuth2Service {
                     self.task = nil
                     self.lastCode = nil
                 }
-            }
         }
         self.task = task
         task.resume()
