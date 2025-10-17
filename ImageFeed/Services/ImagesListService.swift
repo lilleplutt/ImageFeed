@@ -11,6 +11,20 @@ struct Photo {
     let isLiked: Bool
 }
 
+struct PhotoResult: Decodable {
+    let id: String
+    let width: Int
+    let height: Int
+    let created_at: String?
+    let description: String?
+    let liked_by_user: Bool
+}
+
+struct UrlsResult: Decodable {
+    let thumb: String
+    let large: String
+}
+
 final class ImagesListService {
     //MARK: - Private Properties
     private(set) var photos: [Photo] = []
