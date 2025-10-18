@@ -38,13 +38,38 @@ final class ImagesListService {
     private var task: URLSessionDataTask?
     
     //MARK: - Methods
-    func fetchPhotosNextPage() {
+    func fetchPhotosNextPage(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
+        task?.cancel()
         if isLoading { return }
         isLoading = true
         
         let nextPage = (lastLoadedPage ?? 0) + 1
         
+        guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
+            assertionFailure("[ImagesListService] Bearer token is missing")
+            return
+        }
+        
+        guard let request = makePhotosRequest(token: token) else {
+            print("[ImagesListService] Failed to create photos request")
+            completion(.failure(NetworkError.invalidRequest))
+            return
+        }
+        
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
+            guard let self else { return }
+            
+            switch result {
+            case .success(let photoResult):
+              
+            case .failure(let error):
+                completion(.failure(error))
+            }
+            self.task = nil
+        }
+        self.task = task
+        task.resume()
     }
     
     private func makePhotosRequest(token: String) -> URLRequest? {
@@ -59,7 +84,8 @@ final class ImagesListService {
         ]
         guard let photosUrl = urlComponents.url else {
             print("[ImagesListService] Incorrect token request URL with parameters")
-            return nil }
+            return nil
+        }
         
         var request = URLRequest(url: photosUrl)
         request.httpMethod = "GET"
