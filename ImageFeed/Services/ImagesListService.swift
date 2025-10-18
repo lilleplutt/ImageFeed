@@ -33,6 +33,10 @@ final class ImagesListService {
     private var lastLoadedPage: Int?
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
+    private var isLoading = false
+    private let urlSession = URLSession.shared
+    private var task: URLSessionDataTask?
+    
     //MARK: - Methods
     func fetchPhotosNextPage() {
         
