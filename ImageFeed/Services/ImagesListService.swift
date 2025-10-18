@@ -39,6 +39,11 @@ final class ImagesListService {
     
     //MARK: - Methods
     func fetchPhotosNextPage() {
+        assert(Thread.isMainThread)
+        if isLoading { return }
+        isLoading = true
+        
+        let nextPage = (lastLoadedPage ?? 0) + 1
         
     }
     
