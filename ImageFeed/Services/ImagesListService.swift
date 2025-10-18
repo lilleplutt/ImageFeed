@@ -57,7 +57,7 @@ final class ImagesListService {
             return
         }
         
-        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             guard let self else { return }
             
             switch result {
@@ -72,6 +72,7 @@ final class ImagesListService {
         task.resume()
     }
     
+    //MARK: - Private Methods
     private func makePhotosRequest(token: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://api.unsplash.com/photos") else {
             assertionFailure("[ImagesListService] Failed to create URL")
