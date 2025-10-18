@@ -37,4 +37,22 @@ final class ImagesListService {
     func fetchPhotosNextPage() {
         
     }
+    
+    private func makePhotosRequest() -> URLRequest? {
+        guard var urlComponents = URLComponents(string: "https://unsplash.com/photos") else {
+            assertionFailure("[ImagesListService] Failed to create URL")
+            return nil
+        }
+        
+        urlComponents.queryItems = [
+            URLQueryItem(name: "page", value: String(lastLoadedPage ?? 1)),
+            URLQueryItem(name: "per_page", value: "10")
+        ]
+        guard let photosUrl = urlComponents.url else {
+            print("[ImagesListService] Incorrect token request URL with parameters")
+            return nil }
+        var request = URLRequest(url: photosUrl)
+        request.httpMethod = "GET"
+        return request
+    }
 }
