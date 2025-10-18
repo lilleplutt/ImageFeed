@@ -38,8 +38,8 @@ final class ImagesListService {
         
     }
     
-    private func makePhotosRequest() -> URLRequest? {
-        guard var urlComponents = URLComponents(string: "https://unsplash.com/photos") else {
+    private func makePhotosRequest(token: String) -> URLRequest? {
+        guard var urlComponents = URLComponents(string: "https://api.unsplash.com/photos") else {
             assertionFailure("[ImagesListService] Failed to create URL")
             return nil
         }
@@ -51,8 +51,10 @@ final class ImagesListService {
         guard let photosUrl = urlComponents.url else {
             print("[ImagesListService] Incorrect token request URL with parameters")
             return nil }
+        
         var request = URLRequest(url: photosUrl)
         request.httpMethod = "GET"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
 }
