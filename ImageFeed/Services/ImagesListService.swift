@@ -62,7 +62,7 @@ final class ImagesListService {
             
             switch result {
             case .success(let photoResults): //array from unsplash
-                let newPhotos = photoResults.map { convert(photoResult: $0) }
+                let newPhotos = photoResults.map { self.convert(photoResult: $0) }
                 self.photos.append(contentsOf: newPhotos)
                 self.lastLoadedPage = nextPage
                 self.isLoading = false //to free server for next loading
@@ -71,7 +71,7 @@ final class ImagesListService {
                     name: ImagesListService.didChangeNotification,
                     object: self
                 )
-              
+                
             case .failure(let error):
                 self.isLoading = false
                 print("[ImagesListService] Failed to load photos: \(error)")
