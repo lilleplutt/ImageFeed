@@ -6,6 +6,7 @@ final class ImagesListViewController: UIViewController {
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: - Private properties
+    private var imagesListServiceObserver: NSObjectProtocol?
     private let photoNames: [String] = Array(0..<20).map{"\($0)"}
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -21,12 +22,25 @@ final class ImagesListViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        
+        imagesListServiceObserver = NotificationCenter.default.addObserver(
+                forName: ImagesListService.didChangeNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] _ in
+                guard let self else {return }
+                self.updateTableViewAnimated()
+            }
+        
         ImagesListService.shared.fetchPhotosNextPage()
     }
     
     //MARK: - Methods
+    @objc private func updateTableViewAnimated() {
+        tableView.reloadData()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == showSingleImageSegueIdentifier {
             guard
