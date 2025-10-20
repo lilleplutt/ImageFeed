@@ -7,7 +7,9 @@ final class ImagesListViewController: UIViewController {
     
     //MARK: - Private properties
     private var imagesListServiceObserver: NSObjectProtocol?
-    private let photoNames: [String] = Array(0..<20).map{"\($0)"}
+    private var photos: [Photo] {
+        return ImagesListService.shared.photos
+    }
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
