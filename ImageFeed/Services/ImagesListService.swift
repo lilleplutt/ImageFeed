@@ -39,7 +39,7 @@ final class ImagesListService {
     private var task: URLSessionTask?
     
     //MARK: - Methods
-    func fetchPhotosNextPage(_ token: String) {
+    func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
         task?.cancel()
         if isLoading { return }
