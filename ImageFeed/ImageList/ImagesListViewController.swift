@@ -61,11 +61,9 @@ final class ImagesListViewController: UIViewController {
     }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
-        let imageName = photoNames[indexPath.row]
-        guard let image = UIImage(named: imageName) else { return }
-        
-        cell.cellImage.image = image
-        cell.dateLabel.text = dateFormatter.string(from: Date())
+        let photo = photos[indexPath.row]
+        //TODO: load url with kingfisher
+        cell.dateLabel.text = dateFormatter.string(from: photo.createdAt ?? Date())
         
         let isLiked = indexPath.row.isMultiple(of: 2)
         let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
@@ -80,7 +78,7 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let imageName = photoNames[indexPath.row]
+        let imageName = photos[indexPath.row]
         guard let image = UIImage(named: imageName) else { return 0 }
         
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
@@ -96,7 +94,7 @@ extension ImagesListViewController: UITableViewDelegate {
 //MARK: - Extensions
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return photoNames.count
+        return photos.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
