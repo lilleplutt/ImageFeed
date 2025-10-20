@@ -36,7 +36,7 @@ final class ImagesListService {
     
     private var isLoading = false
     private let urlSession = URLSession.shared
-    private var task: URLSessionDataTask?
+    private var task: URLSessionTask?
     
     //MARK: - Methods
     func fetchPhotosNextPage(_ token: String) {
@@ -61,16 +61,20 @@ final class ImagesListService {
             guard let self else { return }
             
             switch result {
-            case .success(let photoResults):
-                
+            case .success(let photoResults): //array from unsplash
+                let newPhotos = photoResults.map { convert(photoResult: $0) }
+                self.photos.append(contentsOf: newPhotos)
+                self.lastLoadedPage = nextPage
+                self.isLoading = false //to free server for next loading
                 
                 NotificationCenter.default.post(
                     name: ImagesListService.didChangeNotification,
-                    object: self,
-                    userInfo: ["URL": photos]
+                    object: self
                 )
               
             case .failure(let error):
+                self.isLoading = false
+                print("[ImagesListService] Failed to load photos: \(error)")
             }
             self.task = nil
         }
