@@ -18,6 +18,7 @@ struct PhotoResult: Decodable {
     let created_at: String?
     let description: String?
     let liked_by_user: Bool
+    let urls: UrlsResult
 }
 
 struct UrlsResult: Decodable {
@@ -38,7 +39,7 @@ final class ImagesListService {
     private var task: URLSessionDataTask?
     
     //MARK: - Methods
-    func fetchPhotosNextPage(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+    func fetchPhotosNextPage(_ token: String) {
         assert(Thread.isMainThread)
         task?.cancel()
         if isLoading { return }
@@ -53,7 +54,6 @@ final class ImagesListService {
         
         guard let request = makePhotosRequest(token: token) else {
             print("[ImagesListService] Failed to create photos request")
-            completion(.failure(NetworkError.invalidRequest))
             return
         }
         
@@ -61,10 +61,16 @@ final class ImagesListService {
             guard let self else { return }
             
             switch result {
-            case .success(let photoResult):
+            case .success(let photoResults):
+                
+                
+                NotificationCenter.default.post(
+                    name: ImagesListService.didChangeNotification,
+                    object: self,
+                    userInfo: ["URL": photos]
+                )
               
             case .failure(let error):
-                completion(.failure(error))
             }
             self.task = nil
         }
@@ -93,4 +99,18 @@ final class ImagesListService {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }
+    
+    private func convert(photoResult: PhotoResult) -> Photo {
+        let dateFormatter = DateFormatter()
+        let createdAt = dateFormatter.date(from: photoResult.created_at ?? "")
+        let size = CGSize(width: photoResult.width, height: photoResult.height)
+        return Photo(id: photoResult.id,
+                     size: size,
+                     createdAt: createdAt,
+                     welcomeDescription: photoResult.description,
+                     thumbImageURL: photoResult.urls.thumb,
+                     largeImageURL: photoResult.urls.large,
+                     isLiked: photoResult.liked_by_user)
+    }
+    
 }
