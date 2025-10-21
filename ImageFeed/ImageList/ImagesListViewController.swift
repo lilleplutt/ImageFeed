@@ -8,9 +8,7 @@ final class ImagesListViewController: UIViewController {
     
     //MARK: - Private properties
     private var imagesListServiceObserver: NSObjectProtocol?
-    private var photos: [Photo] {
-        return ImagesListService.shared.photos
-    }
+    private var photos: [Photo] = []
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -32,7 +30,8 @@ final class ImagesListViewController: UIViewController {
             object: nil,
             queue: .main
         ) { [weak self] _ in
-            guard let self else {return }
+            guard let self else { return }
+            self.photos = ImagesListService.shared.photos
             self.updateTableViewAnimated()
         }
         
