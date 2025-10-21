@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class ImagesListViewController: UIViewController {
     
@@ -62,11 +63,27 @@ final class ImagesListViewController: UIViewController {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         let photo = photos[indexPath.row]
-        //TODO: load url with kingfisher
-        cell.dateLabel.text = dateFormatter.string(from: photo.createdAt ?? Date())
+       
+        cell.cellImage.kf.cancelDownloadTask()
         
-        let isLiked = indexPath.row.isMultiple(of: 2)
-        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+        if let url = URL(string: photo.thumbImageURL) {
+            cell.cellImage.kf.setImage(with: url) { result in
+                switch result {
+                case .success(let value):
+                    print("[ImagesListViewController] Image loaded: \(value.source)")
+                case .failure(let error):
+                    print("[ImagesListViewController] Faied to load image: \(error)")
+                }
+            }
+        }
+        
+        if let date = photo.createdAt {
+            cell.dateLabel.text = dateFormatter.string(from: date)
+        } else {
+            cell.dateLabel.text = ""
+        }
+    
+        let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
     }
 }
