@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class SingleImageViewController: UIViewController {
     
@@ -12,6 +13,25 @@ final class SingleImageViewController: UIViewController {
         }
     }
     
+    var imageURL: String? {
+        didSet {
+            guard let imageURLString = imageURL, let url = URL(string: imageURLString) else { return }
+            
+            UIBlockingProgressHUD.show()
+            
+            imageView.kf.setImage(with: url) { [weak self] result in
+                UIBlockingProgressHUD.dismiss()
+                
+                switch result {
+                case .success(let value):
+                    self?.image = value.image
+                case .failure(let error):
+                    print("[SingleImageViewController] Failed to load image: \(error)")
+                }
+            }
+        }
+    }
+    
     //MARK: - IBOutlets
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -19,7 +39,7 @@ final class SingleImageViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         guard let image else { return }
         imageView.image = image
         imageView.frame.size = image.size
