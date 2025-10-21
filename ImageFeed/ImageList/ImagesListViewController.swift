@@ -40,8 +40,17 @@ final class ImagesListViewController: UIViewController {
     }
     
     //MARK: - Methods
-    @objc private func updateTableViewAnimated() {
-        tableView.reloadData()
+    private func updateTableViewAnimated() {
+        let oldCount = photos.count
+        let newCount = ImagesListService.shared.photos.count
+        if oldCount != newCount {
+            tableView.performBatchUpdates {
+                let indexPaths = (oldCount..<newCount).map { i in
+                    IndexPath(row: i, section: 0)
+                }
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            } completion: { _ in }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -126,4 +135,3 @@ extension ImagesListViewController: UITableViewDataSource {
         }
     }
 }
-
