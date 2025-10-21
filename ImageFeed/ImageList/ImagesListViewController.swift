@@ -53,7 +53,7 @@ final class ImagesListViewController: UIViewController {
                 return
             }
             
-            let image = UIImage(named: photoNames[indexPath.row])
+            let image = UIImage(named: photos[indexPath.row])
             viewController.image = image
         } else {
             super.prepare(for: segue, sender: sender)
@@ -78,17 +78,15 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let imageName = photos[indexPath.row]
-        guard let image = UIImage(named: imageName) else { return 0 }
+        let photo = photos[indexPath.row]
+        let imageSize = photo.size
         
         let imageInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         let imageViewWidth = tableView.bounds.width - imageInsets.left - imageInsets.right
-        let imageWidth = image.size.width
-        let scale = imageViewWidth / imageWidth
-        let cellHeight = image.size.height * scale + imageInsets.top + imageInsets.bottom
+        let scale = imageViewWidth / imageSize.width
+        let cellHeight = imageSize.height * scale + imageInsets.top + imageInsets.bottom
         return cellHeight
     }
-    
 }
 
 //MARK: - Extensions
