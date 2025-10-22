@@ -23,6 +23,7 @@ struct PhotoResult: Decodable {
 
 struct UrlsResult: Decodable {
     let thumb: String?
+    let regular: String?
     let full: String?
 }
 
@@ -117,7 +118,7 @@ final class ImagesListService {
                      size: size,
                      createdAt: createdAt,
                      welcomeDescription: photoResult.description,
-                     thumbImageURL: photoResult.urls.thumb ?? "",
+                     thumbImageURL: photoResult.urls.regular ?? "",
                      fullImageURL: photoResult.urls.full ?? "",
                      isLiked: photoResult.liked_by_user ?? false)
     }
