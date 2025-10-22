@@ -17,7 +17,7 @@ struct PhotoResult: Decodable {
     let height: Int
     let created_at: String?
     let description: String?
-    let liked_by_user: Bool
+    let liked_by_user: Bool?
     let urls: UrlsResult
 }
 
@@ -114,7 +114,7 @@ final class ImagesListService {
                      welcomeDescription: photoResult.description,
                      thumbImageURL: photoResult.urls.thumb,
                      largeImageURL: photoResult.urls.large,
-                     isLiked: photoResult.liked_by_user)
+                     isLiked: photoResult.liked_by_user ?? false)
     }
     
 }

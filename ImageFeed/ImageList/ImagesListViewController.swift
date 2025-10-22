@@ -20,6 +20,7 @@ final class ImagesListViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("[ImagesListViewController] viewDidLoad")
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -40,6 +41,9 @@ final class ImagesListViewController: UIViewController {
     
     //MARK: - Methods
     private func updateTableViewAnimated() {
+        print("[ImagesListViewController] updateTableViewAnimated called")
+        print("Old count: \(photos.count), new count: \(ImagesListService.shared.photos.count)")
+        
         let oldCount = photos.count
         let newCount = ImagesListService.shared.photos.count
         if oldCount != newCount {
@@ -48,7 +52,9 @@ final class ImagesListViewController: UIViewController {
                     IndexPath(row: i, section: 0)
                 }
                 tableView.insertRows(at: indexPaths, with: .automatic)
-            } completion: { _ in }
+            } completion: { _ in
+                print("Batch update finished")
+            }
         }
     }
     
@@ -122,6 +128,7 @@ extension ImagesListViewController: UITableViewDelegate {
 //MARK: - Extensions
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("[ImagesListViewController] numberOfRowsInSection: \(photos.count)")
         return photos.count
     }
     
