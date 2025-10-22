@@ -45,7 +45,6 @@ final class SingleImageViewController: UIViewController {
             
             switch result {
             case .success(let value):
-                print("[SingleImageViewController] Image loaded successfully")
                 self?.image = value.image
             case .failure(let error):
                 print("[SingleImageViewController] Failed to load image: \(error)")

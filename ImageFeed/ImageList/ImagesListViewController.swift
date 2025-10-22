@@ -39,27 +39,9 @@ final class ImagesListViewController: UIViewController {
     }
     
     //MARK: - Methods
-    private func updateTableViewAnimated() { //TODO: fix
-        print("[ImagesListViewController] updateTableViewAnimated called")
-        print("Old count: \(photos.count), new count: \(ImagesListService.shared.photos.count)")
-        
-        /*
-         let oldCount = photos.count
-         let newCount = ImagesListService.shared.photos.count
-         if oldCount != newCount {
-         tableView.performBatchUpdates {
-         let indexPaths = (oldCount..<newCount).map { i in
-         IndexPath(row: i, section: 0)
-         }
-         tableView.insertRows(at: indexPaths, with: .automatic)
-         } completion: { _ in
-         print("Batch update finished")
-         }
-         }
-         */
+    private func updateTableViewAnimated() {
         self.photos = ImagesListService.shared.photos
         tableView.reloadData()
-        print("Table reloaded with \(photos.count) photos")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -71,7 +53,6 @@ final class ImagesListViewController: UIViewController {
                 assertionFailure("[ImagesListViewController] Invalid segue destination")
                 return
             }
-            
             let photo = photos[indexPath.row]
             viewController.imageURL = photo.fullImageURL
         } else {
@@ -144,7 +125,9 @@ extension ImagesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //print("[ImagesListViewController] willDisplay cell at \(indexPath.row), total: \(photos.count)")
         if indexPath.row + 1 == photos.count {
+            print("[ImagesListViewController] ✅ Reached end, loading next page...")
             ImagesListService.shared.fetchPhotosNextPage()
         }
     }
