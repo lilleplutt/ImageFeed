@@ -12,25 +12,7 @@ final class SingleImageViewController: UIViewController {
             rescaleAndCenterImageInScrollView(image: image)
         }
     }
-    
-    var imageURL: String? {
-        didSet {
-            guard let imageURLString = imageURL, let url = URL(string: imageURLString) else { return }
-            
-            UIBlockingProgressHUD.show()
-            
-            imageView.kf.setImage(with: url) { [weak self] result in
-                UIBlockingProgressHUD.dismiss()
-                
-                switch result {
-                case .success(let value):
-                    self?.image = value.image
-                case .failure(let error):
-                    print("[SingleImageViewController] Failed to load image: \(error)")
-                }
-            }
-        }
-    }
+    var imageURL: String?
     
     //MARK: - IBOutlets
     @IBOutlet private var imageView: UIImageView!
@@ -40,16 +22,37 @@ final class SingleImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let image else { return }
-        imageView.image = image
-        imageView.frame.size = image.size
-        rescaleAndCenterImageInScrollView(image: image)
+        if let imageURL {
+            loadImage(from: imageURL)
+        } else if let image {
+            imageView.image = image
+            imageView.frame.size = image.size
+            rescaleAndCenterImageInScrollView(image: image)
+        }
         
         scrollView.minimumZoomScale = 0.1
         scrollView.maximumZoomScale = 1.25
     }
     
     //MARK: - Private methods
+    private func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        UIBlockingProgressHUD.show()
+        
+        imageView.kf.setImage(with: url) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+            
+            switch result {
+            case .success(let value):
+                print("[SingleImageViewController] Image loaded successfully")
+                self?.image = value.image
+            case .failure(let error):
+                print("[SingleImageViewController] Failed to load image: \(error)")
+            }
+        }
+    }
+    
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let minZoomScale = scrollView.minimumZoomScale
         let maxZoomScale = scrollView.maximumZoomScale

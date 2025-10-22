@@ -20,7 +20,6 @@ final class ImagesListViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("[ImagesListViewController] viewDidLoad")
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -133,7 +132,6 @@ extension ImagesListViewController: UITableViewDelegate {
 //MARK: - Extensions
 extension ImagesListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("[ImagesListViewController] numberOfRowsInSection: \(photos.count)")
         return photos.count
     }
     
