@@ -7,7 +7,7 @@ struct Photo {
     let createdAt: Date?
     let welcomeDescription: String?
     let thumbImageURL: String
-    let largeImageURL: String
+    let fullImageURL: String
     let isLiked: Bool
 }
 
@@ -22,8 +22,8 @@ struct PhotoResult: Decodable {
 }
 
 struct UrlsResult: Decodable {
-    let thumb: String
-    let large: String
+    let thumb: String?
+    let full: String?
 }
 
 final class ImagesListService {
@@ -112,8 +112,8 @@ final class ImagesListService {
                      size: size,
                      createdAt: createdAt,
                      welcomeDescription: photoResult.description,
-                     thumbImageURL: photoResult.urls.thumb,
-                     largeImageURL: photoResult.urls.large,
+                     thumbImageURL: photoResult.urls.thumb ?? "",
+                     fullImageURL: photoResult.urls.full ?? "",
                      isLiked: photoResult.liked_by_user ?? false)
     }
     
