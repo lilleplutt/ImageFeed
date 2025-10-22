@@ -73,12 +73,18 @@ final class ImagesListViewController: UIViewController {
         let photo = photos[indexPath.row]
         
         cell.cellImage.kf.cancelDownloadTask()
+        cell.cellImage.kf.indicatorType = .activity
         
         if let url = URL(string: photo.thumbImageURL) {
-            cell.cellImage.kf.setImage(with: url) { result in
+            cell.cellImage.kf.setImage(
+                with: url,
+                placeholder: UIImage(named: "stub_image"),
+                options: [.transition(.fade(0.2))]
+            ) { [weak self] result in
                 switch result {
                 case .success(let value):
                     print("[ImagesListViewController] Image loaded: \(value.source)")
+                    self?.tableView.reloadRows(at: [indexPath], with: .automatic)
                 case .failure(let error):
                     print("[ImagesListViewController] Faied to load image: \(error)")
                 }
