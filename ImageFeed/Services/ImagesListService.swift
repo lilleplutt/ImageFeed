@@ -50,11 +50,13 @@ final class ImagesListService {
         
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
             assertionFailure("[ImagesListService] Bearer token is missing")
+            isLoading = false
             return
         }
         
-        guard let request = makePhotosRequest(token: token) else {
+        guard let request = makePhotosRequest(token: token, page: nextPage) else {
             print("[ImagesListService] Failed to create photos request")
+            isLoading = false
             return
         }
         
@@ -62,11 +64,11 @@ final class ImagesListService {
             guard let self else { return }
             
             switch result {
-            case .success(let photoResults): //array from unsplash
+            case .success(let photoResults):
                 let newPhotos = photoResults.map { self.convert(photoResult: $0) }
                 self.photos.append(contentsOf: newPhotos)
                 self.lastLoadedPage = nextPage
-                self.isLoading = false //to free server for next loading
+                self.isLoading = false
                 
                 NotificationCenter.default.post(
                     name: ImagesListService.didChangeNotification,
@@ -84,14 +86,14 @@ final class ImagesListService {
     }
     
     //MARK: - Private Methods
-    private func makePhotosRequest(token: String) -> URLRequest? {
+    private func makePhotosRequest(token: String, page: Int) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://api.unsplash.com/photos") else {
             assertionFailure("[ImagesListService] Failed to create URL")
             return nil
         }
         
         urlComponents.queryItems = [
-            URLQueryItem(name: "page", value: String(lastLoadedPage ?? 1)),
+            URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "per_page", value: "10")
         ]
         guard let photosUrl = urlComponents.url else {
@@ -106,16 +108,24 @@ final class ImagesListService {
     }
     
     private func convert(photoResult: PhotoResult) -> Photo {
-        let dateFormatter = DateFormatter()
-        let createdAt = dateFormatter.date(from: photoResult.created_at ?? "")
+        let createdAt: Date?
+        if let isoString = photoResult.created_at {
+            let isoFormatter = ISO8601DateFormatter()
+            createdAt = isoFormatter.date(from: isoString)
+        } else {
+            createdAt = nil
+        }
+        
         let size = CGSize(width: photoResult.width, height: photoResult.height)
-        return Photo(id: photoResult.id,
-                     size: size,
-                     createdAt: createdAt,
-                     welcomeDescription: photoResult.description,
-                     thumbImageURL: photoResult.urls.regular ?? "",
-                     fullImageURL: photoResult.urls.full ?? "",
-                     isLiked: photoResult.liked_by_user ?? false)
+        return Photo(
+            id: photoResult.id,
+            size: size,
+            createdAt: createdAt,
+            welcomeDescription: photoResult.description,
+            thumbImageURL: photoResult.urls.regular ?? "",
+            fullImageURL: photoResult.urls.full ?? "",
+            isLiked: photoResult.liked_by_user ?? false
+        )
     }
     
 }
