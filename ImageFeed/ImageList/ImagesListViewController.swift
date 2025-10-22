@@ -44,6 +44,7 @@ final class ImagesListViewController: UIViewController {
         print("[ImagesListViewController] updateTableViewAnimated called")
         print("Old count: \(photos.count), new count: \(ImagesListService.shared.photos.count)")
         
+        /*
         let oldCount = photos.count
         let newCount = ImagesListService.shared.photos.count
         if oldCount != newCount {
@@ -56,6 +57,10 @@ final class ImagesListViewController: UIViewController {
                 print("Batch update finished")
             }
         }
+         */
+        self.photos = ImagesListService.shared.photos
+        tableView.reloadData()
+        print("Table reloaded with \(photos.count) photos")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,7 +74,7 @@ final class ImagesListViewController: UIViewController {
             }
             
             let photo = photos[indexPath.row]
-            viewController.imageURL = photo.largeImageURL
+            viewController.imageURL = photo.fullImageURL
         } else {
             super.prepare(for: segue, sender: sender)
         }

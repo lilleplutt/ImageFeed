@@ -62,8 +62,13 @@ final class ImagesListService {
             
             switch result {
             case .success(let photoResults): //array from unsplash
+                print("[ImagesListService] successfully loaded \(photoResults.count) photos")
                 let newPhotos = photoResults.map { self.convert(photoResult: $0) }
+                print("[ImagesListService] converted to \(newPhotos.count) Photo objects")
+                
                 self.photos.append(contentsOf: newPhotos)
+                print("[ImagesListService] total photos now: \(self.photos.count)")
+                
                 self.lastLoadedPage = nextPage
                 self.isLoading = false //to free server for next loading
                 
