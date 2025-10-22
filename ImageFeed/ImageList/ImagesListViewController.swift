@@ -39,23 +39,23 @@ final class ImagesListViewController: UIViewController {
     }
     
     //MARK: - Methods
-    private func updateTableViewAnimated() {
+    private func updateTableViewAnimated() { //TODO: fix
         print("[ImagesListViewController] updateTableViewAnimated called")
         print("Old count: \(photos.count), new count: \(ImagesListService.shared.photos.count)")
         
         /*
-        let oldCount = photos.count
-        let newCount = ImagesListService.shared.photos.count
-        if oldCount != newCount {
-            tableView.performBatchUpdates {
-                let indexPaths = (oldCount..<newCount).map { i in
-                    IndexPath(row: i, section: 0)
-                }
-                tableView.insertRows(at: indexPaths, with: .automatic)
-            } completion: { _ in
-                print("Batch update finished")
-            }
-        }
+         let oldCount = photos.count
+         let newCount = ImagesListService.shared.photos.count
+         if oldCount != newCount {
+         tableView.performBatchUpdates {
+         let indexPaths = (oldCount..<newCount).map { i in
+         IndexPath(row: i, section: 0)
+         }
+         tableView.insertRows(at: indexPaths, with: .automatic)
+         } completion: { _ in
+         print("Batch update finished")
+         }
+         }
          */
         self.photos = ImagesListService.shared.photos
         tableView.reloadData()
