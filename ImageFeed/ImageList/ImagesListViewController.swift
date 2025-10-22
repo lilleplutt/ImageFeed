@@ -78,8 +78,7 @@ final class ImagesListViewController: UIViewController {
         if let url = URL(string: photo.thumbImageURL) {
             cell.cellImage.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "stub_image"),
-                options: [.transition(.fade(0.2))]
+                placeholder: UIImage(named: "stub_image")
             ) { [weak self] result in
                 switch result {
                 case .success(let value):
