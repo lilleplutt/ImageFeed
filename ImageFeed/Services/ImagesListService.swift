@@ -108,6 +108,18 @@ final class ImagesListService {
         return request
     }
     
+    private func makeLikeRequest(token: String, id: String, isLike: Bool) -> URLRequest? {
+        guard let likeUrl = URL(string: "https://api.unsplash.com/photos/\(id)/like") else {
+            print("[ImagesListService] Incorrect like URL")
+            return nil
+        }
+        
+        var request = URLRequest(url: likeUrl)
+        request.httpMethod = isLike ? "POST" : "DELETE"
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        return request
+    }
+    
     private func convert(photoResult: PhotoResult) -> Photo {
         let size = CGSize(width: photoResult.width, height: photoResult.height)
        

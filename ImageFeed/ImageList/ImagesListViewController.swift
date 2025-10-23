@@ -33,7 +33,7 @@ final class ImagesListViewController: UIViewController {
     }
     
     //MARK: - Methods
-    private func updateTableViewAnimated() {
+    private func updateTableViewAnimated() { //TODO: fix 
         self.photos = ImagesListService.shared.photos
         tableView.reloadData()
     }
