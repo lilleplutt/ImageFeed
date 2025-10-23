@@ -15,9 +15,9 @@ struct PhotoResult: Decodable {
     let id: String
     let width: Int
     let height: Int
-    let created_at: String
+    let createdAt: String
     let description: String?
-    let liked_by_user: Bool?
+    let likedByUser: Bool?
     let urls: UrlsResult
 }
 
@@ -114,11 +114,11 @@ final class ImagesListService {
         return Photo(
             id: photoResult.id,
             size: size,
-            createdAt: dateFormatter.date(from: photoResult.created_at),
+            createdAt: dateFormatter.date(from: photoResult.createdAt),
             welcomeDescription: photoResult.description,
             thumbImageURL: photoResult.urls.regular ?? "",
             fullImageURL: photoResult.urls.full ?? "",
-            isLiked: photoResult.liked_by_user ?? false
+            isLiked: photoResult.likedByUser ?? false
         )
     }
     
