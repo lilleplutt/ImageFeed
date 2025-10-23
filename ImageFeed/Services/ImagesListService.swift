@@ -15,7 +15,7 @@ struct PhotoResult: Decodable {
     let id: String
     let width: Int
     let height: Int
-    let created_at: String?
+    let created_at: String
     let description: String?
     let liked_by_user: Bool?
     let urls: UrlsResult
@@ -34,6 +34,7 @@ final class ImagesListService {
     private(set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    private lazy var dateFormatter = ISO8601DateFormatter()
     
     private var isLoading = false
     private let urlSession = URLSession.shared
@@ -108,19 +109,12 @@ final class ImagesListService {
     }
     
     private func convert(photoResult: PhotoResult) -> Photo {
-        let createdAt: Date?
-        if let isoString = photoResult.created_at {
-            let isoFormatter = ISO8601DateFormatter()
-            createdAt = isoFormatter.date(from: isoString)
-        } else {
-            createdAt = nil
-        }
-        
         let size = CGSize(width: photoResult.width, height: photoResult.height)
+       
         return Photo(
             id: photoResult.id,
             size: size,
-            createdAt: createdAt,
+            createdAt: dateFormatter.date(from: photoResult.created_at),
             welcomeDescription: photoResult.description,
             thumbImageURL: photoResult.urls.regular ?? "",
             fullImageURL: photoResult.urls.full ?? "",

@@ -9,12 +9,6 @@ final class ImagesListViewController: UIViewController {
     //MARK: - Private properties
     private var imagesListServiceObserver: NSObjectProtocol?
     private var photos: [Photo] = []
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     //MARK: - Lifecycle
@@ -80,9 +74,9 @@ final class ImagesListViewController: UIViewController {
                 }
             }
         }
-        
         if let date = photo.createdAt {
-            cell.dateLabel.text = dateFormatter.string(from: date)
+            let dateString = ImagesListCell.dateFormatter.string(from: date)
+            cell.dateLabel.text = dateString
         } else {
             cell.dateLabel.text = ""
         }
@@ -132,3 +126,4 @@ extension ImagesListViewController: UITableViewDataSource {
         }
     }
 }
+
