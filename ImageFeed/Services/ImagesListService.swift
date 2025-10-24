@@ -92,7 +92,7 @@ final class ImagesListService {
         likeTask?.cancel()
         
         guard let index = self.photos.firstIndex(where: { $0.id == id }) else {
-            completion(.failure())
+            completion(.failure(NetworkError.invalidRequest))
             return
         }
         let oldPhoto = self.photos[index]
@@ -107,7 +107,11 @@ final class ImagesListService {
             isLiked: !oldPhoto.isLiked
         )
         self.photos[index] = newPhoto
-        //TODO: add notification?
+        
+        NotificationCenter.default.post(
+            name: ImagesListService.didChangeNotification,
+            object: self
+        )
         
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
             self.photos[index] = oldPhoto
@@ -122,11 +126,32 @@ final class ImagesListService {
         }
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
+            guard let self else { return }
             
+            switch result {
+            case .success(let photoResult):
+                let serverPhoto = self.convert(photoResult: photoResult)
+                self.photos[index] = serverPhoto
+                
+                NotificationCenter.default.post(
+                    name: ImagesListService.didChangeNotification,
+                    object: self
+                )
+                
+            case .failure(let error):
+                self.photos[index] = oldPhoto
+                
+                NotificationCenter.default.post(
+                    name: ImagesListService.didChangeNotification,
+                    object: self
+                )
+                
+                completion(.failure(error))
+            }
+            self.likeTask = nil
         }
-        
-       
-           
+        self.likeTask = task
+        task.resume()
     }
     
     //MARK: - Private Methods
