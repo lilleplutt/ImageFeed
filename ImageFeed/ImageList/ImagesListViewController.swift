@@ -105,7 +105,7 @@ extension ImagesListViewController: UITableViewDelegate {
 }
 
 //MARK: - Extensions
-extension ImagesListViewController: UITableViewDataSource {
+extension ImagesListViewController: UITableViewDataSource, ImagesListCellDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return photos.count
     }
@@ -115,15 +115,22 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
         
         configCell(for: imageListCell, with: indexPath)
+        cell.delegate = self
         return imageListCell
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //print("[ImagesListViewController] willDisplay cell at \(indexPath.row), total: \(photos.count)")
         if indexPath.row + 1 == photos.count {
-            print("[ImagesListViewController] ✅ Reached end, loading next page...")
             ImagesListService.shared.fetchPhotosNextPage()
         }
     }
+    
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        //TODO: setIsLike
+    }
 }
+
+
 

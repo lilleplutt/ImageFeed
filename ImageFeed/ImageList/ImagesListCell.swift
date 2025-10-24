@@ -1,6 +1,10 @@
 import UIKit
 import Kingfisher
 
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTapLike(_ cell: ImagesListCell)
+}
+
 final class ImagesListCell: UITableViewCell {
     
     //MARK: - IBOutlets
@@ -10,6 +14,7 @@ final class ImagesListCell: UITableViewCell {
     
     //MARK: - Properties
     static let reuseIdentifier = "ImagesListCell"
+    weak var delegate: ImagesListCellDelegate?
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
@@ -23,5 +28,12 @@ final class ImagesListCell: UITableViewCell {
         super.prepareForReuse()
         cellImage.kf.cancelDownloadTask()
     }
+    //MARK: - Actions
+    @IBAction func likeButtonClicked(_ sender: Any) {
+        delegate?.imageListCellDidTapLike(self)
+    }
+    
 }
+
+
 
