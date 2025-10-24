@@ -27,12 +27,6 @@ struct UrlsResult: Decodable {
     let full: String?
 }
 
-struct LikeResponse: Decodable {
-    let photo: PhotoResult
-    let id: String
-    let likedByUser: Bool
-}
-
 final class ImagesListService {
     //MARK: - Private Properties
     static let shared = ImagesListService()
@@ -97,40 +91,42 @@ final class ImagesListService {
         assert(Thread.isMainThread)
         likeTask?.cancel()
         
+        guard let index = self.photos.firstIndex(where: { $0.id == id }) else {
+            completion(.failure())
+            return
+        }
+        let oldPhoto = self.photos[index]
+        
+        let newPhoto = Photo(
+            id: oldPhoto.id,
+            size: oldPhoto.size,
+            createdAt: oldPhoto.createdAt,
+            welcomeDescription: oldPhoto.welcomeDescription,
+            thumbImageURL: oldPhoto.thumbImageURL,
+            fullImageURL: oldPhoto.fullImageURL,
+            isLiked: !oldPhoto.isLiked
+        )
+        self.photos[index] = newPhoto
+        //TODO: add notification?
+        
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
-            assertionFailure("[ImagesListService] Bearer token is missing")
+            self.photos[index] = oldPhoto
             completion(.failure(NetworkError.invalidRequest))
             return
         }
         
         guard let request = makeLikeRequest(token: token, id: id, isLike: isLike) else {
-            print("[ImagesListService] Failed to create like request")
+            self.photos[index] = oldPhoto
             completion(.failure(NetworkError.invalidRequest))
             return
         }
         
-        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<[LikeResponse], Error>) in
-            guard let self else { return }
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
             
-            switch result {
-            case .success(likeResponse):
-                if let index = self.photos.firstIndex(where: { $0.id == id }) {
-                    let photo = self.photos[index]
-                    let newPhoto = LikeResponse(
-                        photo: photo,
-                        id: photo.id,
-                        likedByUser: !photo.isLiked
-                    )
-                    self.photos = self.photos.withReplaced(itemAt: index, newValue: newPhoto)
-                }
-                
-            case .failure(let error):
-                print("[ImagesListService] : \(error)")
-            }
-            self.likeTask = nil
         }
-        self.likeTask = task
-        likeTask?.resume()
+        
+       
+           
     }
     
     //MARK: - Private Methods
@@ -169,7 +165,7 @@ final class ImagesListService {
     
     private func convert(photoResult: PhotoResult) -> Photo {
         let size = CGSize(width: photoResult.width, height: photoResult.height)
-       
+        
         return Photo(
             id: photoResult.id,
             size: size,
