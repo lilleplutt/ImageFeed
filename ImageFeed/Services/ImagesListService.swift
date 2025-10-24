@@ -27,6 +27,12 @@ struct UrlsResult: Decodable {
     let full: String?
 }
 
+struct LikeResponse: Decodable {
+    let photo: PhotoResult
+    let id: String
+    let likedByUser: Bool
+}
+
 final class ImagesListService {
     //MARK: - Private Properties
     static let shared = ImagesListService()
@@ -39,6 +45,7 @@ final class ImagesListService {
     private var isLoading = false
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
+    private var likeTask: URLSessionTask?
     
     //MARK: - Methods
     func fetchPhotosNextPage() {
@@ -84,6 +91,46 @@ final class ImagesListService {
         }
         self.task = task
         task.resume()
+    }
+    
+    func fetchLike(id: String, isLike: Bool, _ completion: @escaping (Result<Void, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        likeTask?.cancel()
+        
+        guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
+            assertionFailure("[ImagesListService] Bearer token is missing")
+            completion(.failure(NetworkError.invalidRequest))
+            return
+        }
+        
+        guard let request = makeLikeRequest(token: token, id: id, isLike: isLike) else {
+            print("[ImagesListService] Failed to create like request")
+            completion(.failure(NetworkError.invalidRequest))
+            return
+        }
+        
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<[LikeResponse], Error>) in
+            guard let self else { return }
+            
+            switch result {
+            case .success(likeResponse):
+                if let index = self.photos.firstIndex(where: { $0.id == id }) {
+                    let photo = self.photos[index]
+                    let newPhoto = LikeResponse(
+                        photo: photo,
+                        id: photo.id,
+                        likedByUser: !photo.isLiked
+                    )
+                    self.photos = self.photos.withReplaced(itemAt: index, newValue: newPhoto)
+                }
+                
+            case .failure(let error):
+                print("[ImagesListService] : \(error)")
+            }
+            self.likeTask = nil
+        }
+        self.likeTask = task
+        likeTask?.resume()
     }
     
     //MARK: - Private Methods
