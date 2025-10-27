@@ -137,6 +137,7 @@ final class ImagesListService {
                     name: ImagesListService.didChangeNotification,
                     object: self
                 )
+                completion(.success(()))
                 
             case .failure(let error):
                 self.photos[index] = oldPhoto
