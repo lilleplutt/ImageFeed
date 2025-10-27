@@ -155,6 +155,10 @@ final class ImagesListService {
         task.resume()
     }
     
+    func reset() {
+       photos = []
+    }
+    
     //MARK: - Private Methods
     private func makePhotosRequest(token: String, page: Int) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://api.unsplash.com/photos") else {

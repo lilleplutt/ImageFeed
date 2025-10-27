@@ -69,6 +69,10 @@ final class ProfileService {
         task.resume()
     }
     
+    func reset() {
+        profile = nil
+    }
+    
     //MARK: - Private Methods
     private func makeProfileRequest() -> URLRequest? {
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
