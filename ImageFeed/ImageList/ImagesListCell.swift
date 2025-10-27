@@ -15,6 +15,7 @@ final class ImagesListCell: UITableViewCell {
     //MARK: - Properties
     static let reuseIdentifier = "ImagesListCell"
     weak var delegate: ImagesListCellDelegate?
+    
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
