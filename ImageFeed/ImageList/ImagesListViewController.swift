@@ -81,8 +81,8 @@ final class ImagesListViewController: UIViewController {
             cell.dateLabel.text = ""
         }
         
-        let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
-        cell.likeButton.setImage(likeImage, for: .normal)
+        //let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+        //cell.likeButton.setImage(likeImage, for: .normal)
     }
 }
 
@@ -114,7 +114,7 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else { return UITableViewCell() }
         
         configCell(for: imageListCell, with: indexPath)
-        cell.delegate = self
+        cell.delegate = self //need to fix
         return imageListCell
     }
     
