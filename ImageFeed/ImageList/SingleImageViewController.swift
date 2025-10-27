@@ -48,7 +48,7 @@ final class SingleImageViewController: UIViewController {
             case .success(let value):
                 self.image = value.image
             case .failure(let error):
-                self.showError()
+                self.showAlert()
             }
         }
     }
@@ -68,10 +68,6 @@ final class SingleImageViewController: UIViewController {
         let x = (newContentSize.width - visibleRectSize.width) / 2
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
-    }
-    
-    private func showError() {
-        
     }
     
     //MARK: - IBActions
