@@ -43,11 +43,12 @@ final class SingleImageViewController: UIViewController {
         imageView.kf.setImage(with: url) { [weak self] result in
             UIBlockingProgressHUD.dismiss()
             
+            guard let self else { return }
             switch result {
             case .success(let value):
-                self?.image = value.image
+                self.image = value.image
             case .failure(let error):
-                print("[SingleImageViewController] Failed to load image: \(error)")
+                self.showError()
             }
         }
     }
@@ -67,6 +68,10 @@ final class SingleImageViewController: UIViewController {
         let x = (newContentSize.width - visibleRectSize.width) / 2
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+    }
+    
+    private func showError() {
+        
     }
     
     //MARK: - IBActions
