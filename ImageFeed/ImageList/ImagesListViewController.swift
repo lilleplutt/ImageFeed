@@ -33,7 +33,7 @@ final class ImagesListViewController: UIViewController {
     }
     
     //MARK: - Methods
-    private func updateTableViewAnimated() { //TODO: fix 
+    private func updateTableViewAnimated() { //TODO: fix
         self.photos = ImagesListService.shared.photos
         tableView.reloadData()
     }
@@ -127,11 +127,14 @@ extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
+        UIBlockingProgressHUD.show()
         
         ImagesListService.shared.fetchLike(id: photo.id, isLike: !photo.isLiked) { result in
+            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success:
-                print("[ImagesListViewController] Like update successfully")
+                self.photos = ImagesListService.shared.photos
+                cell.setIsLiked(self.photos[indexPath.row].isLiked)
             case .failure(let error):
                 print("[ImagesListViewController] Failed to update like: \(error)")
             }
