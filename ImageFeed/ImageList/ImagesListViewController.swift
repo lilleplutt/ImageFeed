@@ -127,6 +127,15 @@ extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
+        
+        ImagesListService.shared.fetchLike(id: photo.id, isLike: !photo.isLiked) { result in
+            switch result {
+            case .success:
+                print("[ImagesListViewController] Like update successfully")
+            case .failure(let error):
+                print("[ImagesListViewController] Failed to update like: \(error)")
+            }
+        }
     }
 }
 
