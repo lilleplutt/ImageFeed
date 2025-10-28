@@ -159,7 +159,7 @@ final class ImagesListService {
        photos = []
     }
     
-    //MARK: - Private Methods
+    //MARK: - Private methods
     private func makePhotosRequest(token: String, page: Int) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://api.unsplash.com/photos") else {
             assertionFailure("[ImagesListService] Failed to create URL")
