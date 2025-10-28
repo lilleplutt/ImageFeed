@@ -161,8 +161,7 @@ final class ProfileViewController: UIViewController {
             message: "Уверены, что хотите выйти?",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Да", style: .default) { [weak self] _ in
-            guard let self else { return }
+        alert.addAction(UIAlertAction(title: "Да", style: .default) { _ in
             ProfileLogoutService.shared.logout()
         })
         
