@@ -25,17 +25,41 @@ final class ImagesListViewController: UIViewController {
             queue: .main
         ) { [weak self] _ in
             guard let self else { return }
-            self.photos = ImagesListService.shared.photos
             self.updateTableViewAnimated()
         }
         
         ImagesListService.shared.fetchPhotosNextPage()
     }
     
+    deinit {
+        if let imagesListServiceObserver {
+            NotificationCenter.default.removeObserver(imagesListServiceObserver)
+        }
+    }
+    
     //MARK: - Methods
-    private func updateTableViewAnimated() { //TODO: fix
-        self.photos = ImagesListService.shared.photos
-        tableView.reloadData()
+    private func updateTableViewAnimated() {
+        let oldCount = photos.count
+        let newServicePhotos = ImagesListService.shared.photos
+        let newCount = newServicePhotos.count
+        
+        photos = newServicePhotos
+        
+        if newCount > oldCount {
+            let indexPaths = (oldCount..<newCount).map { IndexPath(row: $0, section: 0) }
+            tableView.performBatchUpdates {
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }
+        } else if newCount == oldCount {
+            guard let visibleIndexPaths = tableView.indexPathsForVisibleRows else { return }
+            for indexPath in visibleIndexPaths {
+                guard indexPath.row < photos.count,
+                      let cell = tableView.cellForRow(at: indexPath) as? ImagesListCell else { continue }
+                cell.setIsLiked(photos[indexPath.row].isLiked)
+            }
+        } else {
+            tableView.reloadData()
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,19 +85,23 @@ final class ImagesListViewController: UIViewController {
         cell.cellImage.kf.indicatorType = .activity
         
         if let url = URL(string: photo.thumbImageURL) {
+            let options: KingfisherOptionsInfo = [.transition(.fade(0.2))]
             cell.cellImage.kf.setImage(
                 with: url,
-                placeholder: UIImage(named: "stub_image")
-            ) { [weak self] result in
+                placeholder: UIImage(named: "stub_image"),
+                options: options
+            ) { result in
                 switch result {
-                case .success(let value):
-                    print("[ImagesListViewController] Image loaded: \(value.source)")
-                    self?.tableView.reloadRows(at: [indexPath], with: .automatic)
+                case .success:
+                    break
                 case .failure(let error):
-                    print("[ImagesListViewController] Faied to load image: \(error)")
+                    print("[ImagesListViewController] Failed to load image: \(error)")
                 }
             }
+        } else {
+            cell.cellImage.image = UIImage(named: "stub_image")
         }
+        
         if let date = photo.createdAt {
             let dateString = ImagesListCell.dateFormatter.string(from: date)
             cell.dateLabel.text = dateString
@@ -128,19 +156,24 @@ extension ImagesListViewController: ImagesListCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
         UIBlockingProgressHUD.show()
+    
+        cell.setIsLiked(!photo.isLiked)
         
-        ImagesListService.shared.fetchLike(id: photo.id, isLike: !photo.isLiked) { result in
+        ImagesListService.shared.fetchLike(id: photo.id, isLike: !photo.isLiked) { [weak self, weak cell] result in
+            guard let self else { return }
             UIBlockingProgressHUD.dismiss()
             switch result {
             case .success:
-                self.photos = ImagesListService.shared.photos
-                cell.setIsLiked(self.photos[indexPath.row].isLiked)
+                break
             case .failure(let error):
                 print("[ImagesListViewController] Failed to update like: \(error)")
+                if let index = self.tableView.indexPath(for: cell ?? UITableViewCell())?.row, index < self.photos.count {
+                    cell?.setIsLiked(self.photos[index].isLiked)
+                } else {
+                    cell?.setIsLiked(photo.isLiked)
+                }
             }
         }
     }
 }
-
-
 
