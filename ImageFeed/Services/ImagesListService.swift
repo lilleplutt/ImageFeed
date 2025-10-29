@@ -48,7 +48,7 @@ final class ImagesListService {
     //MARK: - Methods
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
-        task?.cancel()
+        // Не отменяем текущий запрос пагинации — просто выходим, если он в процессе.
         if isLoading { return }
         isLoading = true
         
@@ -72,8 +72,18 @@ final class ImagesListService {
             switch result {
             case .success(let photoResults):
                 let newPhotos = photoResults.map { self.convert(photoResult: $0) }
-                self.photos.append(contentsOf: newPhotos)
-                self.lastLoadedPage = nextPage
+                
+                // Дедупликация по id: добавляем только те, которых еще нет
+                let existingIDs = Set(self.photos.map { $0.id })
+                let uniqueNewPhotos = newPhotos.filter { !existingIDs.contains($0.id) }
+                
+                if !uniqueNewPhotos.isEmpty {
+                    self.photos.append(contentsOf: uniqueNewPhotos)
+                    self.lastLoadedPage = nextPage
+                } else {
+                    // Если пришли только дубли (бывает при отменах/повторных запросах) — страницу не двигаем
+                }
+                
                 self.isLoading = false
                 
                 NotificationCenter.default.post(
