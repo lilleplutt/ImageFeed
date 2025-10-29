@@ -32,7 +32,7 @@ private struct LikeResponse: Decodable {
 }
 
 final class ImagesListService {
-    //MARK: - Private Properties
+    //MARK: - Private properties
     static let shared = ImagesListService()
     private init() {}
     private(set) var photos: [Photo] = []
@@ -48,7 +48,6 @@ final class ImagesListService {
     //MARK: - Methods
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
-        // Не отменяем текущий запрос пагинации — просто выходим, если он в процессе.
         if isLoading { return }
         isLoading = true
         
@@ -73,15 +72,12 @@ final class ImagesListService {
             case .success(let photoResults):
                 let newPhotos = photoResults.map { self.convert(photoResult: $0) }
                 
-                // Дедупликация по id: добавляем только те, которых еще нет
                 let existingIDs = Set(self.photos.map { $0.id })
                 let uniqueNewPhotos = newPhotos.filter { !existingIDs.contains($0.id) }
-                
                 if !uniqueNewPhotos.isEmpty {
                     self.photos.append(contentsOf: uniqueNewPhotos)
                     self.lastLoadedPage = nextPage
                 } else {
-                    // Если пришли только дубли (бывает при отменах/повторных запросах) — страницу не двигаем
                 }
                 
                 self.isLoading = false
@@ -170,7 +166,7 @@ final class ImagesListService {
     }
     
     func reset() {
-       photos = []
+        photos = []
     }
     
     //MARK: - Private methods
