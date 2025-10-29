@@ -27,6 +27,10 @@ struct UrlsResult: Decodable {
     let full: String?
 }
 
+private struct LikeResponse: Decodable {
+    let photo: PhotoResult
+}
+
 final class ImagesListService {
     //MARK: - Private Properties
     static let shared = ImagesListService()
