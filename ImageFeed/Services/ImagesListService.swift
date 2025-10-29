@@ -129,12 +129,12 @@ final class ImagesListService {
             return
         }
         
-        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
+        let task = urlSession.objectTask(for: request) { [weak self] (result: Result<LikeResponse, Error>) in
             guard let self else { return }
             
             switch result {
-            case .success(let photoResult):
-                let serverPhoto = self.convert(photoResult: photoResult)
+            case .success(let likeResponse):
+                let serverPhoto = self.convert(photoResult: likeResponse.photo)
                 self.photos[index] = serverPhoto
                 
                 NotificationCenter.default.post(
