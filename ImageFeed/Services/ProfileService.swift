@@ -27,7 +27,7 @@ final class ProfileService {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     
-    // MARK: - Public methods
+    // MARK: - Methods
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         task?.cancel()
         
@@ -69,7 +69,11 @@ final class ProfileService {
         task.resume()
     }
     
-    //MARK: - Private Methods
+    func reset() {
+        profile = nil
+    }
+    
+    //MARK: - Private methods
     private func makeProfileRequest() -> URLRequest? {
         guard let token = OAuth2TokenStorage.shared.token, !token.isEmpty else {
             assertionFailure("[ProfileService] Bearer token is missing")

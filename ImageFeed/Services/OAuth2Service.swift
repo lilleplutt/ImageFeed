@@ -57,7 +57,11 @@ final class OAuth2Service {
         task.resume()
     }
     
-    //MARK: - Private Methods
+    func reset() {
+       authToken = nil
+    }
+    
+    //MARK: - Private methods
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "https://unsplash.com/oauth/token") else {
             assertionFailure("[OAuth2Service] Failed to create URL")

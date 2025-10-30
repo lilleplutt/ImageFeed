@@ -23,7 +23,7 @@ final class ProfileImageService {
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     
-    // MARK: - Public methods
+    // MARK: - Methods
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         task?.cancel()
         
@@ -62,7 +62,11 @@ final class ProfileImageService {
         task.resume()
     }
     
-    //MARK: - Private Methods
+    func reset() {
+       avatarURL = nil
+    }
+    
+    //MARK: - Private methods
     private func makeProfileImageRequest(username: String, token: String) -> URLRequest? {
         guard let profileURL = URL(string: "https://api.unsplash.com/users/\(username)") else {
             print("[ProfileImageService] Incorrect user public profile URL")

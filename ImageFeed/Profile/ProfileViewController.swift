@@ -60,7 +60,7 @@ final class ProfileViewController: UIViewController {
         let exitButton = UIButton.systemButton(
             with: UIImage(resource: .exitButton),
             target: self,
-            action: nil
+            action: #selector(exitButtonTapped)
         )
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(exitButton)
@@ -154,5 +154,18 @@ final class ProfileViewController: UIViewController {
             ? "Профиль не заполнен"
             : profile.bio
     }
+    
+    @objc private func exitButtonTapped() {
+        let alert = UIAlertController(
+            title: "Пока, пока!",
+            message: "Уверены, что хотите выйти?",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Да", style: .default) { _ in
+            ProfileLogoutService.shared.logout()
+        })
+        
+        alert.addAction(UIAlertAction(title: "Нет", style: .cancel))
+        present(alert, animated: true)
+    }
 }
-
