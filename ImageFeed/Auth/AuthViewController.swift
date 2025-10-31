@@ -65,6 +65,9 @@ final class AuthViewController: UIViewController {
     //MARK: - Actions
     @objc func loginButtonTapped() {
         let webViewViewController = WebViewViewController()
+        let webViewPresenter = WebViewPresenter()
+        webViewViewController.presenter = webViewPresenter
+        webViewPresenter.view = webViewViewController
         webViewViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: webViewViewController)
