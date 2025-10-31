@@ -3,6 +3,7 @@ import WebKit
 
 public protocol WebViewControllerProtocol: AnyObject {
     var presenter: WebViewPresenterProtocol? { get set }
+    func load(request: URLRequest)
 }
 
 final class WebViewViewController: UIViewController, WebViewControllerProtocol {
@@ -77,6 +78,11 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
         
         guard let url = urlComponents.url else { return }
         let request = URLRequest(url: url)
+        webView.load(request)
+    }
+    
+    //MARK: - Methods
+    func load(request: URLRequest) {
         webView.load(request)
     }
     
