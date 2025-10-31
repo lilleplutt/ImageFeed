@@ -29,11 +29,6 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
              })
     }
     
-    //MARK: - Constants
-    enum WebViewConstants {
-        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-    }
-    
     //MARK: - Properties
     var presenter: WebViewPresenterProtocol?
     weak var delegate: WebViewViewControllerDelegate?
