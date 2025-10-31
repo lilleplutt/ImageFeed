@@ -1,7 +1,11 @@
 import Foundation
 import WebKit
 
-final class WebViewViewController: UIViewController {
+public protocol WebViewControllerProtocol: AnyObject {
+    var presenter: WebViewPresenterProtocol? { get set }
+}
+
+final class WebViewViewController: UIViewController, WebViewControllerProtocol {
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -30,6 +34,7 @@ final class WebViewViewController: UIViewController {
     }
     
     //MARK: - Properties
+    var presenter: WebViewPresenterProtocol?
     weak var delegate: WebViewViewControllerDelegate?
     private let webView = WKWebView()
     private let progressView = UIProgressView()
