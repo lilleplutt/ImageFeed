@@ -69,7 +69,7 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
         webView.load(request)
     }
 
-    func setProgressvalue(_ newValue: Float) {
+    func setProgressValue(_ newValue: Float) {
         progressView.progress = newValue
     }
     
