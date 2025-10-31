@@ -34,6 +34,7 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
     weak var delegate: WebViewViewControllerDelegate?
     private let webView = WKWebView()
     private let progressView = UIProgressView()
+    private var estimatedProgressObservation: NSKeyValueObservation?
     
     //MARK: - Private methods
     private func setUpProgressView() {
@@ -65,13 +66,13 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
     func load(request: URLRequest) {
         webView.load(request)
     }
+
+    func setProgressvalue(_ newValue: Float) {
+        progressView.progress = newValue
+    }
     
-    //MARK: - KVO
-    private var estimatedProgressObservation: NSKeyValueObservation?
-    
-    private func updateProgress() {
-        progressView.progress = Float(webView.estimatedProgress)
-        progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
+    func setProgressHidden(_ isHidden: Bool) {
+        progressView.isHidden = isHidden
     }
 }
 
