@@ -27,6 +27,9 @@ final class WebViewPresenter: WebViewPresenterProtocol {
         
         guard let url = urlComponents.url else { return }
         let request = URLRequest(url: url)
+        
+        didUpdateProgressValue(0)
+        
         view?.load(request: request)
     }
     
