@@ -17,6 +17,7 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
         setUpWebView()
         
         webView.navigationDelegate = self
+        presenter?.loadAuthView()
         
         //MARK: - KVO
         estimatedProgressObservation = webView.observe(
