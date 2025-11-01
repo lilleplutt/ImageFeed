@@ -7,7 +7,7 @@ protocol AuthViewControllerDelegate: AnyObject {
 
 final class AuthViewController: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - Public properties
     weak var delegate: AuthViewControllerDelegate?
     
     //MARK: - Lifecycle
@@ -20,7 +20,7 @@ final class AuthViewController: UIViewController {
         configureBackButton()
     }
     
-    //MARK: - Private Methods
+    //MARK: - Private methods
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(resource: .navBackButton)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(resource: .navBackButton) //for right animation between scenes
@@ -73,7 +73,7 @@ final class AuthViewController: UIViewController {
         
         let navigationController = UINavigationController(rootViewController: webViewViewController)
         navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true) 
+        present(navigationController, animated: true)
     }
 }
 

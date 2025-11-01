@@ -64,11 +64,11 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
         ])
     }
     
-    //MARK: - Methods
+    //MARK: - Public methods
     func load(request: URLRequest) {
         webView.load(request)
     }
-
+    
     func setProgressValue(_ newValue: Float) {
         progressView.progress = newValue
     }

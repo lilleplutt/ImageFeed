@@ -8,12 +8,14 @@ protocol AuthHelperProtocol {
 
 final class AuthHelper: AuthHelperProtocol {
     
+    //MARK: - Properties
     let configuration: AuthConfiguration
-
+    
     init(configuration: AuthConfiguration = .standard) {
         self.configuration = configuration
     }
     
+    //MARK: - Public methods
     func authRequest() -> URLRequest? {
         guard let url = authURL() else { return nil }
         return URLRequest(url: url)
@@ -22,12 +24,12 @@ final class AuthHelper: AuthHelperProtocol {
     func authURL() -> URL? {
         guard var urlComponents = URLComponents(string: configuration.authURLString) else { return nil }
         urlComponents.queryItems = [
-                URLQueryItem(name: "client_id", value: configuration.accessKey),
-                URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
-                URLQueryItem(name: "response_type", value: "code"),
-                URLQueryItem(name: "scope", value: configuration.accessScope)
-            ]
-            return urlComponents.url
+            URLQueryItem(name: "client_id", value: configuration.accessKey),
+            URLQueryItem(name: "redirect_uri", value: configuration.redirectURI),
+            URLQueryItem(name: "response_type", value: "code"),
+            URLQueryItem(name: "scope", value: configuration.accessScope)
+        ]
+        return urlComponents.url
     }
     
     func code(from navigationAction: WKNavigationAction) -> String? {

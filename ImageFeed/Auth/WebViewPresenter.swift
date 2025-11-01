@@ -10,13 +10,15 @@ public protocol WebViewPresenterProtocol {
 
 final class WebViewPresenter: WebViewPresenterProtocol {
     
+    //MARK: - Puplic properties
     weak var view: WebViewControllerProtocol?
     var authHelper: AuthHelperProtocol
-        
-        init(authHelper: AuthHelperProtocol) {
-            self.authHelper = authHelper
-        }
     
+    init(authHelper: AuthHelperProtocol) {
+        self.authHelper = authHelper
+    }
+    
+    //MARK: - Puplic methods
     func loadAuthView() {
         guard let request = authHelper.authRequest() else { return }
         
@@ -39,6 +41,5 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     func code(from navigationAction: WKNavigationAction) -> String? {
         authHelper.code(from: navigationAction)
     }
-    
 }
 
