@@ -13,12 +13,8 @@ final class WebViewPresenter: WebViewPresenterProtocol {
     weak var view: WebViewControllerProtocol?
     
     //MARK: - Constants
-    enum WebViewConstants {
-        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-    }
-    
     func loadAuthView() {
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else { return }
+        guard var urlComponents = URLComponents(string: Constants.unsplashAuthorizeURLString) else { return }
         
         urlComponents.queryItems = [
             URLQueryItem(name: "client_id", value: Constants.accessKey),
