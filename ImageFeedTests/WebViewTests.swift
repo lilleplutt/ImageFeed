@@ -4,17 +4,16 @@ import XCTest
 final class WebViewTests: XCTestCase {
     
     func testViewControllerCallsLoadAuthView() {
-        //given
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "WebViewViewController") as! WebViewViewController
+        // given
+        let viewController = WebViewViewController() 
         let presenter = WebViewPresenterSpy()
         viewController.presenter = presenter
         presenter.view = viewController
         
-        //when
+        // when
         _ = viewController.view
         
-        //then
+        // then
         XCTAssertTrue(presenter.loadAuthViewCalled)
     }
     
