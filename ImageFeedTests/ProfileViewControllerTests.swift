@@ -109,7 +109,10 @@ final class ProfileViewControllerTests: XCTestCase {
     
     func testShowLogoutAlert() {
         // given
+        let window = UIWindow()
         let viewController = ProfileViewController()
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
         
         // when
         _ = viewController.view
@@ -118,8 +121,14 @@ final class ProfileViewControllerTests: XCTestCase {
         // then
         // Проверяем, что alert был показан
         let expectation = expectation(description: "Alert should be presented")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            XCTAssertTrue(viewController.presentedViewController is UIAlertController, "Должен быть показан UIAlertController")
+        DispatchQueue.main.async {
+            let presented = viewController.presentedViewController
+            XCTAssertTrue(presented is UIAlertController, "Должен быть показан UIAlertController")
+            if let alert = presented as? UIAlertController {
+                XCTAssertEqual(alert.title, "Пока, пока!", "Заголовок alert должен быть корректным")
+                XCTAssertEqual(alert.message, "Уверены, что хотите выйти?", "Сообщение alert должно быть корректным")
+                XCTAssertEqual(alert.actions.count, 2, "Должно быть 2 действия в alert")
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: 1.0)
