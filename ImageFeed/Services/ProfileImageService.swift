@@ -18,12 +18,10 @@ final class ProfileImageService {
     private init() {}
     private(set) var avatarURL: String?
     static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
-    
-    // MARK: - Dependencies
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     
-    // MARK: - Methods
+    // MARK: - Public methods
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         task?.cancel()
         
@@ -63,7 +61,7 @@ final class ProfileImageService {
     }
     
     func reset() {
-       avatarURL = nil
+        avatarURL = nil
     }
     
     //MARK: - Private methods

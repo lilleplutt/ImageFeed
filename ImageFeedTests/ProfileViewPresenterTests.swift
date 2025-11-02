@@ -13,7 +13,7 @@ final class ProfileViewPresenterTests: XCTestCase {
         presenter.viewDidLoad()
         
         // then
-        XCTAssertTrue(viewController.setAvatarCalled, "При viewDidLoad должен быть вызван setAvatar")
+        XCTAssertTrue(viewController.setAvatarCalled)
     }
     
     func testDidTapLogoutButton() {
@@ -26,7 +26,7 @@ final class ProfileViewPresenterTests: XCTestCase {
         presenter.didTapLogoutButton()
         
         // then
-        XCTAssertTrue(viewController.showLogoutAlertCalled, "При нажатии на кнопку выхода должен показываться alert")
+        XCTAssertTrue(viewController.showLogoutAlertCalled)
     }
     
     func testUpdateAvatar() {
@@ -39,7 +39,7 @@ final class ProfileViewPresenterTests: XCTestCase {
         presenter.viewDidLoad()
         
         // then
-        XCTAssertTrue(viewController.setAvatarCalled, "setAvatar должен быть вызван при viewDidLoad")
+        XCTAssertTrue(viewController.setAvatarCalled)
     }
 }
 

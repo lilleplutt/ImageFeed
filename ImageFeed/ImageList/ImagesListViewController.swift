@@ -3,7 +3,7 @@ import Kingfisher
 
 final class ImagesListViewController: UIViewController {
     
-    //MARK: - IBOutlets
+    //MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView!
     
     //MARK: - Private properties
@@ -156,7 +156,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         let photo = photos[indexPath.row]
         UIBlockingProgressHUD.show()
-    
+        
         cell.setIsLiked(!photo.isLiked)
         
         ImagesListService.shared.fetchLike(id: photo.id, isLike: !photo.isLiked) { [weak self, weak cell] result in

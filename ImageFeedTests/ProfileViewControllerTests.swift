@@ -14,7 +14,7 @@ final class ProfileViewControllerTests: XCTestCase {
         _ = viewController.view
         
         // then
-        XCTAssertTrue(presenter.viewDidLoadCalled, "Презентер должен быть вызван при загрузке view")
+        XCTAssertTrue(presenter.viewDidLoadCalled)
     }
     
     func testViewControllerCallsDidTapLogoutButton() {
@@ -25,13 +25,12 @@ final class ProfileViewControllerTests: XCTestCase {
         
         // when
         _ = viewController.view
-        // Симулируем нажатие на кнопку выхода через селектор
         if let exitButton = findExitButton(in: viewController.view) {
             exitButton.sendActions(for: .touchUpInside)
         }
         
         // then
-        XCTAssertTrue(presenter.didTapLogoutButtonCalled, "При нажатии на кнопку выхода должен вызываться метод презентера")
+        XCTAssertTrue(presenter.didTapLogoutButtonCalled)
     }
     
     func testSetProfileName() {
@@ -44,9 +43,8 @@ final class ProfileViewControllerTests: XCTestCase {
         viewController.setProfileName(testName)
         
         // then
-        // Проверяем через поиск в view иерархии
         let nameLabel = findLabel(in: viewController.view, with: testName)
-        XCTAssertNotNil(nameLabel, "Имя профиля должно быть установлено корректно")
+        XCTAssertNotNil(nameLabel)
     }
     
     func testSetProfileLoginName() {
@@ -60,7 +58,7 @@ final class ProfileViewControllerTests: XCTestCase {
         
         // then
         let loginLabel = findLabel(in: viewController.view, with: testLoginName)
-        XCTAssertNotNil(loginLabel, "Логин профиля должен быть установлен корректно")
+        XCTAssertNotNil(loginLabel)
     }
     
     func testSetProfileDescription() {
@@ -74,7 +72,7 @@ final class ProfileViewControllerTests: XCTestCase {
         
         // then
         let descriptionLabel = findLabel(in: viewController.view, with: testDescription)
-        XCTAssertNotNil(descriptionLabel, "Описание профиля должно быть установлено корректно")
+        XCTAssertNotNil(descriptionLabel)
     }
     
     func testSetAvatarWithValidURL() {
@@ -87,10 +85,8 @@ final class ProfileViewControllerTests: XCTestCase {
         viewController.setAvatar(url: testURL)
         
         // then
-        // Проверяем, что метод не вызвал ошибку
-        // (точную проверку загрузки изображения сложно сделать без мокирования Kingfisher)
         let imageView = findImageView(in: viewController.view)
-        XCTAssertNotNil(imageView, "ImageView должен существовать")
+        XCTAssertNotNil(imageView)
     }
     
     func testSetAvatarWithNilURL() {
@@ -102,9 +98,8 @@ final class ProfileViewControllerTests: XCTestCase {
         viewController.setAvatar(url: nil)
         
         // then
-        // При nil URL должен быть установлен placeholder
         let imageView = findImageView(in: viewController.view)
-        XCTAssertNotNil(imageView, "ImageView должен существовать")
+        XCTAssertNotNil(imageView)
     }
     
     func testShowLogoutAlert() {
@@ -119,15 +114,14 @@ final class ProfileViewControllerTests: XCTestCase {
         viewController.showLogoutAlert()
         
         // then
-        // Проверяем, что alert был показан
         let expectation = expectation(description: "Alert should be presented")
         DispatchQueue.main.async {
             let presented = viewController.presentedViewController
             XCTAssertTrue(presented is UIAlertController, "Должен быть показан UIAlertController")
             if let alert = presented as? UIAlertController {
-                XCTAssertEqual(alert.title, "Пока, пока!", "Заголовок alert должен быть корректным")
-                XCTAssertEqual(alert.message, "Уверены, что хотите выйти?", "Сообщение alert должно быть корректным")
-                XCTAssertEqual(alert.actions.count, 2, "Должно быть 2 действия в alert")
+                XCTAssertEqual(alert.title, "Пока, пока!")
+                XCTAssertEqual(alert.message, "Уверены, что хотите выйти?")
+                XCTAssertEqual(alert.actions.count, 2)
             }
             expectation.fulfill()
         }
@@ -135,7 +129,7 @@ final class ProfileViewControllerTests: XCTestCase {
     }
 }
 
-// MARK: - Helpers для поиска элементов в view
+// MARK: - Helpers 
 extension ProfileViewControllerTests {
     func findLabel(in view: UIView, with text: String) -> UILabel? {
         for subview in view.subviews {

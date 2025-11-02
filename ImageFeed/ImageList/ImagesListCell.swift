@@ -7,7 +7,7 @@ protocol ImagesListCellDelegate: AnyObject {
 
 final class ImagesListCell: UITableViewCell {
     
-    //MARK: - IBOutlets
+    //MARK: - Outlets
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
@@ -39,7 +39,6 @@ final class ImagesListCell: UITableViewCell {
     @IBAction func likeButtonClicked(_ sender: Any) {
         delegate?.imageListCellDidTapLike(self)
     }
-    
 }
 
 

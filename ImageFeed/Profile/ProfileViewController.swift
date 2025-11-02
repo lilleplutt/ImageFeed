@@ -107,7 +107,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         ])
     }
     
-    // MARK: - ProfileViewControllerProtocol
+    // MARK: - Public methods
     func setProfileName(_ name: String) {
         nameLabel.text = name
     }

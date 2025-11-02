@@ -81,7 +81,6 @@ final class SplashViewController: UIViewController {
             }
         }
     }
-    
 }
 
 //MARK: - Extensions
