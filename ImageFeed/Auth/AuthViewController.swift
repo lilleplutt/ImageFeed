@@ -52,6 +52,7 @@ final class AuthViewController: UIViewController {
         loginButton.setTitleColor(UIColor(resource: .ypBlackIOS), for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         loginButton.layer.cornerRadius = 16
+        loginButton.accessibilityIdentifier = "Authenticate"
         
         loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
