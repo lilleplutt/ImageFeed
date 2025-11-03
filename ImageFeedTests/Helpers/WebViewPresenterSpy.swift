@@ -5,6 +5,7 @@ import WebKit
 final class WebViewPresenterSpy: WebViewPresenterProtocol {
     
     var loadAuthViewCalled: Bool = false
+   
     var view: WebViewControllerProtocol?
     
     func loadAuthView() {
