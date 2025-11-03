@@ -54,6 +54,7 @@ final class WebViewViewController: UIViewController, WebViewControllerProtocol {
     
     private func setUpWebView() {
         webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.accessibilityIdentifier = "UnsplashWebView"
         view.addSubview(webView)
         
         NSLayoutConstraint.activate([

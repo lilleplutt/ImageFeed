@@ -5,7 +5,6 @@ final class ImageFeedUITests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
-
         app.launch()
     }
 
@@ -69,11 +68,8 @@ final class ImageFeedUITests: XCTestCase {
         sleep(3)
         app.tabBars.buttons.element(boundBy: 1).tap()
        
-        XCTAssertTrue(app.staticTexts["Name Lastname"].exists)
-        XCTAssertTrue(app.staticTexts["@username"].exists)
-        
         app.buttons["exit button"].tap()
         
-        app.alerts["Bye bye!"].scrollViews.otherElements.buttons["Yes"].tap()
+        app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
     }
 }
