@@ -12,28 +12,28 @@ final class ImageFeedUITests: XCTestCase {
         app.buttons["Authenticate"].tap()
         
         let webView = app.webViews["UnsplashWebView"]
-        
         XCTAssertTrue(webView.waitForExistence(timeout: 5))
 
         let loginTextField = webView.descendants(matching: .textField).element
         XCTAssertTrue(loginTextField.waitForExistence(timeout: 5))
         
         loginTextField.tap()
-        loginTextField.typeText("alin.alin.alin2000@yandex.ru")
-        webView.swipeUp()
+        usleep(300_000)
+        typeTextReliably("...", into: loginTextField)
+        
+        tapKeyboardArrowDownIfPresent()
         
         let passwordTextField = webView.descendants(matching: .secureTextField).element
         XCTAssertTrue(passwordTextField.waitForExistence(timeout: 5))
         
         passwordTextField.tap()
-        passwordTextField.typeText("gospodi-pomil1987")
-        webView.swipeUp()
-        
+        usleep(300_000)
+        typeTextReliably("...", into: passwordTextField)
+
         webView.buttons["Login"].tap()
         
         let tablesQuery = app.tables
         let cell = tablesQuery.children(matching: .cell).element(boundBy: 0)
-        
         XCTAssertTrue(cell.waitForExistence(timeout: 5))
     }
     
@@ -67,9 +67,64 @@ final class ImageFeedUITests: XCTestCase {
     func testProfile() throws {
         sleep(3)
         app.tabBars.buttons.element(boundBy: 1).tap()
-       
+        
         app.buttons["exit button"].tap()
         
         app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
+    }
+}
+
+// MARK: - Helpers
+extension ImageFeedUITests {
+    private func typeTextReliably(_ text: String, into element: XCUIElement) {
+        UIPasteboard.general.string = text
+        element.press(forDuration: 0.5)
+        let paste = app.menuItems["Paste"]
+        if paste.waitForExistence(timeout: 1.0) {
+            paste.tap()
+            return
+        }
+        for ch in text {
+            element.typeText(String(ch))
+            usleep(40_000)
+        }
+    }
+
+    private func tapKeyboardArrowDownIfPresent() {
+        let toolbar = app.toolbars.firstMatch
+        guard toolbar.waitForExistence(timeout: 2) else { return }
+        let candidates = ["Chevron Down", "Down", "Вниз", "↓", "next", "Next"]
+        for title in candidates {
+            let btn = toolbar.buttons[title]
+            if btn.exists {
+                btn.tap()
+                usleep(300_000)
+                return
+            }
+        }
+        let allButtons = toolbar.buttons.allElementsBoundByIndex
+        if let last = allButtons.last, last.exists {
+            last.tap()
+            usleep(300_000)
+        }
+    }
+
+    private func tapKeyboardArrowUpIfPresent() {
+        let toolbar = app.toolbars.firstMatch
+        guard toolbar.waitForExistence(timeout: 2) else { return }
+        let candidates = ["Chevron Up", "Up", "Вверх", "↑", "previous", "Previous"]
+        for title in candidates {
+            let btn = toolbar.buttons[title]
+            if btn.exists {
+                btn.tap()
+                usleep(300_000)
+                return
+            }
+        }
+        let allButtons = toolbar.buttons.allElementsBoundByIndex
+        if let first = allButtons.first, first.exists {
+            first.tap()
+            usleep(300_000)
+        }
     }
 }
