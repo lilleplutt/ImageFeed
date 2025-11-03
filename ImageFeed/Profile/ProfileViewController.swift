@@ -60,6 +60,7 @@ final class ProfileViewController: UIViewController, ProfileViewControllerProtoc
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(exitButton)
         exitButton.tintColor = UIColor(resource: .ypRedIOS)
+        exitButton.accessibilityIdentifier = "exit button"
         NSLayoutConstraint.activate([
             exitButton.heightAnchor.constraint(equalToConstant: 44),
             exitButton.widthAnchor.constraint(equalToConstant: 44),

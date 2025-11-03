@@ -65,7 +65,15 @@ final class ImageFeedUITests: XCTestCase {
         navBackButtonWhiteButton.tap()
     }
     
-    func testProfile() {
+    func testProfile() throws {
+        sleep(3)
+        app.tabBars.buttons.element(boundBy: 1).tap()
+       
+        XCTAssertTrue(app.staticTexts["Name Lastname"].exists)
+        XCTAssertTrue(app.staticTexts["@username"].exists)
         
+        app.buttons["exit button"].tap()
+        
+        app.alerts["Bye bye!"].scrollViews.otherElements.buttons["Yes"].tap()
     }
 }
