@@ -1,12 +1,21 @@
 import UIKit
 import Kingfisher
 
-final class ImagesListViewController: UIViewController {
+public protocol ImagesListViewControllerProtocol: AnyObject {
+    var presenter: ImagesListPresenterProtocol? { get set }
+    func updateTableViewAnimated()
+    func showBlockingHUD()
+    func dismissBlockingHUD()
+    func setIsLiked(_ isLiked: Bool, at indexPath: IndexPath)
+}
+
+final class ImagesListViewController: UIViewController, ImagesListViewControllerProtocol {
     
     //MARK: - Outlets
     @IBOutlet private weak var tableView: UITableView!
     
-    //MARK: - Private properties
+    //MARK: - Properties
+    var presenter: ImagesListPresenterProtocol?
     private var imagesListServiceObserver: NSObjectProtocol?
     private var photos: [Photo] = []
     private let showSingleImageSegueIdentifier = "ShowSingleImage"
@@ -19,16 +28,7 @@ final class ImagesListViewController: UIViewController {
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
         
-        imagesListServiceObserver = NotificationCenter.default.addObserver(
-            forName: ImagesListService.didChangeNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            guard let self else { return }
-            self.updateTableViewAnimated()
-        }
-        
-        ImagesListService.shared.fetchPhotosNextPage()
+        presenter?.viewDidLoad()
     }
     
     deinit {
@@ -38,7 +38,7 @@ final class ImagesListViewController: UIViewController {
     }
     
     //MARK: - Methods
-    private func updateTableViewAnimated() {
+    func updateTableViewAnimated() {
         let oldCount = photos.count
         let newServicePhotos = ImagesListService.shared.photos
         let newCount = newServicePhotos.count
@@ -60,6 +60,20 @@ final class ImagesListViewController: UIViewController {
         } else {
             tableView.reloadData()
         }
+    }
+    
+    //MARK: - Methods
+    func showBlockingHUD() {
+        UIBlockingProgressHUD.show()
+    }
+    
+    func dismissBlockingHUD() {
+        UIBlockingProgressHUD.dismiss()
+    }
+    
+    func setIsLiked(_ isLiked: Bool, at indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? ImagesListCell else { return }
+        cell.setIsLiked(isLiked)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -115,7 +129,7 @@ final class ImagesListViewController: UIViewController {
 //MARK: - Extensions
 extension ImagesListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+        presenter?.didSelectRow(at: indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -145,34 +159,13 @@ extension ImagesListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == photos.count {
-            ImagesListService.shared.fetchPhotosNextPage()
-        }
+        presenter?.willDisplayRow(at: indexPath, totalCount: photos.count)
     }
 }
 
 extension ImagesListViewController: ImagesListCellDelegate {
     func imageListCellDidTapLike(_ cell: ImagesListCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        let photo = photos[indexPath.row]
-        UIBlockingProgressHUD.show()
-        
-        cell.setIsLiked(!photo.isLiked)
-        
-        ImagesListService.shared.fetchLike(id: photo.id, isLike: !photo.isLiked) { [weak self, weak cell] result in
-            guard let self else { return }
-            UIBlockingProgressHUD.dismiss()
-            switch result {
-            case .success:
-                break
-            case .failure(let error):
-                print("[ImagesListViewController] Failed to update like: \(error)")
-                if let index = self.tableView.indexPath(for: cell ?? UITableViewCell())?.row, index < self.photos.count {
-                    cell?.setIsLiked(self.photos[index].isLiked)
-                } else {
-                    cell?.setIsLiked(photo.isLiked)
-                }
-            }
-        }
+        presenter?.didTapLike(at: indexPath)
     }
 }

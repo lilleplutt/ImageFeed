@@ -6,8 +6,13 @@ final class TabBarController: UITabBarController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: .main)
         
-        let imagesListViewController = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController")
-        imagesListViewController.tabBarItem = UITabBarItem(
+        let imagesListVC = storyboard.instantiateViewController(withIdentifier: "ImagesListViewController")
+        if let imagesListViewController = imagesListVC as? ImagesListViewController {
+            let imagesListPresenter = ImagesListPresenter()
+            imagesListViewController.presenter = imagesListPresenter
+            imagesListPresenter.view = imagesListViewController
+        }
+        imagesListVC.tabBarItem = UITabBarItem(
             title: "",
             image: UIImage(named: "tab_editorial_active"),
             selectedImage: nil)
@@ -20,6 +25,6 @@ final class TabBarController: UITabBarController {
             title: "",
             image: UIImage(named: "tab_profile_active"),
             selectedImage: nil)
-        self.viewControllers = [imagesListViewController, profileViewController]
+        self.viewControllers = [imagesListVC, profileViewController]
     }
 }
