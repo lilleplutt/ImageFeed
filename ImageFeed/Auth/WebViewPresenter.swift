@@ -10,7 +10,7 @@ public protocol WebViewPresenterProtocol {
 
 final class WebViewPresenter: WebViewPresenterProtocol {
     
-    //MARK: - Puplic properties
+    //MARK: - Public properties
     weak var view: WebViewControllerProtocol?
     var authHelper: AuthHelperProtocol
     
@@ -18,7 +18,7 @@ final class WebViewPresenter: WebViewPresenterProtocol {
         self.authHelper = authHelper
     }
     
-    //MARK: - Puplic methods
+    //MARK: - Public methods
     func loadAuthView() {
         guard let request = authHelper.authRequest() else { return }
         
