@@ -19,7 +19,7 @@ final class ImageFeedUITests: XCTestCase {
         
         loginTextField.tap()
         usleep(300_000)
-        typeTextReliably("alin.alin.alin2000@yandex.ru", into: loginTextField)
+        typeTextReliably("...", into: loginTextField)
         
         tapKeyboardArrowDownIfPresent()
         
@@ -28,7 +28,7 @@ final class ImageFeedUITests: XCTestCase {
         
         passwordTextField.tap()
         usleep(300_000)
-        typeTextReliably("gospodi-pomil1987", into: passwordTextField)
+        typeTextReliably("...", into: passwordTextField)
 
         webView.buttons["Login"].tap()
         
