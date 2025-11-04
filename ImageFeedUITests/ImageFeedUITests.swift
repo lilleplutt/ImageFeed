@@ -19,7 +19,7 @@ final class ImageFeedUITests: XCTestCase {
         
         loginTextField.tap()
         usleep(300_000)
-        typeTextReliably("...", into: loginTextField)
+        typeTextReliably("alin.alin.alin2000@yandex.ru", into: loginTextField)
         
         tapKeyboardArrowDownIfPresent()
         
@@ -28,7 +28,7 @@ final class ImageFeedUITests: XCTestCase {
         
         passwordTextField.tap()
         usleep(300_000)
-        typeTextReliably("...", into: passwordTextField)
+        typeTextReliably("gospodi-pomil1987", into: passwordTextField)
 
         webView.buttons["Login"].tap()
         
@@ -68,9 +68,14 @@ final class ImageFeedUITests: XCTestCase {
         sleep(3)
         app.tabBars.buttons.element(boundBy: 1).tap()
         
+        XCTAssertTrue(app.staticTexts["Alina Turlaeva"].exists)
+        XCTAssertTrue(app.staticTexts["@lilleplutt2000"].exists)
+        
         app.buttons["exit button"].tap()
         
         app.alerts["Пока, пока!"].scrollViews.otherElements.buttons["Да"].tap()
+        let authenticateButton = app.buttons["Authenticate"]
+        XCTAssertTrue(authenticateButton.waitForExistence(timeout: 5))
     }
 }
 
