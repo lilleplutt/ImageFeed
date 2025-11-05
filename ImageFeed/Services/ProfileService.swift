@@ -22,12 +22,10 @@ final class ProfileService {
     static let sharedProfile = ProfileService()
     private init() {}
     private(set) var profile: Profile?
-    
-    // MARK: - Dependencies
     private let urlSession = URLSession.shared
     private var task: URLSessionTask?
     
-    // MARK: - Methods
+    // MARK: - Public methods
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         task?.cancel()
         

@@ -19,7 +19,7 @@ final class OAuth2Service {
         }
     }
     
-    //MARK: - Methods
+    //MARK: - Public methods
     func fetchOAuthToken(code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         guard lastCode != code else {
@@ -37,28 +37,28 @@ final class OAuth2Service {
         }
         
         let task = urlSession.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
-                UIBlockingProgressHUD.dismiss()
-                guard let self else { return }
+            UIBlockingProgressHUD.dismiss()
+            guard let self else { return }
+            
+            switch result {
+            case .success(let body):
+                let authToken = body.accessToken
+                self.authToken = authToken
+                completion(.success(authToken))
+            case .failure(let error):
+                print("[OAuth2Service] Request failed: \(error.localizedDescription)")
+                completion(.failure(error))
                 
-                switch result {
-                case .success(let body):
-                    let authToken = body.accessToken
-                    self.authToken = authToken
-                    completion(.success(authToken))
-                case .failure(let error):
-                    print("[OAuth2Service] Request failed: \(error.localizedDescription)")
-                    completion(.failure(error))
-                    
-                    self.task = nil
-                    self.lastCode = nil
-                }
+                self.task = nil
+                self.lastCode = nil
+            }
         }
         self.task = task
         task.resume()
     }
     
     func reset() {
-       authToken = nil
+        authToken = nil
     }
     
     //MARK: - Private methods

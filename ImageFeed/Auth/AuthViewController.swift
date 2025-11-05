@@ -7,7 +7,7 @@ protocol AuthViewControllerDelegate: AnyObject {
 
 final class AuthViewController: UIViewController {
     
-    //MARK: - Properties
+    //MARK: - Public properties
     weak var delegate: AuthViewControllerDelegate?
     
     //MARK: - Lifecycle
@@ -20,7 +20,7 @@ final class AuthViewController: UIViewController {
         configureBackButton()
     }
     
-    //MARK: - Private Methods
+    //MARK: - Private methods
     private func configureBackButton() {
         navigationController?.navigationBar.backIndicatorImage = UIImage(resource: .navBackButton)
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(resource: .navBackButton) //for right animation between scenes
@@ -52,6 +52,7 @@ final class AuthViewController: UIViewController {
         loginButton.setTitleColor(UIColor(resource: .ypBlackIOS), for: .normal)
         loginButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         loginButton.layer.cornerRadius = 16
+        loginButton.accessibilityIdentifier = "Authenticate"
         
         loginButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
         loginButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
@@ -65,11 +66,15 @@ final class AuthViewController: UIViewController {
     //MARK: - Actions
     @objc func loginButtonTapped() {
         let webViewViewController = WebViewViewController()
+        let authHelper = AuthHelper()
+        let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+        webViewViewController.presenter = webViewPresenter
+        webViewPresenter.view = webViewViewController
         webViewViewController.delegate = self
         
         let navigationController = UINavigationController(rootViewController: webViewViewController)
         navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true) 
+        present(navigationController, animated: true)
     }
 }
 

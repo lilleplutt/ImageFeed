@@ -1,17 +1,25 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+public protocol ProfileViewControllerProtocol: AnyObject {
+    var presenter: ProfileViewPresenterProtocol? { get set }
+    func setProfileName(_ name: String)
+    func setProfileLoginName(_ loginName: String)
+    func setProfileDescription(_ description: String)
+    func setAvatar(url: String?)
+    func showLogoutAlert()
+}
+
+final class ProfileViewController: UIViewController, ProfileViewControllerProtocol {
+    
+    // MARK: - Properties
+    var presenter: ProfileViewPresenterProtocol?
     
     // MARK: - UI
     private let profileImageView = UIImageView()
     private let nameLabel = UILabel()
     private let loginNameLabel = UILabel()
     private let descriptionLabel = UILabel()
-    
-    // MARK: - Private properties
-    private var profileImageServiceObserver: NSObjectProtocol?
-    private let tokenStorage = OAuth2TokenStorage.shared
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -24,20 +32,7 @@ final class ProfileViewController: UIViewController {
         setUpLoginNameLabel()
         setUpDescriptionLabel()
         
-        if let profile = ProfileService.sharedProfile.profile {
-            updateProfileDetails(profile: profile)
-        }
-        
-        profileImageServiceObserver = NotificationCenter.default
-            .addObserver(
-                forName: ProfileImageService.didChangeNotification,
-                object: nil,
-                queue: .main
-            ) { [weak self] _ in
-                guard let self = self else { return }
-                self.updateAvatar()
-            }
-        updateAvatar()
+        presenter?.viewDidLoad()
     }
     
     //MARK: - Private methods
@@ -65,6 +60,7 @@ final class ProfileViewController: UIViewController {
         exitButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(exitButton)
         exitButton.tintColor = UIColor(resource: .ypRedIOS)
+        exitButton.accessibilityIdentifier = "exit button"
         NSLayoutConstraint.activate([
             exitButton.heightAnchor.constraint(equalToConstant: 44),
             exitButton.widthAnchor.constraint(equalToConstant: 44),
@@ -112,11 +108,26 @@ final class ProfileViewController: UIViewController {
         ])
     }
     
-    private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
-        else { return }
+    // MARK: - Public methods
+    func setProfileName(_ name: String) {
+        nameLabel.text = name
+    }
+    
+    func setProfileLoginName(_ loginName: String) {
+        loginNameLabel.text = loginName
+    }
+    
+    func setProfileDescription(_ description: String) {
+        descriptionLabel.text = description
+    }
+    
+    func setAvatar(url: String?) {
+        guard let profileImageURL = url,
+              let url = URL(string: profileImageURL)
+        else {
+            setPlaceholderAvatar()
+            return
+        }
         
         let placeholderImage = UIImage(systemName: "person.circle.fill")?
             .withTintColor(.lightGray, renderingMode: .alwaysOriginal)
@@ -143,29 +154,29 @@ final class ProfileViewController: UIViewController {
         }
     }
     
-    private func updateProfileDetails(profile: Profile) {
-        nameLabel.text = profile.name.isEmpty
-            ? "Имя не указано"
-            : profile.name
-        loginNameLabel.text = profile.loginName.isEmpty
-            ? "@неизвестный_пользователь"
-            : profile.loginName
-        descriptionLabel.text = (profile.bio?.isEmpty ?? true)
-            ? "Профиль не заполнен"
-            : profile.bio
-    }
-    
-    @objc private func exitButtonTapped() {
+    func showLogoutAlert() {
         let alert = UIAlertController(
             title: "Пока, пока!",
             message: "Уверены, что хотите выйти?",
             preferredStyle: .alert
         )
-        alert.addAction(UIAlertAction(title: "Да", style: .default) { _ in
-            ProfileLogoutService.shared.logout()
+        alert.addAction(UIAlertAction(title: "Да", style: .default) { [weak self] _ in
+            self?.presenter?.logout()
         })
         
         alert.addAction(UIAlertAction(title: "Нет", style: .cancel))
         present(alert, animated: true)
+    }
+    
+    // MARK: - Private methods
+    private func setPlaceholderAvatar() {
+        let placeholderImage = UIImage(systemName: "person.circle.fill")?
+            .withTintColor(.lightGray, renderingMode: .alwaysOriginal)
+            .withConfiguration(UIImage.SymbolConfiguration(pointSize: 70, weight: .regular, scale: .large))
+        profileImageView.image = placeholderImage
+    }
+    
+    @objc private func exitButtonTapped() {
+        presenter?.didTapLogoutButton()
     }
 }

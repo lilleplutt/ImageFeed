@@ -14,7 +14,7 @@ final class SingleImageViewController: UIViewController {
     }
     var imageURL: String?
     
-    //MARK: - IBOutlets
+    //MARK: - Outlets
     @IBOutlet private var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -85,7 +85,7 @@ final class SingleImageViewController: UIViewController {
         scrollView.contentInset = UIEdgeInsets(top: y, left: x, bottom: y, right: x)
     }
     
-    //MARK: - IBActions
+    //MARK: - Actions
     @IBAction private func didTapBackButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

@@ -32,6 +32,7 @@ private struct LikeResponse: Decodable {
 }
 
 final class ImagesListService {
+    
     //MARK: - Private properties
     static let shared = ImagesListService()
     private init() {}
@@ -45,7 +46,7 @@ final class ImagesListService {
     private var task: URLSessionTask?
     private var likeTask: URLSessionTask?
     
-    //MARK: - Methods
+    //MARK: - Public methods
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
         if isLoading { return }
